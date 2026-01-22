@@ -99,11 +99,11 @@ const Login = () => {
     email: '',
     password: '',
   }
-useEffect(() => {
-  if (userSession) {
-    router.push("/home");
-  }
-}, [userSession]);
+// useEffect(() => {
+//   if (userSession) {
+//     router.push("/home");
+//   }
+// }, [userSession]);
 
   const handleAuth = async (values: UserFormValues, formikHelpers: FormikHelpers<UserFormValues>) => {
   setLoading(true);
