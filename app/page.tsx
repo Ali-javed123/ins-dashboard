@@ -99,11 +99,11 @@ const Login = () => {
     email: '',
     password: '',
   }
-// useEffect(() => {
-//   if (userSession) {
-//     router.push("/home");
-//   }
-// }, [userSession]);
+useEffect(() => {
+  if (userSession) {
+    // router.push("/home");
+  }
+}, [userSession]);
 
   const handleAuth = async (values: UserFormValues, formikHelpers: FormikHelpers<UserFormValues>) => {
   setLoading(true);
@@ -150,7 +150,7 @@ const Login = () => {
         icon: <CheckCircle className="text-green-500" />,
         
       });
-      router.push("/home");
+      router.replace("/home");
       } else {
         // alert('Sign up successful! Please check your email for the confirmation link.');
         toast.success("Sign up successful! Please check your email", {
@@ -175,6 +175,13 @@ const Login = () => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUserSession(session);
+            if (session) {
+        localStorage.setItem("supabase_session", JSON.stringify(session))
+      } else {
+        localStorage.removeItem("supabase_session")
+      }
+
+      
     });
 
     return () => { subscription.unsubscribe(); };
