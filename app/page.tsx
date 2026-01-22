@@ -99,6 +99,11 @@ const Login = () => {
     email: '',
     password: '',
   }
+useEffect(() => {
+  if (userSession) {
+    router.push("/home");
+  }
+}, [userSession]);
 
   const handleAuth = async (values: UserFormValues, formikHelpers: FormikHelpers<UserFormValues>) => {
   setLoading(true);
@@ -143,7 +148,9 @@ const Login = () => {
         // alert('Sign up successful! You are now signed in.');
          toast.success("Sign up successful! You are now signed in", {
         icon: <CheckCircle className="text-green-500" />,
+        
       });
+      router.push("/home");
       } else {
         // alert('Sign up successful! Please check your email for the confirmation link.');
         toast.success("Sign up successful! Please check your email", {
