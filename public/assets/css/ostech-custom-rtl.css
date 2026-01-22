@@ -1,0 +1,98 @@
+body {
+  overflow-x: hidden;
+  direction: rtl;
+}
+
+.owl-carousel {
+  direction: ltr;
+}
+
+.owl-carousel .owl-nav,
+.owl-carousel .owl-dots,
+.owl-carousel .owl-item {
+  direction: rtl;
+}
+
+.contact__input-box .bootstrap-select .dropdown-menu,
+.bootstrap-select .dropdown-toggle .filter-option {
+  text-align: right;
+}
+
+.list-unstyled {
+  padding-right: 0;
+}
+
+.main-slider-one .owl-carousel .owl-item img {
+  width: auto;
+}
+
+.main-slider-one__shape--one {
+  right: auto;
+}
+
+.main-header__right__call {
+  padding-right: 0px;
+  border-right: 0px solid rgba(var(--ostech-white-rgb, 255, 255, 255), 0.2);
+  margin-right: 0px;
+}
+
+.main-header__right__info a:first-child {
+  margin-right: 20px;
+}
+
+.main-header__right__info a + a {
+  margin-left: 0px;
+  margin-right: 0;
+}
+
+.service-one__item__icon {
+  transform: rotateY(180deg);
+  text-align: left;
+}
+
+.service-one__item__thumb::before {
+  transform: rotateY(180deg);
+}
+
+.service-one__item__thumb::after,
+.why-choose-two__inner__item__link__btn,
+.owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav button.owl-prev, .owl-carousel button.owl-dot {
+  transform: rotateY(180deg);
+}
+
+.about-one__funfact__item {
+  margin-right: auto;
+}
+
+.why-choose-two__inner__thumb::after {
+  right: auto;
+}
+
+.testimonials-one .owl-nav .owl-next {
+  left: auto;
+}
+
+.project-one__content {
+  padding: 30px;
+}
+
+.blog-card__link i {
+  right: auto;
+  transform: rotateY(180deg);
+}
+
+.ostech-btn::after {
+  right: auto;
+}
+.ostech-btn::before {
+  left: auto;
+}
+
+.cta-two__item {
+  height: 100%;
+}
+
+.benefit-one__right {
+  margin-left: 0;
+}
+/*# sourceMappingURL=ostech-custom-rtl.css.map */

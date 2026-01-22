@@ -1,0 +1,195 @@
+:root {
+  --ostech-text: #686A6F;
+  --ostech-text-rgb: 104, 106, 111;
+  --ostech-text-dark: #222429;
+  --ostech-text-dark-rgb: 34, 36, 41;
+  --ostech-text-gray: #999B9F;
+  --ostech-text-gray-rgb: 153, 155, 159;
+  --ostech-white: #171717;
+  --ostech-white-rgb: 20, 18, 21;
+  --ostech-base: #FFAA17;
+  --ostech-base-rgb: 255, 170, 23;
+  --ostech-secondary: #232429;
+  --ostech-secondary-rgb: 35, 36, 41;
+  --ostech-black: #fff;
+  --ostech-black-rgb: 255, 255, 255;
+  --ostech-black3: #000;
+  --ostech-black3-rgb: 0, 0, 0;
+  --ostech-gray: #1c1a1d;
+  --ostech-gray-rgb: 28, 26, 29;
+  --ostech-border-color: #DBDBDB;
+  --ostech-border-color-rgb: 219, 219, 219;
+}
+
+.ostech-btn::before, .ostech-btn::after {
+  background-color: var(--ostech-black);
+}
+
+.about-one__feature__item__icon::after,
+.why-choose-two__funfact__item,
+.why-choose-two__inner__item__icon,
+.main-footer__top__inner,
+.footer-widget--contact,
+.footer-widget__newsletter input[type=email],
+.footer-widget__newsletter button[type=submit]:hover,
+.main-footer__bottom,
+.main-slider-one__sub-title span {
+  background-color: var(--ostech-white);
+}
+
+.main-slider-one__carousel .owl-dots .owl-dot span::before {
+  background: var(--ostech-text);
+}
+
+.main-menu .main-menu__list > li > a,
+.main-header__right__number,
+.main-header__right__info__item,
+.main-slider-one__title,
+.service-one__item__title,
+.sec-title__title,
+.about-one__feature__item__title,
+.about-one__funfact__item:hover .about-one__funfact__item__count,
+.about-one__funfact__item:hover .about-one__funfact__item__text,
+.service-card-two__title,
+.why-choose-two__funfact__item__count,
+.why-choose-two__funfact__item__text,
+.why-choose-two__inner__item__text,
+.why-choose-two__cta__link__btn,
+.testimonials-one__item__name,
+.testimonials-one .owl-nav .owl-prev span, .testimonials-one .owl-nav .owl-next span,
+.benefit-one__list__item,
+.benefit-one__bottom__content__text,
+.benefit-one__feature__item__title,
+.project-one__content__btn:hover,
+.blog-card__title,
+.client-carousel-one .owl-theme .owl-nav button span,
+.cta-two__item__icon,
+.main-footer__top__social a,
+.footer-widget__title,
+.footer-widget__instagram a::before,
+.mobile-nav__content .main-menu__list li > a,
+.mobile-nav__contact li a,
+.mobile-nav__social a,
+.mobile-nav__close {
+  color: var(--ostech-black);
+}
+
+.main-header__right__call {
+  border-right: 1px solid rgba(var(--ostech-black-rgb), 0.2);
+}
+
+.service-one__item__thumb::before,
+.service-card-two__content {
+  background: var(--ostech-black3);
+}
+
+.service-one__item:hover .service-one__item__icon {
+  color: var(--ostech-black3);
+}
+
+.about-one__list__item,
+.about-two__top__text,
+.benefit-one__feature__item__text,
+.blog-card__meta li a {
+  color: var(--ostech-text-gray);
+}
+
+.about-one__link__btn {
+  background: var(--ostech-black);
+  color: var(--ostech-text-dark);
+}
+.about-one__link__btn::after, .about-one__link__btn::before {
+  background-color: var(--ostech-base);
+}
+
+.cta-two__item__btn::after, .cta-two__item__btn::before {
+  background-color: var(--ostech-secondary);
+}
+.cta-two__item__btn:hover {
+  color: var(--ostech-black);
+}
+
+.about-one__funfact__item__icon,
+.why-choose-two__funfact__item:hover .why-choose-two__funfact__item__icon {
+  background: rgba(var(--ostech-black-rgb), 0.1);
+}
+
+.about-one__feature__inner:hover {
+  background-color: var(--ostech-gray);
+}
+
+.service-card-two__icon {
+  border: 10px solid var(--ostech-black3);
+}
+
+.service-card-two__icon,
+.service-card-two__inner,
+.why-choose-two__inner__item__link__btn:hover,
+.cta-two__item:hover .cta-two__item__icon,
+.cta-two__item__btn,
+.mobile-nav__btn span {
+  background: var(--ostech-black);
+}
+
+.why-choose-two__funfact__item:hover .why-choose-two__funfact__item__count,
+.why-choose-two__funfact__item:hover .why-choose-two__funfact__item__text,
+.why-choose-two__cta__title {
+  color: var(--ostech-white);
+}
+
+.why-choose-two__inner__item::after {
+  background: rgba(var(--ostech-black-rgb), 0.1);
+}
+
+.benefit-one__feature__item__bg::after {
+  background: rgba(var(--ostech-white-rgb), 0.9);
+}
+
+.benefit-one__bottom::after {
+  border-bottom: 1px solid var(--ostech-text-dark);
+}
+
+.text-slider__inner::after,
+.testimonials-one__item,
+.blog-card__meta,
+.blog-one--home::after {
+  background: var(--ostech-secondary);
+}
+
+.blog-card {
+  box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.5);
+}
+
+.blog-card__image__link {
+  background-color: rgba(var(--ostech-white-rgb), 0.7);
+}
+
+.blog-card__image__link::before, .blog-card__image__link::after {
+  background-color: var(--ostech-black);
+}
+
+.blog-card__link {
+  color: var(--ostech-text);
+}
+.blog-card__link i {
+  color: var(--ostech-base);
+}
+
+.blog-card__link::after {
+  background: var(--ostech-text-dark);
+}
+
+.client-carousel-one .owl-theme .owl-nav::before {
+  background-color: var(--ostech-text-dark);
+}
+
+.client-carousel-one .owl-theme .owl-nav::after,
+.mobile-nav__overlay {
+  background-color: var(--ostech-white);
+}
+
+.testimonials-one__item__bg {
+  mix-blend-mode: overlay;
+  opacity: 0.3;
+}
+/*# sourceMappingURL=ostech-dark.css.map */

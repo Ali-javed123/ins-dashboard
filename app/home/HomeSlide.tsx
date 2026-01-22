@@ -1,0 +1,1988 @@
+// // components/HomeSliderCard.tsx
+// 'use client'
+// import { FC,useCallback,useEffect,useState,useRef } from 'react'
+// import Image, { StaticImageData } from 'next/image'
+// import img from './img1.jpg'
+// import {
+//   Dialog,
+//   DialogContent,
+//   DialogHeader,
+//   DialogTitle,
+//   DialogDescription,
+//   DialogFooter,
+// } from '@/components/ui/dialog'
+// import { Button } from '@/components/ui/button'
+// import { supabase } from "@/lib/supabase-client"
+// import { Input } from '@/components/ui/input'
+
+// import { Formik, Form, Field, ErrorMessage } from 'formik'
+// import * as Yup from 'yup'
+// import type { Session } from "@supabase/supabase-js";
+// import { Label } from '@/components/ui/label'
+// interface UserFormValues {
+//   title: string
+//   heading: string
+//   btnOne:string
+//   btnTwo:string
+// }
+
+
+// interface DatabaseUser {
+//   id: string;
+//   title: string;
+//   heading: number;
+//   btnOne: string;
+//   btnTwo: string;
+//   profileImage: string | null;
+//   created_at?: string;
+// }
+
+
+// interface HomeSliderCardProps {
+//   imageSrc: string | StaticImageData  // <-- fix here
+
+//   title: string
+//   heading: string
+//   buttonOneText: string
+//   buttonTwoText: string
+//   open: boolean
+//   setOpen: React.Dispatch<React.SetStateAction<boolean>>
+
+// }
+
+
+// const BUCKET_NAME = "userImages";
+// const STORAGE_TYPE = "bucket";
+// const CHUNK_SIZE = 60000;
+// const DELIMITER = '|||CHUNK|||';
+// const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+
+
+
+
+
+// // Define Component User type
+// interface User {
+//   id: string;
+//   title: string;
+//   heading: number;
+//   btnOne: string;
+//   btnTwo: string;
+//   image: string;
+//   profileImage:string | null;
+  
+  
+
+//   profileImageUrl?: string | null | undefined; // undefined भी allow करें
+// }
+
+// interface FormData {
+//   title: string;
+//   heading: string;
+//   btnOne: string;
+//   btnTwo: string;
+//   profileImage: File | null;
+// }
+// const HomeSliderCard: FC<HomeSliderCardProps> = ({
+//   imageSrc,
+//   title,
+//   heading,
+//   buttonOneText,
+//   buttonTwoText,
+//   open,
+//   setOpen
+// }) => {
+
+
+//    const [show, setShow] = useState(false);
+//     const [users, setUsers] = useState<User[]>([]);
+//     const [loading, setLoading] = useState(true);
+//     const [isEdit, setIsEdit] = useState(false);
+//     const [editId, setEditId] = useState<string | null>(null);
+//     const fileInputRef = useRef<HTMLInputElement>(null);
+//     const [submitting, setSubmitting] = useState(false);
+//     const [previewImage, setPreviewImage] = useState<string | null>(null);
+//     const [formData, setFormData] = useState<FormData>({
+//       title: "",
+//       heading: "",
+//       btnOne: "",
+//       btnTwo: "",
+//       profileImage: null,
+//     });
+  
+//   // ---Formik---
+ 
+
+//   const validationSchema = Yup.object({
+//     title: Yup.string()
+//       .min(2, 'tile must be at least 2 characters')
+//       .required('title is required'),
+//     heading: Yup.string()
+//       .min(2, 'Heading must be at least 2 characters')
+//       .required('Heading is required'),
+//    btnOne: Yup.string()
+//       .min(2, 'btn one must be at least 2 characters')
+//       .required('btn one is required'),
+//       btnTwo: Yup.string()
+//       .min(2, 'btn two must be at least 2 characters')
+//       .required('btn two is required'),
+//   })
+  
+// const initialValues: UserFormValues = {
+//     title: '',
+//     heading: '',
+//     btnOne: '',
+//     btnTwo: '',
+    
+//   }
+
+//    const resetForm = () => {
+//     setFormData({ 
+//       title: "", 
+//       heading: "", 
+//       btnOne: "", 
+//       btnTwo: "",
+//       profileImage: null 
+//     });
+//     setEditId(null);
+//     setPreviewImage(null);
+//     setIsEdit(false);
+//     setShow(false);
+//     setSubmitting(false);
+    
+//     if (fileInputRef.current) {
+//       fileInputRef.current.value = "";
+//     }
+//   };
+//   const handleSubmit = async (values: UserFormValues) => {
+//     console.log('Form submitted:', values)
+
+
+//     if (submitting) return;
+    
+//     try {
+//       setSubmitting(true);
+      
+//       // First, create user without image to get ID
+//       const { data: userData, error: userError } = await supabase
+//         .from("home-banner")
+//         .insert([
+//           {
+//             title: formData.title,
+//             heading: Number(formData.heading),
+//             btnOne: formData.btnOne,
+//             profileImage: null, // Will update after processing
+//           },
+//         ])
+//         .select()
+//         .single();
+
+//       if (userError) {
+//         console.error("Error adding user:", userError);
+//         alert(`Error: ${userError.message}`);
+//         return;
+//       }
+
+//       let profileImageData: string | null = null;
+      
+//       // Process image based on storage type
+//       if (formData.profileImage) {
+//         if (STORAGE_TYPE === "bucket") {
+//           // Upload to bucket
+//           try {
+//             const bucketUrl = await uploadToBucket(formData.profileImage, userData.id);
+//             profileImageData = bucketUrl;
+//           } catch (uploadError) {
+//             console.error("Bucket upload failed:", uploadError);
+//             // Continue without image
+//           }
+//         } else {
+//           // Convert to Base64 and chunk
+//           try {
+//             const base64Image = await convertImageToBase64(formData.profileImage);
+//             profileImageData = splitIntoChunks(base64Image);
+//           } catch (convertError) {
+//             console.error("Base64 conversion failed:", convertError);
+//           }
+//         }
+        
+//         // Update user with image data
+//         if (profileImageData) {
+//           const { error: updateError } = await supabase
+//             .from("home-banner")
+//             .update({ profileImage: profileImageData })
+//             .eq("id", userData.id);
+
+//           if (updateError) {
+//             console.error("Error updating user with image:", updateError);
+//           }
+//         }
+//       }
+
+//       // Create new user object
+//       const newUser: User = {
+//         ...userData,
+//         profileImage: STORAGE_TYPE === "bucket" ? null : reconstructFromChunks(profileImageData),
+//         profileImageUrl: STORAGE_TYPE === "bucket" ? profileImageData : null
+//       };
+      
+//       // Add user to state with duplicate check
+//       setUsers(prev => {
+//         const exists = prev.some(u => u.id === newUser.id);
+//         if (exists) {
+//           console.log("User already exists, updating instead");
+//           return prev.map(u => u.id === newUser.id ? newUser : u);
+//         }
+//         return [...prev, newUser];
+//       });
+      
+//       resetForm();
+//     } catch (error) {
+//       console.error("Error saving user:", error);
+//       if (error instanceof Error) {
+//         alert(`Error: ${error.message}`);
+//       } else {
+//         alert("Error saving user. Please try again.");
+//       }
+//     } finally {
+//       setSubmitting(false);
+//     }
+//   }
+
+//   // ---Formik---
+
+//   // Base64 chunking functions
+//   const splitIntoChunks = (base64String: string): string => {
+//     if (base64String.length <= CHUNK_SIZE) {
+//       return base64String;
+//     }
+    
+//     const chunks: string[] = [];
+//     for (let i = 0; i < base64String.length; i += CHUNK_SIZE) {
+//       chunks.push(base64String.slice(i, i + CHUNK_SIZE));
+//     }
+//     return chunks.join(DELIMITER);
+//   };
+
+//   const reconstructFromChunks = (chunkedString: string | null | undefined): string | null => {
+//     if (!chunkedString) return null;
+    
+//     if (!chunkedString.includes(DELIMITER)) {
+//       return chunkedString;
+//     }
+    
+//     return chunkedString.split(DELIMITER).join('');
+//   };
+
+//   // Optimized Base64 conversion
+//   const convertImageToBase64 = (file: File): Promise<string> => {
+//     return new Promise((resolve, reject) => {
+//       if (file.size > MAX_IMAGE_SIZE) {
+//         reject(new Error(`Image size should be less than ${MAX_IMAGE_SIZE / 1024 / 1024}MB`));
+//         return;
+//       }
+
+//       const compressImage = (imageFile: File): Promise<string> => {
+//         return new Promise((resolveCompress, rejectCompress) => {
+//           const img = new Image();
+//           const canvas = document.createElement('canvas');
+          
+//           img.onload = () => {
+//             let width = img.width;
+//             let height = img.height;
+            
+//             const maxDimension = 1024;
+//             if (width > maxDimension || height > maxDimension) {
+//               if (width > height) {
+//                 height = (height * maxDimension) / width;
+//                 width = maxDimension;
+//               } else {
+//                 width = (width * maxDimension) / height;
+//                 height = maxDimension;
+//               }
+//             }
+            
+//             canvas.width = width;
+//             canvas.height = height;
+            
+//             const ctx = canvas.getContext('2d');
+//             if (!ctx) {
+//               rejectCompress(new Error('Could not get canvas context'));
+//               return;
+//             }
+            
+//             ctx.fillStyle = 'white';
+//             ctx.fillRect(0, 0, width, height);
+//             ctx.drawImage(img, 0, 0, width, height);
+            
+//             let quality = 0.8;
+//             if (file.size > 2 * 1024 * 1024) quality = 0.6;
+//             if (file.size > 3 * 1024 * 1024) quality = 0.5;
+           
+//             const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+//             resolveCompress(compressedBase64);
+//           };
+          
+//           img.onerror = rejectCompress;
+//           img.src = URL.createObjectURL(imageFile);
+//         });
+//       };
+
+//       const processImage = async () => {
+//         try {
+//           if (file.size > 500 * 1024) {
+//             return await compressImage(file);
+//           } else {
+//             return new Promise<string>((resolveNormal, rejectNormal) => {
+//               const reader = new FileReader();
+//               reader.readAsDataURL(file);
+//               reader.onload = () => resolveNormal(reader.result as string);
+//               reader.onerror = rejectNormal;
+//             });
+//           }
+//         } catch  {
+//           return new Promise<string>((resolveFallback, rejectFallback) => {
+//             const reader = new FileReader();
+//             reader.readAsDataURL(file);
+//             reader.onload = () => resolveFallback(reader.result as string);
+//             reader.onerror = rejectFallback;
+//           });
+//         }
+//       };
+
+//       processImage()
+//         .then(resolve)
+//         .catch(reject);
+//     });
+//   };
+
+//   // Handle image file selection
+//   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const file = e.target.files?.[0] || null;
+    
+//     if (file) {
+//       if (!file.type.startsWith('image/')) {
+//         alert('Please select an image file');
+//         return;
+//       }
+
+//       if (file.size > MAX_IMAGE_SIZE) {
+//         alert(`Image size should be less than ${MAX_IMAGE_SIZE / 1024 / 1024}MB`);
+//         return;
+//       }
+
+//       setFormData((prev) => ({ ...prev, profileImage: file }));
+      
+//       const previewUrl = URL.createObjectURL(file);
+//       setPreviewImage(previewUrl);
+//     }
+//   };
+
+//   // Cleanup preview URL
+//   useEffect(() => {
+//     return () => {
+//       if (previewImage) {
+//         URL.revokeObjectURL(previewImage);
+//       }
+//     };
+//   }, [previewImage]);
+
+//     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const { name, value } = e.target;
+//     setFormData((prev) => ({ ...prev, [name]: value }));
+//   };
+
+//   const convertToUser = (dbUser: DatabaseUser): User => {
+//     if (STORAGE_TYPE === "bucket") {
+//       // For bucket storage
+//       return {
+//         id: dbUser.id,
+//         title: dbUser.title,
+//         heading: dbUser.heading,
+//         btnOne: dbUser.btnOne,
+//         btnTwo: dbUser.btnTwo,
+//         profileImage: null,
+//         profileImageUrl: dbUser.profileImage || null
+//       };
+//     } else {
+//       // For Base64 storage
+//       return {
+//         id: dbUser.id,
+//         title: dbUser.title,
+//         heading: dbUser.heading,
+//         btnOne: dbUser.btnOne,
+//         btnTwo: dbUser.btnTwo,
+//         profileImage: reconstructFromChunks(dbUser.profileImage),
+//         profileImageUrl: null
+//       };
+//     }
+//   };
+  
+
+// const   fetchUsers = useCallback(async () => {
+//     try {
+//       // setLoading(true);
+//       const { data, error } = await supabase
+//         .from("home-banner")
+//         .select("*")
+//         .order("created_at", { ascending: true });
+//       console.log("Fetched users:", data);
+
+//     if (error) {
+//         console.error("Error fetching users:", error);
+//         return;
+//       }
+      
+//       // Safely convert database users to component users
+//       // const processedUsers = (data || []).map(convertToUser);
+      
+//       // setUsers(processedUsers);
+//     } catch (error) {
+//       console.error("Unexpected error:", error);
+//     } finally {
+//       // setLoading(false);
+//     }
+//   }, []);
+
+
+//   useEffect(() => {
+//     fetchUsers();
+//   }, [fetchUsers]);
+
+//   const generateFileName = (userId: string, file: File): string => {
+//     const timestamp = Date.now();
+//     const extension = file.name.split('.').pop() || 'jpg';
+//     return `${userId}_${timestamp}.${extension}`;
+//   };
+
+
+//   const uploadToBucket = async (file: File, userId: string): Promise<string> => {
+//     try {
+//       const fileName = generateFileName(userId, file);
+      
+//       const { data, error } = await supabase.storage
+//         .from(BUCKET_NAME)
+//         .upload(fileName, file, {
+//           cacheControl: '3600',
+//           upsert: true
+//         });
+      
+//       console.log("Upload data:", data);
+
+//       if (error) {
+//         console.error("Error uploading to bucket:", error);
+//         throw error;
+//       }
+
+//       // Get public URL
+//       const { data: { publicUrl } } = supabase.storage
+//         .from(BUCKET_NAME)
+//         .getPublicUrl(fileName);
+
+//       return publicUrl;
+//     } catch (error) {
+//       console.error("Upload failed:", error);
+//       throw error;
+//     }
+//   };
+
+//   // Delete image from bucket
+//   const deleteFromBucket = async (imageUrl: string | null | undefined): Promise<void> => {
+//     try {
+//       if (!imageUrl) return;
+      
+//       // Extract filename from URL
+//       const fileName = imageUrl.split('/').pop();
+//       if (!fileName) return;
+
+//       const { error } = await supabase.storage
+//         .from(BUCKET_NAME)
+//         .remove([fileName]);
+
+//       if (error) {
+//         console.error("Error deleting from bucket:", error);
+//       }
+//     } catch (error) {
+//       console.error("Delete from bucket failed:", error);
+//     }
+//   };
+
+// const handleRemoveImage = () => {
+//     setFormData(prev => ({ ...prev, profileImage: null }));
+//     setPreviewImage(null);
+    
+//     if (fileInputRef.current) {
+//       fileInputRef.current.value = "";
+//     }
+//   };
+//   return (
+//     <div>
+  
+//           <div className="flex w-[400px] flex-col gap-4 rounded-[30px] 
+//   dark:bg-[var(--dark-back-grdient)] bg-[var(--back-grdient)] 
+//   shadow-[0px_0px_152px_20px_#edf2f7] p-4 hover:-translate-y-4.5 transition-all duration-300">
+//                   <div>
+//   <div className="relative">
+//     <Image src={img} alt="sad" className="inline-block h-20 md:h-60 w-full rounded-[15px] md:rounded-[25px] object-cover" />
+//   </div>
+//   <div className="flex w-full flex-col gap-5">
+//     <h3 className="font-[600] plusJakartaSans text-[12px] md:text-[14px]">
+//       cPanel Tutorial for Linux Hosting
+//     </h3>
+//     <p className="font-[300] text-[12px] md:text-[14px]">
+//       What is cPanel? Who should learn how to work with cPanel?
+//     </p>
+//     {/* Divider */}
+//     <div className="h-px w-full bg-[#F7F7F7]" />
+//     <div className="flex items-center">
+//       <img src={"./assets/images/user.svg"} alt="ad" className="mx-1 inline-block" />
+//       <div className="flex flex-col md:flex-row md:items-center justify-between">
+//         <h6 className="text-[#A5A5A5] text-[10px] md:text-[12px]">WHMCSCRAFT</h6>
+//         <p className="mx-2 hidden text-[#A5A5A5] text-[12px] lg:block">
+//           -
+//         </p>
+//         <p className="text-[#A5A5A5] text-[12px]">
+//           October 27, 2025
+//         </p>
+//       </div>
+//     </div>
+//   </div>
+//               </div>
+//               </div>
+
+//    {open && (
+//   <Dialog open={open} onOpenChange={setOpen}>
+//         <DialogContent className="sm:max-w-md">
+//           <DialogHeader>
+//             <DialogTitle>Delete Item</DialogTitle>
+            
+//           </DialogHeader>
+//              <Formik
+//           initialValues={initialValues}
+//           validationSchema={validationSchema}
+//           onSubmit={handleSubmit}
+//         >
+//           {({ isSubmitting, errors, touched }) => (
+//             <Form>
+//           <div >
+//             <div className="my-2">
+//                 <Label htmlFor="title">Title</Label>
+//                 <Field
+//                   as={Input}
+//                   id="title"
+//                   name="title"
+//                   placeholder="John Doe"
+//                   className={errors.title && touched.title ? 'border-destructive' : ''}
+//                 />
+//                 <ErrorMessage
+//                   name="title"
+//                   component="div"
+//                   className="text-sm text-red-400"
+//                 />
+//                     </div>
+//                     <div className="my-2">
+//                 <Label htmlFor="heading">Heading</Label>
+//                 <Field
+//                   as={Input}
+//                   id="heading"
+//                   name="heading"
+//                   placeholder="John Doe"
+//                   className={errors.heading && touched.heading ? 'border-destructive' : ''}
+//                 />
+//                 <ErrorMessage
+//                   name="heading"
+//                   component="div"
+//                   className="text-sm text-red-400"
+//                 />
+//                     </div>
+//                     <div className='flex  w-full  my-2  gap-2'>
+//                       <div>
+//                           <Label htmlFor="btnOne">Button 1</Label>
+//                 <Field
+//                   as={Input}
+//                   id="btnOne"
+//                   name="btnOne"
+//                   placeholder="John Doe"
+//                   className={errors.btnOne && touched.btnOne ? 'border-destructive' : ''}
+//                 />
+//                 <ErrorMessage
+//                   name="btnOne"
+//                   component="div"
+//                   className="text-sm text-red-400"
+//                 />
+//                         </div>
+//                       <div>
+//                                   <Label htmlFor="btnTwo">Button 2</Label>
+//                 <Field
+//                   as={Input}
+//                   id="btnTwo"
+//                   name="btnTwo"
+//                   placeholder="John Doe"
+//                   className={errors["btnTwo"] && touched["btnTwo"] ? 'border-destructive' : ''}
+//                 />
+//                 <ErrorMessage
+//                   name="btnTwo"
+//                   component="div"
+//                   className="text-sm text-red-400"
+//                 />
+//                         </div>
+
+          
+
+//                       </div>
+
+//                     <div className="mb-3">
+//             <label className="form-label">Background Image (Max 1MB)</label>
+//             <input
+//               type="file"
+//               ref={fileInputRef}
+//               onChange={handleImageChange}
+//               accept="image/*"
+//               className="form-control mb-2"
+//               disabled={submitting}
+//             />
+
+//             {previewImage && (
+//               <div className="mt-2 text-center">
+//                 <img
+//                   src={previewImage}
+//                   alt="Preview"
+//                   className="img-thumbnail"
+//                   style={{ maxWidth: "150px", maxHeight: "150px" }}
+//                 />
+//                 <button
+//                   type="button"
+//                   className="btn btn-sm btn-danger mt-2"
+//                   onClick={handleRemoveImage}
+//                   disabled={submitting}
+//                 >
+//                   Remove Image
+//                 </button>
+//               </div>
+//             )}
+
+//             {!previewImage && isEdit && (
+//               <div className="text-muted small">
+//                 Leave empty to keep existing image
+//               </div>
+//             )}
+
+//             <div className="form-text">
+//               {STORAGE_TYPE === "bucket" 
+//                 ? "Images are stored in secure cloud storage bucket."
+//                 : "Images are automatically compressed and stored in database."}
+//             </div>
+//           </div>
+
+//           </div>
+          
+//           </Form>
+//               )}
+//             </Formik>
+
+//           <DialogFooter className="flex gap-2">
+//             <Button
+//               variant="error"
+//               onClick={() => setOpen(false)}
+//             >
+//               Cancel
+//             </Button>
+
+//             <Button
+              
+//               onClick={() => {
+//                 console.log('Deleted')
+//                 setOpen(false)
+//               }}
+//             >
+//               Confirm
+//             </Button>
+//           </DialogFooter>
+//         </DialogContent>
+//       </Dialog>
+//     )}   
+//     </div>
+//   )
+// }
+
+// export default HomeSliderCard
+
+
+
+
+// components/HomeSliderCard.tsx
+'use client'
+import { FC, useCallback, useEffect, useState, useRef } from 'react'
+import Image, { StaticImageData } from 'next/image'
+import img from './img1.jpg'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
+import { supabase } from "@/lib/supabase-client"
+import { Input } from '@/components/ui/input'
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik'
+import * as Yup from 'yup'
+import { Label } from '@/components/ui/label'
+
+import { Pen, Trash,UserRound } from "lucide-react"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Navigation, Pagination, Autoplay} from "swiper/modules"
+import type { Swiper as SwiperType } from "swiper"
+
+import "swiper/css"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
+
+
+
+import img1 from './img1.jpg'
+
+// Remove Session import if not used
+// import type { Session } from "@supabase/supabase-js";
+
+interface UserFormValues {
+  title: string
+  heading: string
+  btnOne: string
+  btnTwo: string
+}
+
+interface DatabaseUser {
+  id: string;
+  title: string;
+  heading: number;
+  btnOne: string;
+  btnTwo: string;
+  profileImage: string | null;
+  created_at?: string;
+}
+
+interface HomeSliderCardProps {
+  imageSrc: string | StaticImageData
+  title?: string
+  heading?: string
+  buttonOneText?: string
+  buttonTwoText?: string
+  open: boolean
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const BUCKET_NAME = "home-banner";
+const STORAGE_TYPE = "bucket";
+const CHUNK_SIZE = 60000;
+const DELIMITER = '|||CHUNK|||';
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+
+// Define Component User type - FIXED: image field removed
+interface User {
+  id: string;
+  title: string;
+  heading: number;
+  btnOne: string;
+  btnTwo: string;
+  profileImage: string | null; // Changed from 'image' to 'profileImage'
+  profileImageUrl?: string | null; // undefined भी allow करें
+}
+
+interface FormData {
+  title: string;
+  heading: string;
+  btnOne: string;
+  btnTwo: string;
+  profileImage: File | null;
+}
+
+const HomeSliderCard: FC<HomeSliderCardProps> = ({
+  imageSrc,
+  title,
+  heading,
+  buttonOneText,
+  buttonTwoText,
+  open,
+  setOpen
+}) => {
+  const [show, setShow] = useState(false);
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [isEdit, setIsEdit] = useState(false);
+  const [editId, setEditId] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+
+
+    const prevRef = useRef<HTMLButtonElement | null>(null)
+  const nextRef = useRef<HTMLButtonElement | null>(null)
+  const swiperRef = useRef<SwiperType | null>(null)
+
+
+  
+  const [formData, setFormData] = useState<FormData>({
+    title: "",
+    heading: "",
+    btnOne: "",
+    btnTwo: "",
+    profileImage: null,
+  });
+
+  // ---Formik---
+  const validationSchema = Yup.object({
+    title: Yup.string()
+      .min(2, 'tile must be at least 2 characters')
+      .required('title is required'),
+    heading: Yup.string()
+      .min(2, 'Heading must be at least 2 characters')
+      .required('Heading is required'),
+    btnOne: Yup.string()
+      .min(2, 'btn one must be at least 2 characters')
+      .required('btn one is required'),
+    btnTwo: Yup.string()
+      .min(2, 'btn two must be at least 2 characters')
+      .required('btn two is required'),
+  })
+
+  const initialValues: UserFormValues = {
+    title: formData.title? formData.title : '',
+    heading: formData.heading? formData.heading : '',
+    btnOne: formData.btnOne? formData.btnOne : '',
+    btnTwo: formData.btnTwo? formData.btnTwo : '',
+  }
+
+  const resetForm = () => {
+    setFormData({
+      title: "",
+      heading: "",
+      btnOne: "",
+      btnTwo: "",
+      profileImage: null
+    });
+    setEditId(null);
+    setPreviewImage(null);
+    setIsEdit(false);
+    setShow(false);
+    setSubmitting(false);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
+
+  const handleEdit = (user: User) => {
+  console.log("<><><>",user)
+    setIsEdit(true);
+    setEditId(user.id);
+    setFormData({
+      title: user.title,
+      heading: String(user.heading),
+      btnOne: user.btnOne,
+      btnTwo: user.btnTwo,
+      profileImage: null,
+    });
+    
+    // Set preview based on storage type
+    if (STORAGE_TYPE === "bucket") {
+      setPreviewImage(user.profileImageUrl || null);
+    } else {
+      setPreviewImage(user.profileImage);
+    }
+    setOpen(true);
+  };
+  console.log("modal show",show)
+
+console.log("users",users)
+  const handleSubmit = async (
+    values: UserFormValues,
+    formikHelpers: FormikHelpers<UserFormValues>
+  ) => {
+    console.log('Form submitted:', values)
+
+    if (submitting) return;
+
+    try {
+      setSubmitting(true);
+
+      // First, create user without image to get ID
+      const { data: userData, error: userError } = await supabase
+        .from("home-banner")
+        .insert([
+          {
+            title: values.title, // Use values from Formik
+            heading: values.heading, // Convert heading to number
+            btnOne: values.btnOne,
+            btnTwo: values.btnTwo, // Add btnTwo which was missing
+            profileImage: null, // Will update after processing
+          }
+        ])
+        .select()
+        .single();
+      
+setOpen(false);
+      if (userError) {
+        console.error("Error adding user:", userError);
+        alert(`Error: ${userError.message}`);
+        return;
+      }
+
+      let profileImageData: string | null = null;
+
+      // Process image based on storage type
+      if (formData.profileImage) {
+        if (STORAGE_TYPE === "bucket") {
+          // Upload to bucket
+          try {
+            const bucketUrl = await uploadToBucket(formData.profileImage, userData.id);
+            profileImageData = bucketUrl;
+          } catch (uploadError) {
+            console.error("Bucket upload failed:", uploadError);
+            // Continue without image
+          }
+        } else {
+          // Convert to Base64 and chunk
+          try {
+            const base64Image = await convertImageToBase64(formData.profileImage);
+            profileImageData = splitIntoChunks(base64Image);
+          } catch (convertError) {
+            console.error("Base64 conversion failed:", convertError);
+          }
+        }
+
+        // Update user with image data
+        if (profileImageData) {
+          const { error: updateError } = await supabase
+            .from("home-banner")
+            .update({ profileImage: profileImageData })
+            .eq("id", userData.id);
+
+          if (updateError) {
+            console.error("Error updating user with image:", updateError);
+          }
+        }
+      }
+
+      // Type-safe user data handling
+      if (!userData) {
+        throw new Error("No user data returned from insert");
+      }
+
+      // Create new user object with proper typing
+      const newUser: User = {
+        id: userData.id,
+        title: userData.title || "",
+        heading: Number(userData.heading) || 0,
+        btnOne: userData.btnOne || "",
+        btnTwo: userData.btnTwo || "",
+        profileImage: STORAGE_TYPE === "bucket" ? null : reconstructFromChunks(profileImageData),
+        profileImageUrl: STORAGE_TYPE === "bucket" ? profileImageData : null
+      };
+
+      // Add user to state with duplicate check
+      setUsers(prev => {
+        const exists = prev.some(u => u.id === newUser.id);
+        if (exists) {
+          console.log("User already exists, updating instead");
+          return prev.map(u => u.id === newUser.id ? newUser : u);
+        }
+        return [...prev, newUser];
+      });
+
+      resetForm();
+      formikHelpers.resetForm();
+    } catch (error) {
+setOpen(false);
+
+      console.error("Error saving user:", error);
+      if (error instanceof Error) {
+        alert(`Error: ${error.message}`);
+      } else {
+        alert("Error saving user. Please try again.");
+      }
+    } finally {
+setOpen(false);
+
+      setSubmitting(false);
+    }
+  }
+
+  // Base64 chunking functions
+  const splitIntoChunks = (base64String: string): string => {
+    if (base64String.length <= CHUNK_SIZE) {
+      return base64String;
+    }
+
+    const chunks: string[] = [];
+    for (let i = 0; i < base64String.length; i += CHUNK_SIZE) {
+      chunks.push(base64String.slice(i, i + CHUNK_SIZE));
+    }
+    return chunks.join(DELIMITER);
+  };
+
+  const reconstructFromChunks = (chunkedString: string | null | undefined): string | null => {
+    if (!chunkedString) return null;
+
+    if (!chunkedString.includes(DELIMITER)) {
+      return chunkedString;
+    }
+
+    return chunkedString.split(DELIMITER).join('');
+  };
+
+  // Optimized Base64 conversion
+  const convertImageToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      if (file.size > MAX_IMAGE_SIZE) {
+        reject(new Error(`Image size should be less than ${MAX_IMAGE_SIZE / 1024 / 1024}MB`));
+        return;
+      }
+
+      const compressImage = (imageFile: File): Promise<string> => {
+        return new Promise((resolveCompress, rejectCompress) => {
+    if (typeof window === 'undefined') {
+      rejectCompress(new Error('Image compression only available in browser'));
+      return;
+    }
+
+    const img = new window.Image(); // Use window.Image
+
+          const canvas = document.createElement('canvas');
+
+          img.onload = () => {
+            let width = img.width;
+            let height = img.height;
+
+            const maxDimension = 1024;
+            if (width > maxDimension || height > maxDimension) {
+              if (width > height) {
+                height = (height * maxDimension) / width;
+                width = maxDimension;
+              } else {
+                width = (width * maxDimension) / height;
+                height = maxDimension;
+              }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+              rejectCompress(new Error('Could not get canvas context'));
+              return;
+            }
+
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, width, height);
+            ctx.drawImage(img, 0, 0, width, height);
+
+            let quality = 0.8;
+            if (file.size > 2 * 1024 * 1024) quality = 0.6;
+            if (file.size > 3 * 1024 * 1024) quality = 0.5;
+
+            const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+            resolveCompress(compressedBase64);
+          };
+
+          img.onerror = rejectCompress;
+          img.src = URL.createObjectURL(imageFile);
+        });
+      };
+
+
+      const processImage = async () => {
+        try {
+          if (file.size > 500 * 1024) {
+            return await compressImage(file);
+          } else {
+            return new Promise<string>((resolveNormal, rejectNormal) => {
+              const reader = new FileReader();
+              reader.readAsDataURL(file);
+              reader.onload = () => resolveNormal(reader.result as string);
+              reader.onerror = rejectNormal;
+            });
+          }
+        } catch {
+          return new Promise<string>((resolveFallback, rejectFallback) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolveFallback(reader.result as string);
+            reader.onerror = rejectFallback;
+          });
+        }
+      };
+
+      processImage()
+        .then(resolve)
+        .catch(reject);
+    });
+  };
+
+  // Handle image file selection
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        alert('Please select an image file');
+        return;
+      }
+
+      if (file.size > MAX_IMAGE_SIZE) {
+        alert(`Image size should be less than ${MAX_IMAGE_SIZE / 1024 / 1024}MB`);
+        return;
+      }
+
+      setFormData((prev) => ({ ...prev, profileImage: file }));
+
+      const previewUrl = URL.createObjectURL(file);
+      setPreviewImage(previewUrl);
+    }
+  };
+
+  // Cleanup preview URL
+  useEffect(() => {
+    return () => {
+      if (previewImage) {
+        URL.revokeObjectURL(previewImage);
+      }
+    };
+  }, [previewImage]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const convertToUser = (dbUser: DatabaseUser): User => {
+    if (STORAGE_TYPE === "bucket") {
+      // For bucket storage
+      return {
+        id: dbUser.id,
+        title: dbUser.title,
+        heading: dbUser.heading,
+        btnOne: dbUser.btnOne,
+        btnTwo: dbUser.btnTwo,
+        profileImage: null,
+        profileImageUrl: dbUser.profileImage || null
+      };
+    } else {
+      // For Base64 storage
+      return {
+        id: dbUser.id,
+        title: dbUser.title,
+        heading: dbUser.heading,
+        btnOne: dbUser.btnOne,
+        btnTwo: dbUser.btnTwo,
+        profileImage: reconstructFromChunks(dbUser.profileImage),
+        profileImageUrl: null
+      };
+    }
+  };
+
+  const fetchUsers = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from("home-banner")
+        .select("*")
+        .order("created_at", { ascending: true });
+      console.log("Fetched users:", data);
+
+      if (error) {
+        console.error("Error fetching users:", error);
+        return;
+      }
+
+      // Safely convert database users to component users
+      const processedUsers = (data || []).map((dbUser) => convertToUser(dbUser as DatabaseUser));
+
+      setUsers(processedUsers);
+    } catch (error) {
+      console.error("Unexpected error:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
+
+  useEffect(() => {
+    if (swiperRef.current && prevRef.current && nextRef.current) {
+      // Reinitialize navigation with custom buttons
+      const swiper = swiperRef.current
+      
+      // Update navigation elements
+      if (swiper.params.navigation && typeof swiper.params.navigation === 'object') {
+        swiper.params.navigation.prevEl = prevRef.current
+        swiper.params.navigation.nextEl = nextRef.current
+      }
+      
+      // Re-init navigation
+      swiper.navigation.destroy()
+      swiper.navigation.init()
+      swiper.navigation.update()
+    }
+  }, [])
+
+
+
+
+
+  const generateFileName = (userId: string, file: File): string => {
+    const timestamp = Date.now();
+    const extension = file.name.split('.').pop() || 'jpg';
+    return `${userId}_${timestamp}.${extension}`;
+  };
+
+  const uploadToBucket = async (file: File, userId: string): Promise<string> => {
+    try {
+      const fileName = generateFileName(userId, file);
+
+      const { data, error } = await supabase.storage
+        .from(BUCKET_NAME)
+        .upload(fileName, file, {
+          cacheControl: '3600',
+          upsert: true
+        });
+
+      console.log("Upload data:", data);
+
+      if (error) {
+        console.error("Error uploading to bucket:", error);
+        throw error;
+      }
+
+      // Get public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from(BUCKET_NAME)
+        .getPublicUrl(fileName);
+
+      return publicUrl;
+    } catch (error) {
+      console.error("Upload failed:", error);
+      throw error;
+    }
+  };
+
+  // Delete image from bucket
+  const deleteFromBucket = async (imageUrl: string | null | undefined): Promise<void> => {
+    try {
+      if (!imageUrl) return;
+
+      // Extract filename from URL
+      const fileName = imageUrl.split('/').pop();
+      if (!fileName) return;
+
+      const { error } = await supabase.storage
+        .from(BUCKET_NAME)
+        .remove([fileName]);
+
+      if (error) {
+        console.error("Error deleting from bucket:", error);
+      }
+    } catch (error) {
+      console.error("Delete from bucket failed:", error);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setFormData(prev => ({ ...prev, profileImage: null }));
+    setPreviewImage(null);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
+  console.log("formData",formData)
+
+
+  const getImageUrl = (user: User): string | null => {
+    const url = STORAGE_TYPE === "bucket" ? user.profileImageUrl : user.profileImage;
+    return url || null;
+  };
+
+
+const getSafeImageSrc = (
+  dynamicSrc: string | null, 
+  fallbackSrc: string | StaticImageData | undefined
+): string => {
+  // Use dynamic source if available
+  if (dynamicSrc) return dynamicSrc;
+  
+  // Handle fallback source
+  if (!fallbackSrc) return `${img1}`;
+  
+  if (typeof fallbackSrc === 'string') {
+    return fallbackSrc;
+  }
+  
+  // Handle StaticImageData
+  if (fallbackSrc && typeof fallbackSrc === 'object' && 'src' in fallbackSrc) {
+    return fallbackSrc.src;
+  }
+  
+  return `${img1}`;
+};
+
+
+   // DELETE USER Functionality - with both storage options
+  const handleDeleteUser = async (id: string) => {
+    if (!window.confirm("Delete this user?")) return;
+
+    try {
+      // Handle image deletion based on storage type
+      if (STORAGE_TYPE === "bucket") {
+        const userToDelete = users.find(u => u.id === id);
+        if (userToDelete?.profileImageUrl) {
+          await deleteFromBucket(userToDelete.profileImageUrl);
+        }
+      }
+      // For Base64 storage, no need to delete from bucket
+
+      // Delete user from database
+      const { error } = await supabase.from("home-banner").delete().eq("id", id);
+
+      if (error) {
+        console.error("Error deleting user:", error);
+        alert(`Error: ${error.message}`);
+        return;
+      }
+
+      // Remove user from state
+      setUsers((prev) => prev.filter((u) => u.id !== id));
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      alert("Error deleting user. Please try again.");
+    }
+  };
+
+
+  const handleUpdateUser = async (
+    values: UserFormValues,
+    formikHelpers: FormikHelpers<UserFormValues>
+  ) => {
+    if (!editId || submitting) return;
+
+    try {
+      setSubmitting(true);
+      let profileImageData: string | null = null;
+      let oldImageData: string | null | undefined = null;
+      
+      // Get existing user data
+      const existingUser = users.find(u => u.id === editId);
+      if (existingUser) {
+        oldImageData = STORAGE_TYPE === "bucket" 
+          ? existingUser.profileImageUrl 
+          : existingUser.profileImage;
+      }
+      
+      // Process new image if selected
+      if (formData.profileImage) {
+        if (STORAGE_TYPE === "bucket") {
+          // Delete old image from bucket if exists
+          if (oldImageData) {
+            await deleteFromBucket(oldImageData);
+          }
+          
+          // Upload new image to bucket
+          try {
+            profileImageData = await uploadToBucket(formData.profileImage, editId);
+          } catch (uploadError) {
+            console.error("Bucket upload failed:", uploadError);
+            profileImageData = oldImageData || null;
+          }
+        } else {
+          // Convert to Base64 and chunk
+          try {
+            const base64Image = await convertImageToBase64(formData.profileImage);
+            profileImageData = splitIntoChunks(base64Image);
+          } catch (convertError) {
+            console.error("Base64 conversion failed:", convertError);
+            profileImageData = oldImageData ? splitIntoChunks(oldImageData) : null;
+          }
+        }
+      } else {
+        // Keep existing image
+        profileImageData = oldImageData || null;
+      }
+
+      // Update user in database
+      const { data, error } = await supabase
+        .from("home-banner")
+        .update({
+          title: values.title,
+          heading: values.heading,
+          btnOne: values.btnOne,
+          btnTwo: values.btnTwo,
+          profileImage: profileImageData,
+        })
+        .eq("id", editId)
+        .select()
+        .single();
+        setOpen(false);
+
+      if (error) {
+        console.error("Error updating user:", error);
+        alert(`Error: ${error.message}`);
+        return;
+      }
+
+      // Convert database user to component user
+      const updatedUser = convertToUser(data);
+      
+      setUsers((prev) => prev.map((u) => (u.id === editId ? updatedUser : u)));
+      resetForm();
+      formikHelpers.resetForm();
+    } catch (error) {
+      console.error("Error updating user:", error);
+      if (error instanceof Error) {
+        alert(`Error: ${error.message}`);
+      } else {
+        alert("Error updating user. Please try again.");
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  };
+  console.log("users isEdit",isEdit)
+  
+  return (
+
+    
+    <div className="relative">
+      {/* <div className="flex w-full lg:flex-wrap flex wrap gap-4">
+              {users && users.length > 0 && users.map((u) => (
+
+                                 
+      <div key={u.id} className="flex w-full lg:w-[450px] md:w-[450px] flex-col gap-2 rounded-[30px] 
+  bg-[hsl(var(--color-background))] 
+    dark:bg-[hsl(var(--color-background))] 
+      shadow-lg dark:shadow-lg
+      border-2 
+ p-4 hover:-translate-y-4.5 transition-all duration-300">
+        <div>
+                    <div className="relative">
+                                            {getImageUrl(u) ? (
+            <img src={`${getImageUrl(u)}`} alt={`${u.title}'s profile`}  className="inline-block h-20 md:h-60 w-full rounded-[15px] md:rounded-[25px] object-cover" />
+                      ) : (
+            <img src={`${imageSrc}`} alt="sad"  className="inline-block h-20 md:h-60 w-full rounded-[15px] md:rounded-[25px] object-cover" />
+                      )}
+          </div>
+          <div className="flex w-full flex-col px-2 gap-5 mt-2">
+            <h3 className="font-[600] plusJakartaSans text-[12px] md:text-[14px]">
+              {u.title}
+            </h3>
+            <p className="font-[300] text-[12px] md:text-[14px]">
+            {u.heading}
+                      </p>
+                      <div className="flex gap-2">
+                        <div>
+
+                        <Button >
+                          {u.btnOne}
+                        </Button>
+                        </div>
+                        <div>
+
+                        <Button >
+                          {u.btnTwo}
+                        </Button>
+                        </div>
+                        <div>
+                            <button
+                          className="btn w-8 h-8   px-1 rounded-lg py-1 bg-red-400 mt-[2px]"
+                          onClick={() => handleDeleteUser(u.id)}
+                        >
+                          <Trash className="text-white font-lg text-[12px] leading-[15px]"/>
+                        </button>
+                        </div>
+                        <div>
+                          <button
+  type="button"
+  onClick={() => handleEdit(u)}
+  className="flex h-8 w-8 items-center justify-center rounded-lg bg-red-400 hover:bg-red-500 transition"
+>
+  <div className="relative">
+    <UserRound size={20} className="text-white" />
+
+    <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full text-white">
+      <Pen size={14} className="text-white"/>
+    </span>
+  </div>
+</button>
+
+                        </div>
+
+                      </div>
+            
+          </div>
+        </div>
+      </div>
+))}
+
+      </div> */}
+      <div className="w-full relative">
+              <button
+        ref={prevRef}
+        className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-lg"
+      >
+        ←
+      </button>
+      
+      <button
+        ref={nextRef}
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-lg"
+      >
+        →
+      </button>
+
+  <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+    spaceBetween={16}
+    slidesPerView="auto"
+    loop={true}
+    autoplay={{
+      delay: 2500,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    }}
+    pagination={{ 
+      clickable: true,
+      dynamicBullets: true 
+    }}
+    navigation={false} // Start mein false rakhein
+        onSwiper={(swiper) => {
+      swiperRef.current = swiper
+    }}
+
+    onInit={(swiper) => {
+      // Alternative: Direct onclick handlers set karein
+      if (prevRef.current && nextRef.current) {
+        prevRef.current.onclick = () => swiper.slidePrev()
+        nextRef.current.onclick = () => swiper.slideNext()
+      }
+    }}
+    breakpoints={{
+      640: { 
+        slidesPerView: 2,
+        spaceBetween: 16 
+      },
+      1024: { 
+        slidesPerView: 2,
+        spaceBetween: 24
+      },
+    }}
+    className="!overflow-visible"
+
+  >
+    {users?.map((u: User) => (
+      <SwiperSlide 
+        key={u.id} 
+        className="!w-[calc(100%-8px)] sm:!w-[calc(50%-12px)] lg:!w-[calc(50%-12px)]" // Responsive widths
+      >
+        <div className="flex flex-col gap-2 rounded-[30px] bg-[hsl(var(--color-background))] shadow-lg border-2 p-4 hover:-translate-y-4.5 transition-all duration-300 w-full h-full">
+          <div className="relative">
+            {/* eslint-disable @next/next/no-img-element */}
+            <img
+              // src={getImageUrl(u) ?? imageSrc}
+                src={getSafeImageSrc(getImageUrl(u), imageSrc)}
+
+              alt={u.title}
+              className="w-full h-60 md:h-60 rounded-[15px] object-cover"
+              
+            />
+          </div>
+
+          <div className="flex flex-col gap-2 mt-2">
+            <h3 className="font-semibold text-[12px] md:text-[14px]">{u.title}</h3>
+            <p className="font-light text-[12px] md:text-[14px]">{u.heading}</p>
+
+
+            <div className="flex gap-2">
+                        <div>
+
+                        <Button >
+                          {u.btnOne}
+                        </Button>
+                        </div>
+                        <div>
+
+                        <Button >
+                          {u.btnTwo}
+                        </Button>
+                        </div>
+                        <div>
+                            <button
+                          className="btn w-8 h-8   px-1 rounded-lg py-1 bg-red-400 mt-[2px]"
+                          onClick={() => handleDeleteUser(u.id)}
+                        >
+                          <Trash className="text-white font-lg text-[12px] leading-[15px]"/>
+                        </button>
+                        </div>
+                        <div>
+                          <button
+  type="button"
+  onClick={() => handleEdit(u)}
+  className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-400 hover:bg-green-500 transition"
+>
+  <div className="relative">
+    <UserRound size={20} className="text-white" />
+
+    <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full text-white">
+      <Pen size={14} className="text-white"/>
+    </span>
+  </div>
+</button>
+
+                        </div>
+
+                      </div>
+            
+          </div>
+        </div>
+      </SwiperSlide>
+    ))}
+          
+    <div className="custom-pagination flex gap-2 mt-4"></div>
+  </Swiper>
+</div>
+
+
+      {open && (
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>{isEdit ? "Edit Slide" : "Create Slide"}</DialogTitle>
+            </DialogHeader>
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={isEdit ? handleUpdateUser : handleSubmit}
+            >
+              {({ isSubmitting, errors, touched }) => (
+                <Form>
+                  <div>
+                    <div className="my-2">
+                      <Label htmlFor="title">Title</Label>
+                      <Field
+                        as={Input}
+                        id="title"
+                        name="title"
+                        placeholder="John Doe"
+                        className={errors.title && touched.title ? 'border-destructive' : ''}
+                      />
+                      <ErrorMessage
+                        name="title"
+                        component="div"
+                        className="text-sm text-red-400"
+                      />
+                    </div>
+                    <div className="my-2">
+                      <Label htmlFor="heading">Heading</Label>
+                      <Field
+                        as={Input}
+                        id="heading"
+                        name="heading"
+                        placeholder="John Doe"
+                        className={errors.heading && touched.heading ? 'border-destructive' : ''}
+                      />
+                      <ErrorMessage
+                        name="heading"
+                        component="div"
+                        className="text-sm text-red-400"
+                      />
+                    </div>
+                    <div className='flex w-full my-2 gap-2'>
+                      <div>
+                        <Label htmlFor="btnOne">Button 1</Label>
+                        <Field
+                          as={Input}
+                          id="btnOne"
+                          name="btnOne"
+                          placeholder="John Doe"
+                          className={errors.btnOne && touched.btnOne ? 'border-destructive' : ''}
+                        />
+                        <ErrorMessage
+                          name="btnOne"
+                          component="div"
+                          className="text-sm text-red-400"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="btnTwo">Button 2</Label>
+                        <Field
+                          as={Input}
+                          id="btnTwo"
+                          name="btnTwo"
+                          placeholder="John Doe"
+                          className={errors["btnTwo"] && touched["btnTwo"] ? 'border-destructive' : ''}
+                        />
+                        <ErrorMessage
+                          name="btnTwo"
+                          component="div"
+                          className="text-sm text-red-400"
+                        />
+                      </div>
+                    </div>
+
+                    {/* <div className="mb-3">
+                      <label className="form-label">Background Image (Max 1MB)</label>
+                      <input
+                        type="file"
+                        ref={fileInputRef}
+                        onChange={handleImageChange}
+                        accept="image/*"
+                        className="form-control mb-2"
+                        disabled={submitting}
+                      />
+
+                      {previewImage && (
+                        <div className="mt-2 text-center">
+                          <img
+                            src={previewImage}
+                            alt="Preview"
+                            className="img-thumbnail"
+                            style={{ maxWidth: "150px", maxHeight: "150px" }}
+                          />
+                          <button
+                            type="button"
+                            className="btn btn-sm btn-danger mt-2"
+                            onClick={handleRemoveImage}
+                            disabled={submitting}
+                          >
+                            Remove Image
+                          </button>
+                        </div>
+                      )}
+
+                      {!previewImage && isEdit && (
+                        <div className="text-muted small">
+                          Leave empty to keep existing image
+                        </div>
+                      )}
+
+                      <div className="form-text">
+                        {STORAGE_TYPE === "bucket"
+                          ? "Images are stored in secure cloud storage bucket."
+                          : "Images are automatically compressed and stored in database."}
+                      </div>
+                    </div> */}
+      <div className="mb-4">
+  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+    Background Image (Max 1MB)
+  </label>
+
+  {/* File Upload Card - Compact for modal */}
+  <div 
+    className={`
+      relative border-2 border-dashed rounded-lg transition-all duration-200
+      ${!previewImage 
+        ? 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800' 
+        : 'border-transparent'
+      }
+      ${submitting ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
+      max-w-full
+    `}
+    onClick={() => !submitting && fileInputRef.current?.click()}
+  >
+    <input
+      type="file"
+      ref={fileInputRef}
+      onChange={handleImageChange}
+      accept="image/*"
+      className="hidden"
+      disabled={submitting}
+    />
+
+    {!previewImage ? (
+      <div className="p-4 text-center">
+        <div className="mx-auto w-10 h-10 mb-2 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="20" 
+            height="20" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            className="text-gray-500 dark:text-gray-400"
+          >
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7"/>
+            <line x1="16" x2="22" y1="5" y2="5"/>
+            <line x1="19" x2="19" y1="2" y2="8"/>
+            <circle cx="9" cy="9" r="2"/>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+          </svg>
+        </div>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+          <span className="font-medium text-primary-600 dark:text-primary-400">
+            Click to upload
+          </span>
+        </p>
+        <p className="text-xs text-gray-500 dark:text-gray-500 mb-2">
+          PNG, JPG, GIF (max 1MB)
+        </p>
+        
+        {isEdit && (
+          <div className="mt-2 px-2 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-md inline-block">
+            <p className="text-xs text-gray-600 dark:text-gray-400 flex items-center gap-1">
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="12" 
+                height="12" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 16v-4"/>
+                <path d="M12 8h.01"/>
+              </svg>
+              Leave empty to keep existing
+            </p>
+          </div>
+        )}
+      </div>
+    ) : (
+      <div className="p-3">
+        <div className="flex items-center gap-3">
+          {/* Image Preview - Compact */}
+          <div className="relative group flex-shrink-0">
+            <img
+              src={previewImage}
+              alt="Preview"
+              className="w-20 h-20 object-cover rounded-md shadow"
+            />
+            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity rounded-md flex items-center justify-center">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleRemoveImage();
+                }}
+                disabled={submitting}
+                className="p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors disabled:opacity-50"
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                >
+                  <path d="M3 6h18"/>
+                  <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                  <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          {/* Remove Button - Compact */}
+          <div className="flex-1 min-w-0">
+            <p className="text-sm text-gray-600 dark:text-gray-400 truncate mb-2">
+              Image selected
+            </p>
+            <button
+              type="button"
+              onClick={handleRemoveImage}
+              disabled={submitting}
+              className="w-30 py-1.5 px-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-md font-medium hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors flex items-center justify-center gap-1.5 disabled:opacity-50 text-sm"
+            >
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="14" 
+                height="14" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              >
+                <path d="M3 6h18"/>
+                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+              </svg>
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+
+  {/* Storage Info - Compact */}
+  <div className="mt-2 px-3 py-2 bg-gray-50 dark:bg-gray-800/50 rounded-md">
+    <p className="text-xs text-gray-600 dark:text-gray-400 flex items-start gap-2">
+      <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        width="14" 
+        height="14" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
+        className="text-primary-500 mt-0.5 flex-shrink-0"
+      >
+        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+        <path d="m9 12 2 2 4-4"/>
+      </svg>
+      <span>
+        {STORAGE_TYPE === "bucket" 
+          ? "Stored in secure cloud storage bucket."
+          : "Automatically compressed and stored."
+        }
+      </span>
+    </p>
+  </div>
+</div>
+                    
+
+                    <DialogFooter className="flex gap-2 mt-4">
+                      <Button
+                        type="button"
+                        variant="secondary"
+                        onClick={() => setOpen(false)}
+                        disabled={isSubmitting}
+                      >
+                        Cancel
+                      </Button>
+
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? "Saving..." : "Save Changes"}
+                      </Button>
+                    </DialogFooter>
+                  </div>
+                </Form>
+              )}
+            </Formik>
+          </DialogContent>
+        </Dialog>
+      )}
+    </div>
+  )
+}
+
+export default HomeSliderCard
