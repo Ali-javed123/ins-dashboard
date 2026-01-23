@@ -928,7 +928,9 @@ const HomeSliderCard: FC<HomeSliderCardProps> = ({
 
 
 
-console.log("users",users)
+  console.log("users", users)
+  
+  
   const handleSubmit = async (
     values: UserFormValues,
     formikHelpers: FormikHelpers<UserFormValues>
@@ -955,7 +957,7 @@ console.log("users",users)
         .select()
         .single();
       
-setOpen(false);
+      setOpen(false);
       if (userError) {
         console.error("Error adding user:", userError);
         alert(`Error: ${userError.message}`);
