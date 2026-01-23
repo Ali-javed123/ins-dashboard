@@ -99,15 +99,79 @@ const Login = () => {
     email: '',
     password: '',
   }
-useEffect(() => {
-  if (userSession) {
-    // router.push("/home");
-  }
-}, [userSession]);
+// useEffect(() => {
+//   if (userSession) {
+//     router.push("/home");
+//   }
+// }, [userSession]);
 
-  const handleAuth = async (values: UserFormValues, formikHelpers: FormikHelpers<UserFormValues>) => {
+//   const handleAuth = async (values: UserFormValues, formikHelpers: FormikHelpers<UserFormValues>) => {
+//   setLoading(true);
+//   console.log('Attempting auth with:', values); // 👈 Add this line
+  
+//   try {
+//     if (login === "login") {
+//       const { data, error } = await supabase.auth.signInWithPassword({
+//         email: values.email,
+//         password: values.password,
+//       });
+//       console.log('Login response:error', { error });
+//       console.log('Login response data:', { data });
+      
+//       console.log("error?.error?.code",`${error.code}`)
+//       toast.error(`${error.code}`, {
+//         icon: <XCircle className="text-red-500" />,
+//       });
+//       formikHelpers.resetForm();
+
+//       if (!error) {
+//         router.push('/home');
+//       }
+//         // 👈 Add this line
+//       if (error) throw error;
+//       alert("Logged in successfully!");
+      
+//     } else {
+//       const { data, error } = await supabase.auth.signUp({
+//         email: values.email,
+//         password: values.password,
+//       });
+//       console.log('Signup response:', { data, error }); // 👈 Add this line
+//       if (error) throw error;
+//       // Check if email confirmation is required
+//       if (data.user && data.user.identities && data.user.identities.length === 0) {
+//         // alert('User already exists. Try logging in.');
+//          toast.success("User already exists. Try logging in.", {
+//         icon: <CheckCircle className="text-green-500" />,
+//       });
+//       } else if (data.session) {
+//         // alert('Sign up successful! You are now signed in.');
+//          toast.success("Sign up successful! You are now signed in", {
+//         icon: <CheckCircle className="text-green-500" />,
+        
+//       });
+//       router.push("/home");
+//       } else {
+//         // alert('Sign up successful! Please check your email for the confirmation link.');
+//         toast.success("Sign up successful! Please check your email", {
+//         icon: <CheckCircle className="text-green-500" />,
+//       });
+//       }
+//     }
+//   } catch (error: unknown) {
+//     const {errors}=error
+//     // toast.success(error?.error?.code, {
+//     //     icon: <CheckCircle className="text-green-500" />,
+//     //   });
+//     // ... your existing error handling ...
+//     console.log("errors",error)
+//   } finally {
+//     setLoading(false);
+//   }
+// };
+const handleAuth = async (values: UserFormValues, formikHelpers: FormikHelpers<UserFormValues>) => {
   setLoading(true);
-  console.log('Attempting auth with:', values); // 👈 Add this line
+  console.log('Attempting auth with:', values);
   
   try {
     if (login === "login") {
@@ -115,58 +179,57 @@ useEffect(() => {
         email: values.email,
         password: values.password,
       });
-      console.log('Login response:error', { error });
-      console.log('Login response data:', { data });
       
-      console.log("error?.error?.code",`${error.code}`)
-      toast.error(`${error.code}`, {
-        icon: <XCircle className="text-red-500" />,
-      });
-      formikHelpers.resetForm();
-
-      if (!error) {
-        router.push('/home');
+      if (error) {
+        toast.error(`${error.message}`, {
+          icon: <XCircle className="text-red-500" />,
+        });
+        throw error;
       }
-        // 👈 Add this line
-      if (error) throw error;
-      alert("Logged in successfully!");
+      
+      // ✅ Agar error nahi hai to redirect karein
+      if (data.session) {
+        toast.success("Logged in successfully!", {
+          icon: <CheckCircle className="text-green-500" />,
+        });
+        router.push('/home');
+        router.refresh(); // ✅ Client-side cache refresh
+      }
       
     } else {
       const { data, error } = await supabase.auth.signUp({
         email: values.email,
         password: values.password,
       });
-      console.log('Signup response:', { data, error }); // 👈 Add this line
-      if (error) throw error;
-      // Check if email confirmation is required
+      
+      if (error) {
+        toast.error(`${error.message}`, {
+          icon: <XCircle className="text-red-500" />,
+        });
+        throw error;
+      }
+      
       if (data.user && data.user.identities && data.user.identities.length === 0) {
-        // alert('User already exists. Try logging in.');
-         toast.success("User already exists. Try logging in.", {
-        icon: <CheckCircle className="text-green-500" />,
-      });
+        toast.info("User already exists. Try logging in.", {
+          icon: <AlertTriangle className="text-yellow-500" />,
+        });
       } else if (data.session) {
-        // alert('Sign up successful! You are now signed in.');
-         toast.success("Sign up successful! You are now signed in", {
-        icon: <CheckCircle className="text-green-500" />,
-        
-      });
-      router.replace("/home");
+        toast.success("Sign up successful! You are now signed in", {
+          icon: <CheckCircle className="text-green-500" />,
+        });
+        router.push("/home");
+        router.refresh(); // ✅ Client-side cache refresh
       } else {
-        // alert('Sign up successful! Please check your email for the confirmation link.');
         toast.success("Sign up successful! Please check your email", {
-        icon: <CheckCircle className="text-green-500" />,
-      });
+          icon: <CheckCircle className="text-green-500" />,
+        });
       }
     }
-  } catch (error: unknown) {
-    const {errors}=error
-    // toast.success(error?.error?.code, {
-    //     icon: <CheckCircle className="text-green-500" />,
-    //   });
-    // ... your existing error handling ...
-    console.log("errors",error)
+  } catch (error: any) {
+    console.error("Auth error:", error);
   } finally {
     setLoading(false);
+    formikHelpers.resetForm();
   }
 };
    // Session listener
@@ -175,13 +238,6 @@ useEffect(() => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUserSession(session);
-            if (session) {
-        localStorage.setItem("supabase_session", JSON.stringify(session))
-      } else {
-        localStorage.removeItem("supabase_session")
-      }
-
-      
     });
 
     return () => { subscription.unsubscribe(); };
