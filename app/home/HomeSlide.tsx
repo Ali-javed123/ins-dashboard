@@ -896,6 +896,38 @@ const HomeSliderCard: FC<HomeSliderCardProps> = ({
   };
   console.log("modal show",show)
 
+
+  const fetchUsers = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from("home-banner")
+        .select("*")
+        .order("created_at", { ascending: true });
+      console.log("Fetched users:", data);
+
+      if (error) {
+        console.error("Error fetching users:", error);
+        return;
+      }
+
+      // Safely convert database users to component users
+      const processedUsers = (data || []).map((dbUser) => convertToUser(dbUser as DatabaseUser));
+
+      setUsers(processedUsers);
+    } catch (error) {
+      console.error("Unexpected error:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
+
+
+
+
 console.log("users",users)
   const handleSubmit = async (
     values: UserFormValues,
@@ -991,7 +1023,7 @@ setOpen(false);
         }
         return [...prev, newUser];
       });
-
+fetchUsers();
       resetForm();
       formikHelpers.resetForm();
     } catch (error) {
@@ -1184,33 +1216,6 @@ setOpen(false);
     }
   };
 
-  const fetchUsers = useCallback(async () => {
-    try {
-      const { data, error } = await supabase
-        .from("home-banner")
-        .select("*")
-        .order("created_at", { ascending: true });
-      console.log("Fetched users:", data);
-
-      if (error) {
-        console.error("Error fetching users:", error);
-        return;
-      }
-
-      // Safely convert database users to component users
-      const processedUsers = (data || []).map((dbUser) => convertToUser(dbUser as DatabaseUser));
-
-      setUsers(processedUsers);
-    } catch (error) {
-      console.error("Unexpected error:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchUsers();
-  }, [fetchUsers]);
 
   useEffect(() => {
     if (swiperRef.current && prevRef.current && nextRef.current) {
