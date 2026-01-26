@@ -252,7 +252,7 @@ export default function Sidebar() {
     <TooltipProvider delayDuration={0}>
       <aside
         className={cn(
-      'fixed inset-y-0 left-0 z-50 w-72 border-r bg-gradient-to-b from-background to-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/90 transition-all duration-300 ease-in-out lg:translate-x-0',
+      'fixed inset-y-0 left-0 z-50  w-72 border-r bg-gradient-to-b from-background to-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/90 transition-all duration-300 ease-in-out lg:translate-x-0',
           !isOpen && '-translate-x-full' , 'shadow-lg', // Base shadow
 
 

@@ -1463,78 +1463,9 @@ const getSafeImageSrc = (
   return (
 
     
-    <div className="relative">
-      {/* <div className="flex w-full lg:flex-wrap flex wrap gap-4">
-              {users && users.length > 0 && users.map((u) => (
+<div className="w-full  max-w-full overflow-hidden">
 
-                                 
-      <div key={u.id} className="flex w-full lg:w-[450px] md:w-[450px] flex-col gap-2 rounded-[30px] 
-  bg-[hsl(var(--color-background))] 
-    dark:bg-[hsl(var(--color-background))] 
-      shadow-lg dark:shadow-lg
-      border-2 
- p-4 hover:-translate-y-4.5 transition-all duration-300">
-        <div>
-                    <div className="relative">
-                                            {getImageUrl(u) ? (
-            <img src={`${getImageUrl(u)}`} alt={`${u.title}'s profile`}  className="inline-block h-20 md:h-60 w-full rounded-[15px] md:rounded-[25px] object-cover" />
-                      ) : (
-            <img src={`${imageSrc}`} alt="sad"  className="inline-block h-20 md:h-60 w-full rounded-[15px] md:rounded-[25px] object-cover" />
-                      )}
-          </div>
-          <div className="flex w-full flex-col px-2 gap-5 mt-2">
-            <h3 className="font-[600] plusJakartaSans text-[12px] md:text-[14px]">
-              {u.title}
-            </h3>
-            <p className="font-[300] text-[12px] md:text-[14px]">
-            {u.heading}
-                      </p>
-                      <div className="flex gap-2">
-                        <div>
-
-                        <Button >
-                          {u.btnOne}
-                        </Button>
-                        </div>
-                        <div>
-
-                        <Button >
-                          {u.btnTwo}
-                        </Button>
-                        </div>
-                        <div>
-                            <button
-                          className="btn w-8 h-8   px-1 rounded-lg py-1 bg-red-400 mt-[2px]"
-                          onClick={() => handleDeleteUser(u.id)}
-                        >
-                          <Trash className="text-white font-lg text-[12px] leading-[15px]"/>
-                        </button>
-                        </div>
-                        <div>
-                          <button
-  type="button"
-  onClick={() => handleEdit(u)}
-  className="flex h-8 w-8 items-center justify-center rounded-lg bg-red-400 hover:bg-red-500 transition"
->
-  <div className="relative">
-    <UserRound size={20} className="text-white" />
-
-    <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full text-white">
-      <Pen size={14} className="text-white"/>
-    </span>
-  </div>
-</button>
-
-                        </div>
-
-                      </div>
-            
-          </div>
-        </div>
-      </div>
-))}
-
-      </div> */}
+      
       <div className="w-full relative">
               <button
         ref={prevRef}
@@ -1554,6 +1485,8 @@ const getSafeImageSrc = (
             modules={[Navigation, Pagination, Autoplay]}
     spaceBetween={16}
     slidesPerView="auto"
+          // slidesPerView={1}  // Default 1 slide
+
     loop={true}
     autoplay={{
       delay: 2500,
@@ -1562,7 +1495,9 @@ const getSafeImageSrc = (
     }}
     pagination={{ 
       clickable: true,
-      dynamicBullets: true 
+      dynamicBullets: true ,
+              // el: '.custom-pagination',
+
     }}
     navigation={false} // Start mein false rakhein
         onSwiper={(swiper) => {
@@ -1576,29 +1511,41 @@ const getSafeImageSrc = (
         nextRef.current.onclick = () => swiper.slideNext()
       }
     }}
-    breakpoints={{
-      640: { 
-        slidesPerView: 2,
-        spaceBetween: 16 
-      },
-      1024: { 
-        slidesPerView: 2,
-        spaceBetween: 24
-      },
-    }}
-    className="!overflow-visible"
+             breakpoints={{
+        640: { 
+          slidesPerView: 2,
+          slidesPerGroup: 1,
+          spaceBetween: 16 
+        },
+        768: { 
+          slidesPerView: 2,
+          slidesPerGroup: 1,
+          spaceBetween: 20
+        },
+        1024: { 
+          slidesPerView: 2,
+          slidesPerGroup: 1,
+          spaceBetween: 24
+        },
+      }}
+
+
+    // className="!overflow-y-visible"
+    className="h-[500px]"
+    
 
   >
+    {/* eslint-disable @next/next/no-img-element */}
     {users?.map((u: User) => (
       <SwiperSlide 
         key={u.id} 
-        className="!w-[calc(100%-8px)] sm:!w-[calc(50%-12px)] lg:!w-[calc(50%-12px)]" // Responsive widths
+
       >
+        {/* <div className="relative group">
+
         <div className="flex flex-col gap-2 rounded-[30px] bg-[hsl(var(--color-background))] shadow-lg border-2 p-4 hover:-translate-y-4.5 transition-all duration-300 w-full h-full">
           <div className="relative">
-            {/* eslint-disable @next/next/no-img-element */}
             <img
-              // src={getImageUrl(u) ?? imageSrc}
                 src={getSafeImageSrc(getImageUrl(u), imageSrc)}
 
               alt={u.title}
@@ -1654,6 +1601,468 @@ const getSafeImageSrc = (
             
           </div>
         </div>
+        </div> */}
+        <div className="relative group h-[450px] perspective-1000">
+          
+  {/* Floating animation container */}
+  <div className="
+    absolute 
+    inset-0 
+    rounded-[30px] 
+    bg-gradient-to-br 
+    from-[hsl(var(--color-primary)/0.1)] 
+    via-transparent 
+    to-[hsl(var(--color-secondary)/0.05)]
+    opacity-0 
+    group-hover:opacity-100 
+    transition-opacity 
+    duration-700
+    blur-xl
+    -z-10
+  "/>
+  
+  {/* Main card with enhanced hover effects */}
+  <div className="
+    flex flex-col gap-4 
+    rounded-[30px] 
+    bg-gradient-to-br 
+    from-[hsl(var(--color-background))] 
+    to-[hsl(var(--color-background)/0.95)]
+    dark:from-[hsl(var(--color-background-dark))] 
+    dark:to-[hsl(var(--color-background-dark)/0.95)]
+    shadow-lg 
+    shadow-[hsl(var(--color-shadow)/0.1)]
+    border-2 
+    border-[hsl(var(--color-border)/0.8)]
+    p-5 
+    h-full
+    overflow-hidden
+    
+    /* 3D Hover Transform */
+    transform-style: preserve-3d
+    transform: translateZ(0)
+    group-hover:translateY(-1rem)
+    group-hover:scale-[1.02]
+    group-hover:[transform:rotateX(3deg)_rotateY(-2deg)_translateZ(15px)]
+    
+    /* Shadow and border effects */
+    group-hover:shadow-2xl
+    group-hover:shadow-[hsl(var(--color-primary)/0.2)]
+    group-hover:border-[hsl(var(--color-primary)/0.4)]
+    
+    /* Glow animation on hover */
+    group-hover:animate-[pulse-glow_2s_ease-in-out_infinite]
+    
+    /* All transitions */
+    transition-all 
+    duration-500 
+    ease-[cubic-bezier(0.34,1.56,0.64,1)]
+    
+    /* Glass morphism effect */
+    backdrop-blur-[2px]
+    group-hover:backdrop-blur-[4px]
+    
+    /* Floating animation trigger */
+    group-hover:animate-[float_3s_ease-in-out_infinite]
+  ">
+    
+    {/* Shimmer effect overlay */}
+    <div className="
+      absolute 
+      inset-0 
+      rounded-[30px]
+      bg-gradient-to-r 
+      from-transparent 
+      via-[hsl(var(--color-primary)/0.1)] 
+      to-transparent 
+      translate-x-[-150%]
+      group-hover:translate-x-[150%]
+      transition-transform 
+      duration-[2s]
+      ease-out
+      pointer-events-none
+      z-10
+    "/>
+    
+    {/* Glowing border */}
+    <div className="
+      absolute 
+      inset-0 
+      rounded-[30px]
+      border 
+      border-transparent
+      group-hover:border-[hsl(var(--color-primary)/0.3)]
+      group-hover:shadow-[0_0_30px_hsl(var(--color-primary)/0.2)]
+      transition-all 
+      duration-700
+      pointer-events-none
+    "/>
+    
+    {/* Image container with parallax effect */}
+    <div className="relative overflow-hidden rounded-[20px]">
+      {/* Image gradient overlay */}
+      <div className="
+        absolute 
+        inset-0 
+        bg-gradient-to-t 
+        from-[hsl(var(--color-background)/0.3)] 
+        via-transparent 
+        to-transparent
+        opacity-0
+        group-hover:opacity-100
+        transition-opacity 
+        duration-500
+        z-10
+      "/>
+      
+      <img
+        src={getSafeImageSrc(getImageUrl(u), imageSrc)}
+        alt={u.title}
+        className="
+          w-full 
+          h-56 
+          object-cover
+          scale-100
+          group-hover:scale-110
+          group-hover:brightness-110
+          transition-all 
+          duration-700
+          ease-out
+          transform-gpu
+        "
+      />
+      
+      {/* Floating overlay effect */}
+      <div className="
+        absolute 
+        inset-0 
+        bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] 
+        from-[hsl(var(--color-primary)/0.2)] 
+        via-transparent 
+        to-transparent
+        opacity-0
+        group-hover:opacity-70
+        mix-blend-overlay
+        transition-opacity 
+        duration-500
+        pointer-events-none
+      "/>
+    </div>
+
+    {/* Content area with animated text */}
+    <div className="flex flex-col gap-3 mt-3 flex-grow">
+      {/* Title with color transition */}
+      <h3 className="
+        font-bold 
+        text-lg
+        text-[hsl(var(--color-foreground))]
+        dark:text-[hsl(var(--color-foreground-dark))]
+        group-hover:text-[hsl(var(--color-primary))]
+        group-hover:drop-shadow-[0_2px_4px_hsl(var(--color-primary)/0.3)]
+        transition-all 
+        duration-400
+        delay-75
+        transform-gpu
+        group-hover:translate-x-1
+      ">
+        {u.title}
+      </h3>
+      
+      {/* Description with smooth reveal */}
+      <p className="
+        text-sm 
+        text-[hsl(var(--color-muted-foreground))]
+        dark:text-[hsl(var(--color-muted-foreground-dark))]
+        group-hover:text-[hsl(var(--color-foreground))]
+        dark:group-hover:text-[hsl(var(--color-foreground-dark))]
+        transition-all 
+        duration-400
+        delay-100
+        line-clamp-2
+        group-hover:line-clamp-3
+      ">
+        {u.heading}
+      </p>
+
+      {/* Action buttons container - ALWAYS VISIBLE */}
+      <div className="flex flex-wrap items-center gap-2 mt-auto pt-4 border-t border-[hsl(var(--color-border)/0.5)]">
+        
+        {/* Button One - Always Visible */}
+        <Button 
+          className="
+            flex-1 
+            min-w-[120px]
+            bg-gradient-to-r 
+            from-[hsl(var(--color-primary))] 
+            to-[hsl(var(--color-primary)/0.9)]
+            text-[hsl(var(--color-primary-foreground))]
+            border-0
+            shadow-md
+            shadow-[hsl(var(--color-primary)/0.2)]
+            hover:from-[hsl(var(--color-primary)/0.9)] 
+            hover:to-[hsl(var(--color-primary)/0.8)]
+            hover:shadow-lg
+            hover:shadow-[hsl(var(--color-primary)/0.3)]
+            hover:scale-105
+            active:scale-95
+            transition-all 
+            duration-300
+            transform-gpu
+          "
+        >
+          {u.btnOne}
+        </Button>
+        
+        {/* Button Two - Always Visible */}
+        <Button 
+          variant="outline"
+          className="
+            flex-1 
+            min-w-[120px]
+            border-[hsl(var(--color-border))]
+            text-[hsl(var(--color-foreground))]
+            dark:text-[hsl(var(--color-foreground-dark))]
+            bg-[hsl(var(--color-background)/0.5)]
+            dark:bg-[hsl(var(--color-background-dark)/0.5)]
+            hover:border-[hsl(var(--color-primary))]
+            hover:text-[hsl(var(--color-primary))]
+            hover:bg-[hsl(var(--color-primary)/0.05)]
+            hover:shadow-md
+            hover:scale-105
+            active:scale-95
+            transition-all 
+            duration-300
+            transform-gpu
+          "
+        >
+          {u.btnTwo}
+        </Button>
+
+        {/* Edit and Delete buttons - ALWAYS VISIBLE with enhanced styling */}
+        <div className="flex gap-2 ml-auto">
+          
+          {/* Edit Button - Enhanced */}
+          <button
+            type="button"
+            onClick={() => handleEdit(u)}
+            className="
+              relative
+              flex 
+              items-center 
+              justify-center 
+              w-10 
+              h-10 
+              rounded-xl
+              bg-gradient-to-br 
+              from-[hsl(var(--color-success)/0.15)] 
+              to-[hsl(var(--color-success)/0.1)]
+              border 
+              border-[hsl(var(--color-success)/0.3)]
+              text-[hsl(var(--color-success))]
+              hover:text-[hsl(var(--color-success))]
+              hover:from-[hsl(var(--color-success)/0.25)] 
+              hover:to-[hsl(var(--color-success)/0.2)]
+              hover:border-[hsl(var(--color-success)/0.5)]
+              hover:scale-110
+              hover:shadow-lg
+              hover:shadow-[hsl(var(--color-success)/0.2)]
+              active:scale-95
+              transition-all 
+              duration-300
+              transform-gpu
+              group/edit
+              overflow-hidden
+            "
+            aria-label="Edit"
+          >
+            {/* Shimmer effect for edit button */}
+            <div className="
+              absolute 
+              inset-0 
+              bg-gradient-to-r 
+              from-transparent 
+              via-white/20 
+              to-transparent 
+              translate-x-[-100%]
+              group-hover/edit:translate-x-[100%]
+              transition-transform 
+              duration-1000
+            "/>
+            
+            <Pen className="w-4 h-4 relative z-10" />
+            
+            {/* Tooltip */}
+            <span className="
+              absolute 
+              -top-8 
+              left-1/2 
+              -translate-x-1/2 
+              bg-[hsl(var(--color-success))] 
+              text-[hsl(var(--color-success-foreground))] 
+              text-xs 
+              px-2 
+              py-1 
+              rounded-md 
+              opacity-0 
+              group-hover/edit:opacity-100 
+              group-hover/edit:translate-y-0 
+              translate-y-2 
+              transition-all 
+              duration-300
+              whitespace-nowrap
+              pointer-events-none
+              z-20
+              before:content-[''] 
+              before:absolute 
+              before:bottom-[-4px] 
+              before:left-1/2 
+              before:-translate-x-1/2 
+              before:border-4 
+              before:border-transparent 
+              before:border-t-[hsl(var(--color-success))] 
+            ">
+              Edit
+            </span>
+          </button>
+
+          {/* Delete Button - Enhanced */}
+          <button
+            type="button"
+            onClick={() => handleDeleteUser(u.id)}
+            className="
+              relative
+              flex 
+              items-center 
+              justify-center 
+              w-10 
+              h-10 
+              rounded-xl
+              bg-gradient-to-br 
+              from-[hsl(var(--color-destructive)/0.15)] 
+              to-[hsl(var(--color-destructive)/0.1)]
+              border 
+              border-[hsl(var(--color-destructive)/0.3)]
+              text-[hsl(var(--color-destructive))]
+              hover:text-[hsl(var(--color-destructive))]
+              hover:from-[hsl(var(--color-destructive)/0.25)] 
+              hover:to-[hsl(var(--color-destructive)/0.2)]
+              hover:border-[hsl(var(--color-destructive)/0.5)]
+              hover:scale-110
+              hover:shadow-lg
+              hover:shadow-[hsl(var(--color-destructive)/0.2)]
+              active:scale-95
+              transition-all 
+              duration-300
+              transform-gpu
+              group/delete
+              overflow-hidden
+            "
+            aria-label="Delete"
+          >
+            {/* Shimmer effect for delete button */}
+            <div className="
+              absolute 
+              inset-0 
+              bg-gradient-to-r 
+              from-transparent 
+              via-white/20 
+              to-transparent 
+              translate-x-[-100%]
+              group-hover/delete:translate-x-[100%]
+              transition-transform 
+              duration-1000
+            "/>
+            
+            <Trash className="w-4 h-4 relative z-10" />
+            
+            {/* Tooltip */}
+            <span className="
+              absolute 
+              -top-8 
+              left-1/2 
+              -translate-x-1/2 
+              bg-[hsl(var(--color-destructive))] 
+              text-[hsl(var(--color-destructive-foreground))] 
+              text-xs 
+              px-2 
+              py-1 
+              rounded-md 
+              opacity-0 
+              group-hover/delete:opacity-100 
+              group-hover/delete:translate-y-0 
+              translate-y-2 
+              transition-all 
+              duration-300
+              whitespace-nowrap
+              pointer-events-none
+              z-20
+              before:content-[''] 
+              before:absolute 
+              before:bottom-[-4px] 
+              before:left-1/2 
+              before:-translate-x-1/2 
+              before:border-4 
+              before:border-transparent 
+              before:border-t-[hsl(var(--color-destructive))] 
+            ">
+              Delete
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    {/* Particle effect dots */}
+    <div className="
+      absolute 
+      inset-0 
+      rounded-[30px] 
+      overflow-hidden 
+      pointer-events-none
+      opacity-0
+      group-hover:opacity-100
+      transition-opacity 
+      duration-700
+    ">
+      {[...Array(5)].map((_, i) => (
+        <div
+          key={i}
+          className="
+            absolute 
+            w-1 
+            h-1 
+            rounded-full 
+            bg-[hsl(var(--color-primary)/0.4)]
+            animate-[float_3s_ease-in-out_infinite]
+          "
+          style={{
+            top: `${20 + i * 15}%`,
+            left: `${10 + i * 20}%`,
+            animationDelay: `${i * 0.2}s`,
+          }}
+        />
+      ))}
+    </div>
+    
+    {/* Corner accent */}
+    <div className="
+      absolute 
+      top-3 
+      right-3 
+      w-3 
+      h-3 
+      rounded-full 
+      bg-gradient-to-r 
+      from-[hsl(var(--color-primary))] 
+      to-[hsl(var(--color-secondary))]
+      opacity-70
+      group-hover:opacity-100
+      group-hover:scale-150
+      transition-all 
+      duration-500
+    "/>
+  </div>
+</div>
       </SwiperSlide>
     ))}
           

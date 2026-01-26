@@ -87,6 +87,8 @@ export default function HomeSlider() {
       {/* Top Action Bar */}
 
     </div>
+
+
   )
 
 }

@@ -218,14 +218,14 @@ const handleAuth = async (values: UserFormValues, formikHelpers: FormikHelpers<U
           icon: <CheckCircle className="text-green-500" />,
         });
         router.push("/home");
-        router.refresh(); // ✅ Client-side cache refresh
+        // router.refresh(); // ✅ Client-side cache refresh
       } else {
         toast.success("Sign up successful! Please check your email", {
           icon: <CheckCircle className="text-green-500" />,
         });
       }
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Auth error:", error);
   } finally {
     setLoading(false);
