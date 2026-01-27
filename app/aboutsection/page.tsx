@@ -2796,7 +2796,7 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
                    {/* <i className={`${e.coliconOne ? e.coliconOne:''} text-lg` } />   */}
                          <div 
         dangerouslySetInnerHTML={{
-          __html: `<i class="${e.coliconOne || 'fas fa-globe'}"></i>`
+          __html: `<i class="fa-regular ${e.coliconOne || ''}"></i>`
         }}
         className="flex items-center justify-center w-full h-full"
       />

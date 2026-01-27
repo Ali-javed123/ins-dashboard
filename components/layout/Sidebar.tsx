@@ -141,6 +141,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { useAppSelector, useAppDispatch } from '@/lib/hooks'
 import { setSidebarOpen, toggleSidebar } from '@/lib/features/sidebar/sidebarSlice'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation' // Import useRouter
 
 // Define types for navigation items
 type NavItem = {
@@ -169,17 +170,17 @@ const navCategories: NavCategory[] = [
     icon: LayoutDashboard,
     items: [
       { id: 'overview', label: 'Overview', icon: Layers, href: '/dashboard' },
-      { id: 'analytics', label: 'Analytics', icon: BarChart3, href: '/dashboard/analytics', badge: 'New', isNew: true },
-      { id: 'reports', label: 'Reports', icon: FileText, href: '/dashboard/reports' },
+      // { id: 'analytics', label: 'Analytics', icon: BarChart3, href: '/dashboard/analytics', badge: 'New', isNew: true },
+      // { id: 'reports', label: 'Reports', icon: FileText, href: '/dashboard/reports' },
     ]
   },
   {
-    id: 'management',
-    label: 'Management',
+    id: 'Component',
+    label: 'Component',
     icon: Users,
     items: [
-      { id: 'users', label: 'Users', icon: UserCog, href: '/dashboard/users', badge: '24' },
-      { id: 'teams', label: 'Teams', icon: Users, href: '/dashboard/teams' },
+      { id: 'homeBanner', label: 'home Banner',  icon: UserCog, href: '/home', badge: '24' },
+      { id: 'AboutSection', label: 'About Section', icon: Users, href: '/aboutsection' },
       { id: 'roles', label: 'Roles & Permissions', icon: Shield, href: '/dashboard/roles' },
       { id: 'departments', label: 'Departments', icon: Building, href: '/dashboard/departments' },
     ]
@@ -233,6 +234,10 @@ export default function Sidebar() {
   const isOpen = useAppSelector((state) => state.sidebar.isOpen)
   const [activeItem, setActiveItem] = useState('overview')
   const [collapsedCategories, setCollapsedCategories] = useState<string[]>([])
+  const router = useRouter() // Initialize router
+
+
+
 
   const toggleCategory = (categoryId: string) => {
     setCollapsedCategories(prev =>
@@ -245,6 +250,11 @@ export default function Sidebar() {
   const handleItemClick = (itemId: string) => {
     setActiveItem(itemId)
   }
+    const handleNavigate = (itemId: string, href: string) => {
+    setActiveItem(itemId)
+    router.push(href) // Navigate to the href
+  }
+
 
   const isCollapsed = (categoryId: string) => !collapsedCategories.includes(categoryId)
 
@@ -350,7 +360,7 @@ export default function Sidebar() {
                                 activeItem === item.id && "bg-primary/10 border-l-4 border-primary pl-2.5",
                                 "hover:bg-accent hover:translate-x-1"
                               )}
-                              onClick={() => handleItemClick(item.id)}
+                              onClick={() => { handleItemClick(item.id);handleNavigate(item.id, item.href) }}
                             >
                               <div className="flex items-center justify-between w-full">
                                 <div className="flex items-center gap-3">
