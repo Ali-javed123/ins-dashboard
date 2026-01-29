@@ -42,6 +42,7 @@ import StoreProvider from '@/app/StoreProvider'
 import ThemeProvider from '@/components/providers/ThemeProvider'
 import '@/app/globals.css'
 import { Toaster } from "@/components/ui/sonner";
+import "remixicon/fonts/remixicon.css";
 
 export default function RootLayout({
   children,

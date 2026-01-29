@@ -67,7 +67,7 @@ export default function HomeSlider() {
 //     </div>
 //   )
   return (
-    <div className="w-full space-y-6 bg-[hsl(var(--color-background))] 
+    <div className="w-full space-y-2 bg-[hsl(var(--color-background))] 
     dark:bg-[hsl(var(--color-background))] ">
       <div className='px-3'>
 

@@ -21,6 +21,9 @@ const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
         error: "bg-red-500 text-white hover:bg-red-600",
+        update: "bg-green-500 text-white hover:bg-green-600",
+
+        errorOutline: "border-red-500  text-black hover:text-white dark:text-white hover:bg-red-600 after:bg-red-600 border-1",
 
       },
       size: {

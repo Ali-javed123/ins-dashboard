@@ -1463,20 +1463,20 @@ const getSafeImageSrc = (
   return (
 
     
-<div className="w-full  max-w-full overflow-hidden">
+<div className="w-full   overflow-hidden">
 
       
       <div className="w-full relative">
               <button
         ref={prevRef}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-lg"
+        className="absolute text-black left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-lg"
       >
         ←
       </button>
       
       <button
         ref={nextRef}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-lg"
+        className="absolute text-black right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-lg"
       >
         →
       </button>
@@ -1531,7 +1531,7 @@ const getSafeImageSrc = (
 
 
     // className="!overflow-y-visible"
-    className="h-[500px]"
+    className="min-h-[520px]"
     
 
   >
@@ -1602,7 +1602,7 @@ const getSafeImageSrc = (
           </div>
         </div>
         </div> */}
-        <div className="relative group h-[450px] perspective-1000">
+        <div className="relative group min-h-[450px] perspective-1000">
           
   {/* Floating animation container */}
   <div className="
@@ -1611,8 +1611,8 @@ const getSafeImageSrc = (
     rounded-[30px] 
     bg-gradient-to-br 
     from-[hsl(var(--color-primary)/0.1)] 
-    via-transparent 
     to-[hsl(var(--color-secondary)/0.05)]
+    via-transparent 
     opacity-0 
     group-hover:opacity-100 
     transition-opacity 
@@ -1638,12 +1638,7 @@ const getSafeImageSrc = (
     h-full
     overflow-hidden
     
-    /* 3D Hover Transform */
-    transform-style: preserve-3d
-    transform: translateZ(0)
-    group-hover:translateY(-1rem)
-    group-hover:scale-[1.02]
-    group-hover:[transform:rotateX(3deg)_rotateY(-2deg)_translateZ(15px)]
+    
     
     /* Shadow and border effects */
     group-hover:shadow-2xl

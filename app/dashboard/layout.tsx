@@ -18,23 +18,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <body>
-        <StoreProvider>
-          <ThemeProvider>
-            <div className="min-h-screen bg-background">
-              <Sidebar />
-              <div className="lg:pl-72">
-                <Header />
-                <main className="py-10">
-                  <div className="px-4 sm:px-6 lg:px-8">{children}</div>
-                </main>
-                <Footer />
-              </div>
-            </div>
-          </ThemeProvider>
-        </StoreProvider>
-      </body>
-    </html>
+    <div className="min-h-screen bg-background">
+         <Sidebar />
+         <div className="lg:pl-72">
+           <Header />
+           <main className="py-10">
+             <div className="px-4 sm:px-6 lg:px-8">
+               {children}
+             </div>
+           </main>
+           <Footer />
+         </div>
+       </div>
   )
 }

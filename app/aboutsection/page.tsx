@@ -3011,6 +3011,7 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
                             
                             {previewImgOne ? (
                               <div className="text-center space-y-3">
+                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                   src={previewImgOne}
                                   alt="Preview 1"
@@ -3104,6 +3105,7 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
                             
                             {previewImgTwo ? (
                               <div className="text-center space-y-3">
+                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                   src={previewImgTwo}
                                   alt="Preview 2"
