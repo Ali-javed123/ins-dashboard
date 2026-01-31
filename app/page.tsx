@@ -192,7 +192,7 @@ const handleAuth = async (values: UserFormValues, formikHelpers: FormikHelpers<U
         toast.success("Logged in successfully!", {
           icon: <CheckCircle className="text-green-500" />,
         });
-        router.push('/home');
+        router.push('/dashboard');
         router.refresh(); // ✅ Client-side cache refresh
       }
       
@@ -217,7 +217,7 @@ const handleAuth = async (values: UserFormValues, formikHelpers: FormikHelpers<U
         toast.success("Sign up successful! You are now signed in", {
           icon: <CheckCircle className="text-green-500" />,
         });
-        router.push("/home");
+        router.push("/dashboard");
         // router.refresh(); // ✅ Client-side cache refresh
       } else {
         toast.success("Sign up successful! Please check your email", {

@@ -6,7 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { useAppDispatch, useAppSelector } from '@/lib/hooks'
-import { toggleSidebar } from '@/lib/features/sidebar/sidebarSlice'
+import { openSidebar, toggleSidebar } from '@/lib/features/sidebar/sidebarSlice'
+
 import { toggleTheme } from '@/lib/features/theme/themeSlice'
 import { useSyncExternalStore, use, Suspense } from 'react'
 
@@ -32,9 +33,15 @@ export default function Header() {
     dispatch(toggleTheme())
   }
 
-  const handleSidebarToggle = () => {
-    dispatch(toggleSidebar())
+   const handleSidebarToggle = () => {
+    // Mobile par openSidebar use karein
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      dispatch(openSidebar()) // Always open on mobile toggle
+    } else {
+      dispatch(toggleSidebar()) // Desktop par toggle
+    }
   }
+
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-lg">
