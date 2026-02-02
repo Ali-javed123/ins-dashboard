@@ -489,7 +489,7 @@ const TeamManagement: FC = () => {
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-1 sm:gap-3">
-            {teams.map((team, index) => (
+            {teams?.map((team, index) => (
               <div
                 key={team.id}
                 className={`group relative rounded-2xl p-[1px] bg-gradient-to-br from-blue-500/40 via-purple-500/40 to-cyan-500/40 hover:from-blue-500 hover:to-cyan-500 transition-all duration-500`}

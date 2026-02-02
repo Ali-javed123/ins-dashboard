@@ -1129,7 +1129,7 @@ const OurBenefitsSection: FC = () => {
                         Edit
                       </Button>
                       <Button
-                        variant="destructive"
+                        variant="error"
                         className='shadow-lg'
                         onClick={() => handleDeleteBenefit(benefit.id)}
                       >
@@ -1170,7 +1170,7 @@ const OurBenefitsSection: FC = () => {
 
                     {/* Button Display */}
                     <div className="flex justify-center mb-8">
-                      <Button className="px-8 py-3 text-lg">
+                      <Button className="px-8 py-3 text-lg !text-upparcase text-white">
                         {benefit.btnText} {/* New field display */}
                       </Button>
                     </div>
