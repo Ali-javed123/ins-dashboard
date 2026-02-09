@@ -22,7 +22,7 @@
 //     {
 //       icon: <Target className="w-6 h-6" />,
 //       title: "Precision & Excellence",
-//       description: "Navigating IT solutions with meticulous attention to detail and unparalleled quality standards.",
+//       description: "Navigating IT solutions with meticulous attention to detail and unparagraphlleled quality standards.",
 //       color: 'blue'
 //     },
 //     {
@@ -172,16 +172,16 @@
 // interface Feature {
 //   icon: string
 //   title: string
-//   para: string
+//   paragraph: string
 // }
 
 // interface DatabaseWhyChooseUs {
 //   id: string
 //   title: string
-//   para: string
+//   paragraph: string
 //   images: string | null
-//   bannerHeading: string
-//   bannerButtun: string
+//   heading: string
+//   banner_buttun: string
 //   features: Feature[] | null
 //   created_at?: string
 // }
@@ -189,37 +189,37 @@
 // interface WhyChooseUs {
 //   id: string
 //   title: string
-//   para: string
+//   paragraph: string
 //   images: string | null
-//   bannerHeading: string
-//   bannerButtun: string
+//   heading: string
+//   banner_buttun: string
 //   features: Feature[]
 //   imageUrl: string | null
 // }
 
 // interface WhyChooseUsFormValues {
 //   title: string
-//   para: string
-//   bannerHeading: string
-//   bannerButtun: string
+//   paragraph: string
+//   heading: string
+//   banner_buttun: string
 //   features: Feature[]
 // }
 
 // interface WhyChooseUsFormData {
 //   title: string
-//   para: string
-//   bannerHeading: string
-//   bannerButtun: string
+//   paragraph: string
+//   heading: string
+//   banner_buttun: string
 //   features: Feature[]
 //   image: File | null
 // }
 
 // interface UpdateWhyChooseUsData {
 //   title: string
-//   para: string
+//   paragraph: string
 //   images: string | null
-//   bannerHeading: string
-//   bannerButtun: string
+//   heading: string
+//   banner_buttun: string
 //   features: Feature[]
 // }
 
@@ -239,14 +239,14 @@
 // interface FeatureError {
 //   icon?: string
 //   title?: string
-//   para?: string
+//   paragraph?: string
 // }
 
 // interface FormikErrorType {
 //   title?: string
-//   para?: string
-//   bannerHeading?: string
-//   bannerButtun?: string
+//   paragraph?: string
+//   heading?: string
+//   banner_buttun?: string
 //   features?: string | FeatureError[]
 // }
 
@@ -270,12 +270,12 @@
 //   useEffect(() => {
 //     setFormData({
 //       title: "",
-//       para: "",
-//       bannerHeading: "",
-//       bannerButtun: "",
+//       paragraph: "",
+//       heading: "",
+//       banner_buttun: "",
 //       features: [
-//         { icon: "", title: "", para: "" },
-//         { icon: "", title: "", para: "" }
+//         { icon: "", title: "", paragraph: "" },
+//         { icon: "", title: "", paragraph: "" }
 //       ],
 //       image: null
 //     })
@@ -286,13 +286,13 @@
 //     title: Yup.string()
 //       .min(2, 'Title must be at least 2 characters')
 //       .required('Title is required'),
-//     para: Yup.string()
+//     paragraph: Yup.string()
 //       .min(10, 'Description must be at least 10 characters')
 //       .required('Description is required'),
-//     bannerHeading: Yup.string()
+//     heading: Yup.string()
 //       .min(2, 'Banner heading is required')
 //       .required('Banner heading is required'),
-//     bannerButtun: Yup.string()
+//     banner_buttun: Yup.string()
 //       .min(2, 'Banner button text is required')
 //       .required('Banner button text is required'),
 //     features: Yup.array().of(
@@ -303,7 +303,7 @@
 //         title: Yup.string()
 //           .min(2, 'Feature title is required')
 //           .required('Title is required'),
-//         para: Yup.string()
+//         paragraph: Yup.string()
 //           .min(10, 'Feature description must be at least 10 characters')
 //           .required('Description is required')
 //       })
@@ -313,15 +313,15 @@
 //   // Initial Form Values - only when formData is available
 //   const initialValues: WhyChooseUsFormValues = formData ? {
 //     title: formData.title,
-//     para: formData.para,
-//     bannerHeading: formData.bannerHeading,
-//     bannerButtun: formData.bannerButtun,
+//     paragraph: formData.paragraph,
+//     heading: formData.heading,
+//     banner_buttun: formData.banner_buttun,
 //     features: formData.features
 //   } : {
 //     title: "",
-//     para: "",
-//     bannerHeading: "",
-//     bannerButtun: "",
+//     paragraph: "",
+//     heading: "",
+//     banner_buttun: "",
 //     features: []
 //   }
 
@@ -331,12 +331,12 @@
 //       setFormData({
 //         ...formData,
 //         title: "",
-//         para: "",
-//         bannerHeading: "",
-//         bannerButtun: "",
+//         paragraph: "",
+//         heading: "",
+//         banner_buttun: "",
 //         features: [
-//           { icon: "", title: "", para: "" },
-//           { icon: "", title: "", para: "" }
+//           { icon: "", title: "", paragraph: "" },
+//           { icon: "", title: "", paragraph: "" }
 //         ],
 //         image: null
 //       })
@@ -363,7 +363,7 @@
 //       }
 
 //       const { data, error } = await supabase
-//         .from("why-choose-us")
+//         .from(`${TableName}`)
 //         .select("*")
 //         .order("created_at", { ascending: true })
 
@@ -524,10 +524,10 @@
 //       return {
 //         id: dbSection.id,
 //         title: dbSection.title || "",
-//         para: dbSection.para || "",
+//         paragraph: dbSection.paragraph || "",
 //         images: null,
-//         bannerHeading: dbSection.bannerHeading || "",
-//         bannerButtun: dbSection.bannerButtun || "",
+//         heading: dbSection.heading || "",
+//         banner_buttun: dbSection.banner_buttun || "",
 //         features: dbSection.features || [],
 //         imageUrl: dbSection.images
 //       }
@@ -535,10 +535,10 @@
 //       return {
 //         id: dbSection.id,
 //         title: dbSection.title || "",
-//         para: dbSection.para || "",
+//         paragraph: dbSection.paragraph || "",
 //         images: reconstructFromChunks(dbSection.images),
-//         bannerHeading: dbSection.bannerHeading || "",
-//         bannerButtun: dbSection.bannerButtun || "",
+//         heading: dbSection.heading || "",
+//         banner_buttun: dbSection.banner_buttun || "",
 //         features: dbSection.features || [],
 //         imageUrl: null
 //       }
@@ -554,12 +554,12 @@
 //       setFormData({
 //         ...formData,
 //         title: section.title,
-//         para: section.para,
-//         bannerHeading: section.bannerHeading,
-//         bannerButtun: section.bannerButtun,
+//         paragraph: section.paragraph,
+//         heading: section.heading,
+//         banner_buttun: section.banner_buttun,
 //         features: section.features.length > 0 ? section.features : [
-//           { icon: "", title: "", para: "" },
-//           { icon: "", title: "", para: "" }
+//           { icon: "", title: "", paragraph: "" },
+//           { icon: "", title: "", paragraph: "" }
 //         ],
 //         image: null
 //       })
@@ -723,10 +723,10 @@
 //         .insert([
 //           {
 //             title: values.title,
-//             para: values.para,
+//             paragraph: values.paragraph,
 //             images: STORAGE_TYPE === "bucket" ? null : imageData,
-//             bannerHeading: values.bannerHeading,
-//             bannerButtun: values.bannerButtun,
+//             heading: values.heading,
+//             banner_buttun: values.banner_buttun,
 //             features: values.features
 //           }
 //         ])
@@ -771,10 +771,10 @@
 //       const newSection: WhyChooseUs = {
 //         id: sectionData.id,
 //         title: sectionData.title || "",
-//         para: sectionData.para || "",
+//         paragraph: sectionData.paragraph || "",
 //         images: STORAGE_TYPE === "bucket" ? null : reconstructFromChunks(imageData),
-//         bannerHeading: sectionData.bannerHeading || "",
-//         bannerButtun: sectionData.bannerButtun || "",
+//         heading: sectionData.heading || "",
+//         banner_buttun: sectionData.banner_buttun || "",
 //         features: sectionData.features || [],
 //         imageUrl: STORAGE_TYPE === "bucket" ? imageData : null
 //       }
@@ -852,10 +852,10 @@
 //       // Update section in database
 //       const updateData: UpdateWhyChooseUsData = {
 //         title: values.title,
-//         para: values.para,
+//         paragraph: values.paragraph,
 //         images: imageData,
-//         bannerHeading: values.bannerHeading,
-//         bannerButtun: values.bannerButtun,
+//         heading: values.heading,
+//         banner_buttun: values.banner_buttun,
 //         features: values.features
 //       }
 
@@ -1109,10 +1109,10 @@
 //                         {section.title}
 //                       </h1>
 //                       <p className="text-lg md:text-xl font-semibold text-gray-700 dark:text-gray-300 mb-4">
-//                         {section.bannerHeading}
+//                         {section.heading}
 //                       </p>
 //                       <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-3xl mx-auto">
-//                         {section.para}
+//                         {section.paragraph}
 //                       </p>
 //                       <div className="h-1 w-24 bg-[var(--color-theme)] mx-auto rounded-full"></div>
 //                     </div>
@@ -1154,7 +1154,7 @@
 //                               </div>
 //                               <div className="flex-1">
 //                                 <h3 className="font-bold text-xl mb-2">{feature.title}</h3>
-//                                 <p className="text-gray-600 dark:text-gray-300">{feature.para}</p>
+//                                 <p className="text-gray-600 dark:text-gray-300">{feature.paragraph}</p>
 //                               </div>
 //                             </div>
 //                           </div>
@@ -1176,13 +1176,13 @@
 //     border-[hsl(var(--color-border)/0.8)]  p-6 text-white p-8 mt-3">
 //                       <div className="text-center">
 //                         <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-//                           {section.bannerHeading}
+//                           {section.heading}
 //                         </h3>
 //                         <p className="text-gray-600 dark:text-gray-300 mb-6">
 //                           Ready to experience our exceptional service?
 //                         </p>
 //                         <button className="bg-[var(--color-theme)] hover:bg-[var(--color-theme-hover)] text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-//                           {section.bannerButtun}
+//                           {section.banner_buttun}
 //                         </button>
 //                       </div>
 //                     </div>
@@ -1248,19 +1248,19 @@
 //                           </div>
 
 //                           <div>
-//                             <Label htmlFor="para" className="mb-2 block font-medium">
+//                             <Label htmlFor="paragraph" className="mb-2 block font-medium">
 //                               Description *
 //                             </Label>
 //                             <Field
 //                               as="textarea"
-//                               id="para"
-//                               name="para"
+//                               id="paragraph"
+//                               name="paragraph"
 //                               rows={4}
-//                               className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${hasError(formikErrors, 'para') && touched.para ? 'border-red-500 focus:ring-red-500' : ''}`}
+//                               className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${hasError(formikErrors, 'paragraph') && touched.paragraph ? 'border-red-500 focus:ring-red-500' : ''}`}
 //                               placeholder="We're resolving your technology woes with expert care..."
 //                             />
 //                             <ErrorMessage
-//                               name="para"
+//                               name="paragraph"
 //                               component="div"
 //                               className="text-sm text-red-600 mt-1"
 //                             />
@@ -1270,36 +1270,36 @@
 //                         {/* Right Column */}
 //                         <div className="space-y-4">
 //                           <div>
-//                             <Label htmlFor="bannerHeading" className="mb-2 block font-medium">
+//                             <Label htmlFor="heading" className="mb-2 block font-medium">
 //                               Banner Heading *
 //                             </Label>
 //                             <Field
 //                               as={Input}
-//                               id="bannerHeading"
-//                               name="bannerHeading"
+//                               id="heading"
+//                               name="heading"
 //                               placeholder="Why Our Technology Solutions Company Stands Out?"
-//                               className={`${hasError(formikErrors, 'bannerHeading') && touched.bannerHeading ? 'border-red-500 focus:ring-red-500' : ''}`}
+//                               className={`${hasError(formikErrors, 'heading') && touched.heading ? 'border-red-500 focus:ring-red-500' : ''}`}
 //                             />
 //                             <ErrorMessage
-//                               name="bannerHeading"
+//                               name="heading"
 //                               component="div"
 //                               className="text-sm text-red-600 mt-1"
 //                             />
 //                           </div>
 
 //                           <div>
-//                             <Label htmlFor="bannerButtun" className="mb-2 block font-medium">
+//                             <Label htmlFor="banner_buttun" className="mb-2 block font-medium">
 //                               Banner Button Text *
 //                             </Label>
 //                             <Field
 //                               as={Input}
-//                               id="bannerButtun"
-//                               name="bannerButtun"
+//                               id="banner_buttun"
+//                               name="banner_buttun"
 //                               placeholder="Get Started"
-//                               className={`${hasError(formikErrors, 'bannerButtun') && touched.bannerButtun ? 'border-red-500 focus:ring-red-500' : ''}`}
+//                               className={`${hasError(formikErrors, 'banner_buttun') && touched.banner_buttun ? 'border-red-500 focus:ring-red-500' : ''}`}
 //                             />
 //                             <ErrorMessage
-//                               name="bannerButtun"
+//                               name="banner_buttun"
 //                               component="div"
 //                               className="text-sm text-red-600 mt-1"
 //                             />
@@ -1413,7 +1413,7 @@
 //                                 type="button"
 //                                 variant="outline"
 //                                 size="sm"
-//                                 onClick={() => push({ icon: "", title: "", para: "" })}
+//                                 onClick={() => push({ icon: "", title: "", paragraph: "" })}
 //                                 disabled={submitting}
 //                               >
 //                                 <Plus className="w-4 h-4 mr-2" />
@@ -1485,23 +1485,23 @@
 //                                     </div>
                                     
 //                                     <div>
-//                                       <Label htmlFor={`features.${index}.para`} className="mb-2 block font-medium">
+//                                       <Label htmlFor={`features.${index}.paragraph`} className="mb-2 block font-medium">
 //                                         Description *
 //                                       </Label>
 //                                       <Field
 //                                         as="textarea"
-//                                         id={`features.${index}.para`}
-//                                         name={`features.${index}.para`}
+//                                         id={`features.${index}.paragraph`}
+//                                         name={`features.${index}.paragraph`}
 //                                         rows={3}
 //                                         className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-//                                           getFeatureErrorMessage(formikErrors, index, 'para') 
+//                                           getFeatureErrorMessage(formikErrors, index, 'paragraph') 
 //                                             ? 'border-red-500 focus:ring-red-500' 
 //                                             : ''
 //                                         }`}
 //                                         placeholder="Navigating IT solutions with meticulous attention..."
 //                                       />
 //                                       <ErrorMessage
-//                                         name={`features.${index}.para`}
+//                                         name={`features.${index}.paragraph`}
 //                                         component="div"
 //                                         className="text-sm text-red-600 mt-1"
 //                                       />
@@ -1616,24 +1616,25 @@ const STORAGE_TYPE: 'bucket' | 'base64' = "bucket"
 const CHUNK_SIZE = 60000
 const DELIMITER = '|||CHUNK|||'
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024
+const TableName="why_choose_us"
 
-// Strict Type Definitions - SUBHEADING ADDED HERE
+// Strict Type Definitions - sub_heading ADDED HERE
 type StorageType = 'bucket' | 'base64'
 
 interface Feature {
   icon: string
   // title: string
-  para: string
+  paragraph: string
 }
 
 interface DatabaseWhyChooseUs {
   id: string
   title: string
-  para: string
-  subHeading: string // NEW FIELD ADDED
+  paragraph: string
+  sub_heading: string // NEW FIELD ADDED
   images: string | null
-  bannerHeading: string
-  bannerButtun: string
+  heading: string
+  banner_buttun: string
   features: Feature[] | null
   created_at?: string
 }
@@ -1641,41 +1642,41 @@ interface DatabaseWhyChooseUs {
 interface WhyChooseUs {
   id: string
   title: string
-  para: string
-  subHeading: string // NEW FIELD ADDED
+  paragraph: string
+  sub_heading: string // NEW FIELD ADDED
   images: string | null
-  bannerHeading: string
-  bannerButtun: string
+  heading: string
+  banner_buttun: string
   features: Feature[]
   imageUrl: string | null
 }
 
 interface WhyChooseUsFormValues {
   title: string
-  para: string
-  subHeading: string // NEW FIELD ADDED
-  bannerHeading: string
-  bannerButtun: string
+  paragraph: string
+  sub_heading: string // NEW FIELD ADDED
+  heading: string
+  banner_buttun: string
   features: Feature[]
 }
 
 interface WhyChooseUsFormData {
   title: string
-  para: string
-  subHeading: string // NEW FIELD ADDED
-  bannerHeading: string
-  bannerButtun: string
+  paragraph: string
+  sub_heading: string // NEW FIELD ADDED
+  heading: string
+  banner_buttun: string
   features: Feature[]
   image: File | null
 }
 
 interface UpdateWhyChooseUsData {
   title: string
-  para: string
-  subHeading: string // NEW FIELD ADDED
+  paragraph: string
+  sub_heading: string // NEW FIELD ADDED
   images: string | null
-  bannerHeading: string
-  bannerButtun: string
+  heading: string
+  banner_buttun: string
   features: Feature[]
 }
 
@@ -1695,15 +1696,15 @@ interface ImagePreview {
 interface FeatureError {
   icon?: string
   // title?: string
-  para?: string
+  paragraph?: string
 }
 
 interface FormikErrorType {
   title?: string
-  para?: string
-  subHeading?: string // NEW FIELD ADDED
-  bannerHeading?: string
-  bannerButtun?: string
+  paragraph?: string
+  sub_heading?: string // NEW FIELD ADDED
+  heading?: string
+  banner_buttun?: string
   features?: string | FeatureError[]
 }
 
@@ -1727,33 +1728,33 @@ const WhyChooseUsSection: FC = () => {
   useEffect(() => {
     setFormData({
       title: "",
-      para: "",
-      subHeading: "", // NEW FIELD INITIALIZED
-      bannerHeading: "",
-      bannerButtun: "",
+      paragraph: "",
+      sub_heading: "", // NEW FIELD INITIALIZED
+      heading: "",
+      banner_buttun: "",
       features: [
-        { icon: "",  para: "" },
-        { icon: "",  para: "" }
+        { icon: "",  paragraph: "" },
+        { icon: "",  paragraph: "" }
       ],
       image: null
     })
   }, [])
 
-  // Validation Schema with strict typing - SUBHEADING VALIDATION ADDED
+  // Validation Schema with strict typing - sub_heading VALIDATION ADDED
   const validationSchema = Yup.object().shape({
     title: Yup.string()
       .min(2, 'Title must be at least 2 characters')
       .required('Title is required'),
-    para: Yup.string()
+    paragraph: Yup.string()
       .min(10, 'Description must be at least 10 characters')
       .required('Description is required'),
-    subHeading: Yup.string() // NEW VALIDATION ADDED
+    sub_heading: Yup.string() // NEW VALIDATION ADDED
       .min(2, 'Sub-heading must be at least 2 characters')
       .required('Sub-heading is required'),
-    bannerHeading: Yup.string()
+    heading: Yup.string()
       .min(2, 'Banner heading is required')
       .required('Banner heading is required'),
-    bannerButtun: Yup.string()
+    banner_buttun: Yup.string()
       .min(2, 'Banner button text is required')
       .required('Banner button text is required'),
     features: Yup.array().of(
@@ -1764,7 +1765,7 @@ const WhyChooseUsSection: FC = () => {
         // title: Yup.string()
         //   .min(2, 'Feature title is required')
         //   .required('Title is required'),
-        para: Yup.string()
+        paragraph: Yup.string()
           .min(10, 'Feature description must be at least 10 characters')
           .required('Description is required')
       })
@@ -1774,17 +1775,17 @@ const WhyChooseUsSection: FC = () => {
   // Initial Form Values - only when formData is available
   const initialValues: WhyChooseUsFormValues = formData ? {
     title: formData.title,
-    para: formData.para,
-    subHeading: formData.subHeading, // NEW FIELD ADDED
-    bannerHeading: formData.bannerHeading,
-    bannerButtun: formData.bannerButtun,
+    paragraph: formData.paragraph,
+    sub_heading: formData.sub_heading, // NEW FIELD ADDED
+    heading: formData.heading,
+    banner_buttun: formData.banner_buttun,
     features: formData.features
   } : {
     title: "",
-    para: "",
-    subHeading: "", // NEW FIELD ADDED
-    bannerHeading: "",
-    bannerButtun: "",
+    paragraph: "",
+    sub_heading: "", // NEW FIELD ADDED
+    heading: "",
+    banner_buttun: "",
     features: []
   }
 
@@ -1794,13 +1795,13 @@ const WhyChooseUsSection: FC = () => {
       setFormData({
         ...formData,
         title: "",
-        para: "",
-        subHeading: "", // NEW FIELD RESET
-        bannerHeading: "",
-        bannerButtun: "",
+        paragraph: "",
+        sub_heading: "", // NEW FIELD RESET
+        heading: "",
+        banner_buttun: "",
         features: [
-          { icon: "",  para: "" },
-          { icon: "",  para: "" }
+          { icon: "",  paragraph: "" },
+          { icon: "",  paragraph: "" }
         ],
         image: null
       })
@@ -1827,7 +1828,7 @@ const WhyChooseUsSection: FC = () => {
       }
 
       const { data, error } = await supabase
-        .from("why-choose-us")
+        .from(`${TableName}`)
         .select("*")
         .order("created_at", { ascending: true })
 
@@ -1982,17 +1983,17 @@ const WhyChooseUsSection: FC = () => {
     })
   }
 
-  // Convert Database to Component Type - SUBHEADING ADDED HERE
+  // Convert Database to Component Type - sub_heading ADDED HERE
   const convertToWhyChooseUs = (dbSection: DatabaseWhyChooseUs): WhyChooseUs => {
     if (STORAGE_TYPE === "bucket") {
       return {
         id: dbSection.id,
         title: dbSection.title || "",
-        para: dbSection.para || "",
-        subHeading: dbSection.subHeading || "", // NEW FIELD ADDED
+        paragraph: dbSection.paragraph || "",
+        sub_heading: dbSection.sub_heading || "", // NEW FIELD ADDED
         images: null,
-        bannerHeading: dbSection.bannerHeading || "",
-        bannerButtun: dbSection.bannerButtun || "",
+        heading: dbSection.heading || "",
+        banner_buttun: dbSection.banner_buttun || "",
         features: dbSection.features || [],
         imageUrl: dbSection.images
       }
@@ -2000,18 +2001,18 @@ const WhyChooseUsSection: FC = () => {
       return {
         id: dbSection.id,
         title: dbSection.title || "",
-        para: dbSection.para || "",
-        subHeading: dbSection.subHeading || "", // NEW FIELD ADDED
+        paragraph: dbSection.paragraph || "",
+        sub_heading: dbSection.sub_heading || "", // NEW FIELD ADDED
         images: reconstructFromChunks(dbSection.images),
-        bannerHeading: dbSection.bannerHeading || "",
-        bannerButtun: dbSection.bannerButtun || "",
+        heading: dbSection.heading || "",
+        banner_buttun: dbSection.banner_buttun || "",
         features: dbSection.features || [],
         imageUrl: null
       }
     }
   }
 
-  // Handle Edit - SUBHEADING ADDED HERE
+  // Handle Edit - sub_heading ADDED HERE
   const handleEdit = (section: WhyChooseUs): void => {
     setIsEdit(true)
     setEditId(section.id)
@@ -2020,13 +2021,13 @@ const WhyChooseUsSection: FC = () => {
       setFormData({
         ...formData,
         title: section.title,
-        para: section.para,
-        subHeading: section.subHeading, // NEW FIELD ADDED
-        bannerHeading: section.bannerHeading,
-        bannerButtun: section.bannerButtun,
+        paragraph: section.paragraph,
+        sub_heading: section.sub_heading, // NEW FIELD ADDED
+        heading: section.heading,
+        banner_buttun: section.banner_buttun,
         features: section.features.length > 0 ? section.features : [
-          { icon: "",  para: "" },
-          { icon: "",  para: "" }
+          { icon: "",  paragraph: "" },
+          { icon: "",  paragraph: "" }
         ],
         image: null
       })
@@ -2157,7 +2158,7 @@ const WhyChooseUsSection: FC = () => {
     }
   }, [previewImage])
 
-  // Handle Submit (Create) - SUBHEADING ADDED HERE
+  // Handle Submit (Create) - sub_heading ADDED HERE
   const handleSubmit = async (
     values: WhyChooseUsFormValues,
     formikHelpers: FormikHelpers<WhyChooseUsFormValues>
@@ -2184,17 +2185,17 @@ const WhyChooseUsSection: FC = () => {
         }
       }
 
-      // First create section - SUBHEADING ADDED HERE
+      // First create section - sub_heading ADDED HERE
       const { data: sectionData, error: sectionError } = await supabase
-        .from("why-choose-us")
+        .from(`${TableName}`)
         .insert([
           {
             title: values.title,
-            para: values.para,
-            subHeading: values.subHeading, // NEW FIELD ADDED
+            paragraph: values.paragraph,
+            sub_heading: values.sub_heading, // NEW FIELD ADDED
             images: STORAGE_TYPE === "bucket" ? null : imageData,
-            bannerHeading: values.bannerHeading,
-            bannerButtun: values.bannerButtun,
+            heading: values.heading,
+            banner_buttun: values.banner_buttun,
             features: values.features
           }
         ])
@@ -2220,7 +2221,7 @@ const WhyChooseUsSection: FC = () => {
         // Update section with image URL
         if (imageUrl) {
           const { error: updateError } = await supabase
-            .from("why-choose-us")
+            .from(`${TableName}`)
             .update({ 
               images: imageUrl
             })
@@ -2235,15 +2236,15 @@ const WhyChooseUsSection: FC = () => {
         imageData = imageUrl
       }
 
-      // Create new section object - SUBHEADING ADDED HERE
+      // Create new section object - sub_heading ADDED HERE
       const newSection: WhyChooseUs = {
         id: sectionData.id,
         title: sectionData.title || "",
-        para: sectionData.para || "",
-        subHeading: sectionData.subHeading || "", // NEW FIELD ADDED
+        paragraph: sectionData.paragraph || "",
+        sub_heading: sectionData.sub_heading || "", // NEW FIELD ADDED
         images: STORAGE_TYPE === "bucket" ? null : reconstructFromChunks(imageData),
-        bannerHeading: sectionData.bannerHeading || "",
-        bannerButtun: sectionData.bannerButtun || "",
+        heading: sectionData.heading || "",
+        banner_buttun: sectionData.banner_buttun || "",
         features: sectionData.features || [],
         imageUrl: STORAGE_TYPE === "bucket" ? imageData : null
       }
@@ -2273,7 +2274,7 @@ const WhyChooseUsSection: FC = () => {
     }
   }
 
-  // Handle Update - SUBHEADING ADDED HERE
+  // Handle Update - sub_heading ADDED HERE
   const handleUpdate = async (
     values: WhyChooseUsFormValues,
     formikHelpers: FormikHelpers<WhyChooseUsFormValues>
@@ -2318,19 +2319,19 @@ const WhyChooseUsSection: FC = () => {
         imageData = existingSection?.images || existingSection?.imageUrl || null
       }
 
-      // Update section in database - SUBHEADING ADDED HERE
+      // Update section in database - sub_heading ADDED HERE
       const updateData: UpdateWhyChooseUsData = {
         title: values.title,
-        para: values.para,
-        subHeading: values.subHeading, // NEW FIELD ADDED
+        paragraph: values.paragraph,
+        sub_heading: values.sub_heading, // NEW FIELD ADDED
         images: imageData,
-        bannerHeading: values.bannerHeading,
-        bannerButtun: values.bannerButtun,
+        heading: values.heading,
+        banner_buttun: values.banner_buttun,
         features: values.features
       }
 
       const { data, error } = await supabase
-        .from("why-choose-us")
+        .from(`${TableName}`)
         .update(updateData)
         .eq("id", editId)
         .select()
@@ -2378,7 +2379,7 @@ const WhyChooseUsSection: FC = () => {
       }
 
       // Delete from database
-      const { error } = await supabase.from("why-choose-us").delete().eq("id", id)
+      const { error } = await supabase.from(`${TableName}`).delete().eq("id", id)
 
       if (error) {
         console.error("Error deleting section:", error)
@@ -2569,7 +2570,7 @@ const WhyChooseUsSection: FC = () => {
     shadow-[hsl(var(--color-shadow)/0.1)]
     border-2 
     border-[hsl(var(--color-border)/0.8)] p-5">
-                    {/* Header Section - SUBHEADING DISPLAY ADDED HERE */}
+                    {/* Header Section - sub_heading DISPLAY ADDED HERE */}
                     <div className="mb-8 text-center">
                       <div className="inline-flex items-center justify-center p-2 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-4">
                         <div className="w-6 h-6 text-blue-600 dark:text-blue-400">✓</div>
@@ -2577,15 +2578,15 @@ const WhyChooseUsSection: FC = () => {
                       <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
                         {section.title}
                       </h1>
-                      {/* SUBHEADING DISPLAY ADDED HERE */}
+                      {/* sub_heading DISPLAY ADDED HERE */}
                       {/* <p className="text-xl md:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-4">
-                        {section.subHeading}
+                        {section.sub_heading}
                       </p> */}
                       <p className="text-lg md:text-xl font-semibold text-gray-700 dark:text-gray-300 mb-4">
-                        {section.bannerHeading}
+                        {section.heading}
                       </p>
                       <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-3xl mx-auto">
-                        {section.para}
+                        {section.paragraph}
                       </p>
                       <div className="h-1 w-24 bg-[var(--color-theme)] mx-auto rounded-full"></div>
                     </div>
@@ -2628,7 +2629,7 @@ const WhyChooseUsSection: FC = () => {
                               </div>
                               <div className="flex-1">
                                 {/* <h3 className="font-bold text-xl mb-2">{feature.title}</h3> */}
-                                <p className="text-gray-600 dark:text-gray-300">{feature.para}</p>
+                                <p className="text-gray-600 dark:text-gray-300">{feature.paragraph}</p>
                               </div>
                             </div>
                           </div>
@@ -2650,13 +2651,13 @@ const WhyChooseUsSection: FC = () => {
     border-[hsl(var(--color-border)/0.8)]  p-6 text-white p-8 mt-3">
                       <div className="text-center">
                         <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-                          {section.subHeading}
+                          {section.sub_heading}
                         </h3>
                         <p className="text-gray-600 dark:text-gray-300 mb-6">
                           Ready to experience our exceptional service?
                         </p>
                         <button className="bg-[var(--color-theme)] hover:bg-[var(--color-theme-hover)] text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-                          {section.bannerButtun}
+                          {section.banner_buttun}
                         </button>
                       </div>
                     </div>
@@ -2667,7 +2668,7 @@ const WhyChooseUsSection: FC = () => {
         </div>
       </div>
 
-      {/* Dialog for Create/Edit - SUBHEADING FORM FIELD ADDED HERE */}
+      {/* Dialog for Create/Edit - sub_heading FORM FIELD ADDED HERE */}
       {open && (
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
@@ -2722,37 +2723,37 @@ const WhyChooseUsSection: FC = () => {
                           </div>
 
                           <div>
-                            <Label htmlFor="subHeading" className="mb-2 block font-medium">
-                              Sub-heading * {/* NEW FIELD ADDED */}
+                            <Label htmlFor="sub_heading" className="mb-2 block font-medium">
+                              Banner Heading * {/* NEW FIELD ADDED */}
                             </Label>
                             <Field
                               as={Input}
-                              id="subHeading"
-                              name="subHeading"
+                              id="sub_heading"
+                              name="sub_heading"
                               placeholder="Why Our Technology Solutions Company Stands Out?"
-                              className={`${hasError(formikErrors, 'subHeading') && touched.subHeading ? 'border-red-500 focus:ring-red-500' : ''}`}
+                              className={`${hasError(formikErrors, 'sub_heading') && touched.sub_heading ? 'border-red-500 focus:ring-red-500' : ''}`}
                             />
                             <ErrorMessage
-                              name="subHeading"
+                              name="sub_heading"
                               component="div"
                               className="text-sm text-red-600 mt-1"
                             />
                           </div>
 
                           <div>
-                            <Label htmlFor="para" className="mb-2 block font-medium">
+                            <Label htmlFor="paragraph" className="mb-2 block font-medium">
                               Description *
                             </Label>
                             <Field
                               as="textarea"
-                              id="para"
-                              name="para"
+                              id="paragraph"
+                              name="paragraph"
                               rows={4}
-                              className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${hasError(formikErrors, 'para') && touched.para ? 'border-red-500 focus:ring-red-500' : ''}`}
+                              className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${hasError(formikErrors, 'paragraph') && touched.paragraph ? 'border-red-500 focus:ring-red-500' : ''}`}
                               placeholder="We're resolving your technology woes with expert care..."
                             />
                             <ErrorMessage
-                              name="para"
+                              name="paragraph"
                               component="div"
                               className="text-sm text-red-600 mt-1"
                             />
@@ -2762,36 +2763,36 @@ const WhyChooseUsSection: FC = () => {
                         {/* Right Column */}
                         <div className="space-y-4">
                           <div>
-                            <Label htmlFor="bannerHeading" className="mb-2 block font-medium">
-                              Banner Heading *
+                            <Label htmlFor="heading" className="mb-2 block font-medium">
+                              Heading *
                             </Label>
                             <Field
                               as={Input}
-                              id="bannerHeading"
-                              name="bannerHeading"
+                              id="heading"
+                              name="heading"
                               placeholder="Our Commitment to Excellence"
-                              className={`${hasError(formikErrors, 'bannerHeading') && touched.bannerHeading ? 'border-red-500 focus:ring-red-500' : ''}`}
+                              className={`${hasError(formikErrors, 'heading') && touched.heading ? 'border-red-500 focus:ring-red-500' : ''}`}
                             />
                             <ErrorMessage
-                              name="bannerHeading"
+                              name="heading"
                               component="div"
                               className="text-sm text-red-600 mt-1"
                             />
                           </div>
 
                           <div>
-                            <Label htmlFor="bannerButtun" className="mb-2 block font-medium">
+                            <Label htmlFor="banner_buttun" className="mb-2 block font-medium">
                               Banner Button Text *
                             </Label>
                             <Field
                               as={Input}
-                              id="bannerButtun"
-                              name="bannerButtun"
+                              id="banner_buttun"
+                              name="banner_buttun"
                               placeholder="Get Started"
-                              className={`${hasError(formikErrors, 'bannerButtun') && touched.bannerButtun ? 'border-red-500 focus:ring-red-500' : ''}`}
+                              className={`${hasError(formikErrors, 'banner_buttun') && touched.banner_buttun ? 'border-red-500 focus:ring-red-500' : ''}`}
                             />
                             <ErrorMessage
-                              name="bannerButtun"
+                              name="banner_buttun"
                               component="div"
                               className="text-sm text-red-600 mt-1"
                             />
@@ -2909,7 +2910,7 @@ const WhyChooseUsSection: FC = () => {
                                 type="button"
                                 variant="outline"
                                 size="sm"
-                                onClick={() => push({ icon: "",  para: "" })}
+                                onClick={() => push({ icon: "",  paragraph: "" })}
   disabled={submitting || values.features.length >= 2}
 
                               >
@@ -2982,23 +2983,23 @@ const WhyChooseUsSection: FC = () => {
                                     </div> */}
                                     
                                     <div>
-                                      <Label htmlFor={`features.${index}.para`} className="mb-2 block font-medium">
+                                      <Label htmlFor={`features.${index}.paragraph`} className="mb-2 block font-medium">
                                         Description *
                                       </Label>
                                       <Field
                                         as="textarea"
-                                        id={`features.${index}.para`}
-                                        name={`features.${index}.para`}
+                                        id={`features.${index}.paragraph`}
+                                        name={`features.${index}.paragraph`}
                                         rows={3}
                                         className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                                          getFeatureErrorMessage(formikErrors, index, 'para') 
+                                          getFeatureErrorMessage(formikErrors, index, 'paragraph') 
                                             ? 'border-red-500 focus:ring-red-500' 
                                             : ''
                                         }`}
                                         placeholder="Navigating IT solutions with meticulous attention..."
                                       />
                                       <ErrorMessage
-                                        name={`features.${index}.para`}
+                                        name={`features.${index}.paragraph`}
                                         component="div"
                                         className="text-sm text-red-600 mt-1"
                                       />

@@ -5343,6 +5343,12 @@ text-decoration:none !important;
   z-index: 1;
   margin-bottom: 40px;
   transition: all 0.4s ease-in-out;
+  overflow:hidden;
+  border-radius:15px !important;
+  -webkit-border-radius:15px !important;
+  -moz-border-radius:15px !important;
+  -ms-border-radius:15px !important;
+  -o-border-radius:15px !important;
 }
 .testimonial-two__item__star {
   color: gold;

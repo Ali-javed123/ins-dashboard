@@ -36,19 +36,19 @@
 //   title: string;
 //   heading: number;
 // created_at:string
-//   para: string;
-//   imgOne: string;
-//   imgTwo: string;
+//   paragraph: string;
+//   img_one: string;
+//   img_two: string;
 //   subHeading: string;
-//   subpara: string;
-//   coliconOne: string;
-//   coliconTwo: string;
-//   colHeadOne: string;
-//   colHeadTwo: string;
-//   colparaOne: string;
-//   colparaTwo: string;
+//   subparagraph: string;
+//   col_icon_one: string;
+//   col_icon_two: string;
+//   col_head_one: string;
+//   col_head_two: string;
+//   col_paragraph_one: string;
+//   col_paragraph_two: string;
 
-//   colbtn: string;
+//   col_btn: string;
 
 
 
@@ -73,10 +73,10 @@
 //   heading: "Provide the Best Easy Solution for Your IT Problem",
 //   description:
 //     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.",
-//   highlightTitle: "Deliver Perfect Solution",
-//   highlightDescription:
+//   highlight_title: "Deliver Perfect Solution",
+//   highlight_description:
 //     "There are many variations passages of Lorem Ipsum available, but the majority.",
-//   colbtn: "More Details",
+//   col_btn: "More Details",
 //   features: [
 //     {
 //       id: 1,
@@ -97,19 +97,19 @@
 //   id: string;
 //   title: string;
 //   heading: number;
-//   para: string;
-//   imgOne: string;
-//   imgTwo: string;
+//   paragraph: string;
+//   img_one: string;
+//   img_two: string;
 //   subHeading: string;
-//   subpara: string;
-//   coliconOne: string;
-//   coliconTwo: string;
-//   colHeadOne: string;
-//   colHeadTwo: string;
-//   colparaOne: string;
-//   colparaTwo: string;
+//   subparagraph: string;
+//   col_icon_one: string;
+//   col_icon_two: string;
+//   col_head_one: string;
+//   col_head_two: string;
+//   col_paragraph_one: string;
+//   col_paragraph_two: string;
 // created_at:string
-//   colbtn: string;
+//   col_btn: string;
 
 //   btnOne: string;   // ✅ add
 //   btnTwo: string;   // ✅ add
@@ -125,19 +125,19 @@
 // interface UserFormValues {
 //    title?: string;
 //   heading?: string;
-//   para?: string;
-//   imgOne?: string;
-//   imgTwo?: string;
+//   paragraph?: string;
+//   img_one?: string;
+//   img_two?: string;
 //   subHeading?: string;
-//   subpara?: string;
-//   coliconOne?: string;
-//   coliconTwo?: string;
-//   colHeadOne?: string;
-//   colHeadTwo?: string;
-//   colparaOne?: string;
-//   colparaTwo?: string;
+//   subparagraph?: string;
+//   col_icon_one?: string;
+//   col_icon_two?: string;
+//   col_head_one?: string;
+//   col_head_two?: string;
+//   col_paragraph_one?: string;
+//   col_paragraph_two?: string;
 // created_at?:string
-//   colbtn?: string;
+//   col_btn?: string;
 
 // }
 // const Page: FC = () => {
@@ -173,18 +173,18 @@
 //     const initialValues: UserFormValues = {
 //       title: '',
 //   heading: '',
-//   para: '',
-//   imgOne: '',
-//   imgTwo: '',
+//   paragraph: '',
+//   img_one: '',
+//   img_two: '',
 //   subHeading: '',
-//   subpara: '',
-//   coliconOne: '',
-//   coliconTwo: '',
-//   colHeadOne: '',
-//   colHeadTwo: '',
-//   colparaOne: '',
-//   colparaTwo: '',
-//   colbtn: '',
+//   subparagraph: '',
+//   col_icon_one: '',
+//   col_icon_two: '',
+//   col_head_one: '',
+//   col_head_two: '',
+//   col_paragraph_one: '',
+//   col_paragraph_two: '',
+//   col_btn: '',
 
 //     }
   
@@ -254,18 +254,18 @@
 //       id: dbUser.id,
 //       title: dbUser.title,
 //       heading: dbUser.heading,
-//       para: dbUser.para,
-//       imgOne: dbUser.imgOne,
-//       imgTwo: dbUser.imgTwo,
+//       paragraph: dbUser.paragraph,
+//       img_one: dbUser.img_one,
+//       img_two: dbUser.img_two,
 //       subHeading: dbUser.subHeading,
-//       subpara: dbUser.subpara,
-//       coliconOne: dbUser.coliconOne,
-//       coliconTwo: dbUser.coliconTwo,
-//       colHeadOne: dbUser.colHeadOne,
-//       colHeadTwo: dbUser.colHeadTwo,
-//       colparaOne: dbUser.colparaOne,
-//       colparaTwo: dbUser.colparaTwo,
-//       colbtn: dbUser.colbtn,
+//       subparagraph: dbUser.subparagraph,
+//       col_icon_one: dbUser.col_icon_one,
+//       col_icon_two: dbUser.col_icon_two,
+//       col_head_one: dbUser.col_head_one,
+//       col_head_two: dbUser.col_head_two,
+//       col_paragraph_one: dbUser.col_paragraph_one,
+//       col_paragraph_two: dbUser.col_paragraph_two,
+//       col_btn: dbUser.col_btn,
 
 //       btnOne: dbUser.btnOne ?? "", // agar DatabaseUser mein hai
 //       btnTwo: dbUser.btnTwo ?? "",
@@ -279,18 +279,18 @@
 //       id: dbUser.id,
 //       title: dbUser.title,
 //       heading: dbUser.heading,
-//       para: dbUser.para,
-//       imgOne: dbUser.imgOne,
-//       imgTwo: dbUser.imgTwo,
+//       paragraph: dbUser.paragraph,
+//       img_one: dbUser.img_one,
+//       img_two: dbUser.img_two,
 //       subHeading: dbUser.subHeading,
-//       subpara: dbUser.subpara,
-//       coliconOne: dbUser.coliconOne,
-//       coliconTwo: dbUser.coliconTwo,
-//       colHeadOne: dbUser.colHeadOne,
-//       colHeadTwo: dbUser.colHeadTwo,
-//       colparaOne: dbUser.colparaOne,
-//       colparaTwo: dbUser.colparaTwo,
-//       colbtn: dbUser.colbtn,
+//       subparagraph: dbUser.subparagraph,
+//       col_icon_one: dbUser.col_icon_one,
+//       col_icon_two: dbUser.col_icon_two,
+//       col_head_one: dbUser.col_head_one,
+//       col_head_two: dbUser.col_head_two,
+//       col_paragraph_one: dbUser.col_paragraph_one,
+//       col_paragraph_two: dbUser.col_paragraph_two,
+//       col_btn: dbUser.col_btn,
 
 //     btnOne: dbUser.btnOne ?? "",
 //       btnTwo: dbUser.btnTwo ?? "",
@@ -397,10 +397,10 @@
 //           {/* Highlight Card */}
 //           <div className="bg-neutral-900 dark:bg-slate-900 border border-neutral-800 rounded-xl p-6 mb-8">
 //             <h4 className="font-semibold mb-2">
-//               {aboutSectionData.highlightTitle}
+//               {aboutSectionData.highlight_title}
 //             </h4>
 //             <p className="text-sm text-slate-50">
-//               {aboutSectionData.highlightDescription}
+//               {aboutSectionData.highlight_description}
 //             </p>
 //           </div>
 
@@ -431,7 +431,7 @@
 
 
 //           <button className="bg-[var(--color-theme)] hover:bg-[var(--color-theme-hover)] transition px-6 py-3 rounded-lg font-medium">
-//             {aboutSectionData.colbtn}
+//             {aboutSectionData.col_btn}
 //           </button>
 //         </div>
 
@@ -484,21 +484,21 @@
 //   id: string
 //   title: string
 //   heading: string
-//   para: string
-//   imgOne: string | null
-//   imgTwo: string | null
+//   paragraph: string
+//   img_one: string | null
+//   img_two: string | null
   
-//   coliconOne: string
-//   coliconTwo: string
-//   colHeadOne: string
-//   colHeadTwo: string
-//   colparaOne: string
-//   colparaTwo: string
-//   colbtn: string
+//   col_icon_one: string
+//   col_icon_two: string
+//   col_head_one: string
+//   col_head_two: string
+//   col_paragraph_one: string
+//   col_paragraph_two: string
+//   col_btn: string
   
 //   // badge: string
-//   highlightTitle: string
-//   highlightDescription: string
+//   highlight_title: string
+//   highlight_description: string
 //   created_at?: string
 // }
 
@@ -506,33 +506,33 @@
 //   id: string
 //   title: string
 //   heading: string
-//   para: string
-//   imgOne: string | null
-//   imgTwo: string | null
+//   paragraph: string
+//   img_one: string | null
+//   img_two: string | null
   
-//   coliconOne: string
-//   coliconTwo: string
-//   colHeadOne: string
-//   colHeadTwo: string
-//   colparaOne: string
-//   colparaTwo: string
+//   col_icon_one: string
+//   col_icon_two: string
+//   col_head_one: string
+//   col_head_two: string
+//   col_paragraph_one: string
+//   col_paragraph_two: string
  
 //   // badge?: string
-//   highlightTitle: string
-//   highlightDescription: string
-//   colbtn: string
-//   imgOneUrl?: string | null
-//   imgTwoUrl?: string | null
+//   highlight_title: string
+//   highlight_description: string
+//   col_btn: string
+//   img_oneUrl?: string | null
+//   img_twoUrl?: string | null
 // }
 // export const aboutSectionData: AboutSectionData = {
 //   badge: "ABOUT US",
 //   heading: "Provide the Best Easy Solution for Your IT Problem",
 //   description:
 //     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.",
-//   highlightTitle: "Deliver Perfect Solution",
-//   highlightDescription:
+//   highlight_title: "Deliver Perfect Solution",
+//   highlight_description:
 //     "There are many variations passages of Lorem Ipsum available, but the majority.",
-//   colbtn: "More Details",
+//   col_btn: "More Details",
 //   features: [
 //     {
 //       id: 1,
@@ -551,42 +551,42 @@
 // interface AboutSectionFormValues {
 //   title: string
 //   heading: string
-//   para: string
+//   paragraph: string
   
-//   coliconOne: string
-//   coliconTwo: string
-//   colHeadOne: string
-//   colHeadTwo: string
-//   colparaOne: string
-//   colparaTwo: string
-//   colbtn: string
+//   col_icon_one: string
+//   col_icon_two: string
+//   col_head_one: string
+//   col_head_two: string
+//   col_paragraph_one: string
+//   col_paragraph_two: string
+//   col_btn: string
 //   btnOne?: string
 //   btnTwo?: string
 //   // badge: string
-//   highlightTitle: string
-//   highlightDescription: string
+//   highlight_title: string
+//   highlight_description: string
 // }
 
 // interface AboutSectionFormData {
 //   title: string
 //   heading: string
-//   para: string
+//   paragraph: string
 //   subHeading?: string
-//   subpara?: string
-//   coliconOne: string
-//   coliconTwo: string
-//   colHeadOne: string
-//   colHeadTwo: string
-//   colparaOne: string
-//   colparaTwo: string
-//   colbtn: string
+//   subparagraph?: string
+//   col_icon_one: string
+//   col_icon_two: string
+//   col_head_one: string
+//   col_head_two: string
+//   col_paragraph_one: string
+//   col_paragraph_two: string
+//   col_btn: string
 //   btnOne?: string
 //   btnTwo?: string
 //   // badge: string
-//   highlightTitle: string
-//   highlightDescription: string
-//   imgOne: File | null
-//   imgTwo: File | null
+//   highlight_title: string
+//   highlight_description: string
+//   img_one: File | null
+//   img_two: File | null
 // }
 
 // interface AboutSectionCardProps {
@@ -605,8 +605,8 @@
 //     const [open, setOpen] = useState(false)
 
 //   const [submitting, setSubmitting] = useState(false)
-//   const [previewImgOne, setPreviewImgOne] = useState<string | null>(null)
-//   const [previewImgTwo, setPreviewImgTwo] = useState<string | null>(null)
+//   const [previewimg_one, setPreviewimg_one] = useState<string | null>(null)
+//   const [previewimg_two, setPreviewimg_two] = useState<string | null>(null)
   
 //   const fileInputRefOne = useRef<HTMLInputElement>(null)
 //   const fileInputRefTwo = useRef<HTMLInputElement>(null)
@@ -614,21 +614,21 @@
 //   const [formData, setFormData] = useState<AboutSectionFormData>({
 //     title: "",
 //     heading: "",
-//     para: "",
+//     paragraph: "",
     
-//     coliconOne: "",
-//     coliconTwo: "",
-//     colHeadOne: "",
-//     colHeadTwo: "",
-//     colparaOne: "",
-//     colparaTwo: "",
+//     col_icon_one: "",
+//     col_icon_two: "",
+//     col_head_one: "",
+//     col_head_two: "",
+//     col_paragraph_one: "",
+//     col_paragraph_two: "",
    
 //     // badge: "ABOUT US",
-//     highlightTitle: "",
-//     highlightDescription: "",
-//     colbtn: "More Details",
-//     imgOne: null,
-//     imgTwo: null
+//     highlight_title: "",
+//     highlight_description: "",
+//     col_btn: "More Details",
+//     img_one: null,
+//     img_two: null
 //   })
 
 //   // Validation Schema
@@ -639,17 +639,17 @@
 //     heading: Yup.string()
 //       .min(2, 'Heading must be at least 2 characters')
 //       .required('Heading is required'),
-//     para: Yup.string()
+//     paragraph: Yup.string()
 //       .min(10, 'Description must be at least 10 characters')
 //       .required('Description is required'),
     
-//     colHeadOne: Yup.string()
+//     col_head_one: Yup.string()
 //       .min(2, 'Column 1 heading is required'),
-//     colparaOne: Yup.string()
+//     col_paragraph_one: Yup.string()
 //       .min(10, 'Column 1 description is required'),
-//     colHeadTwo: Yup.string()
+//     col_head_two: Yup.string()
 //       .min(2, 'Column 2 heading is required'),
-//     colparaTwo: Yup.string()
+//     col_paragraph_two: Yup.string()
 //       .min(10, 'Column 2 description is required'),
     
 //   })
@@ -658,20 +658,20 @@
 //   const initialValues: AboutSectionFormValues = {
 //     title: formData.title || '',
 //     heading: formData.heading || '',
-//     para: formData.para || '',
+//     paragraph: formData.paragraph || '',
 //     // subHeading: formData.subHeading || '',
-//     // subpara: formData.subpara || '',
-//     coliconOne: formData.coliconOne || '',
-//     coliconTwo: formData.coliconTwo || '',
-//     colHeadOne: formData.colHeadOne || '',
-//     colHeadTwo: formData.colHeadTwo || '',
-//     colparaOne: formData.colparaOne || '',
-//     colparaTwo: formData.colparaTwo || '',
+//     // subparagraph: formData.subparagraph || '',
+//     col_icon_one: formData.col_icon_one || '',
+//     col_icon_two: formData.col_icon_two || '',
+//     col_head_one: formData.col_head_one || '',
+//     col_head_two: formData.col_head_two || '',
+//     col_paragraph_one: formData.col_paragraph_one || '',
+//     col_paragraph_two: formData.col_paragraph_two || '',
     
 //     // badge: formData.badge || 'ABOUT US',
-//     highlightTitle: formData.highlightTitle || '',
-//     highlightDescription: formData.highlightDescription || '',
-//     colbtn: formData.colbtn || 'More Details'
+//     highlight_title: formData.highlight_title || '',
+//     highlight_description: formData.highlight_description || '',
+//     col_btn: formData.col_btn || 'More Details'
 //   }
 
 //   // Reset Form
@@ -679,25 +679,25 @@
 //     setFormData({
 //       title: "",
 //       heading: "",
-//       para: "",
+//       paragraph: "",
      
-//       coliconOne: "",
-//       coliconTwo: "",
-//       colHeadOne: "",
-//       colHeadTwo: "",
-//       colparaOne: "",
-//       colparaTwo: "",
+//       col_icon_one: "",
+//       col_icon_two: "",
+//       col_head_one: "",
+//       col_head_two: "",
+//       col_paragraph_one: "",
+//       col_paragraph_two: "",
     
 //       // badge: "ABOUT US",
-//       highlightTitle: "",
-//       highlightDescription: "",
-//       colbtn: "More Details",
-//       imgOne: null,
-//       imgTwo: null
+//       highlight_title: "",
+//       highlight_description: "",
+//       col_btn: "More Details",
+//       img_one: null,
+//       img_two: null
 //     })
 //     setEditId(null)
-//     setPreviewImgOne(null)
-//     setPreviewImgTwo(null)
+//     setPreviewimg_one(null)
+//     setPreviewimg_two(null)
 //     setIsEdit(false)
 //     setSubmitting(false)
     
@@ -739,44 +739,44 @@
 //         id: dbSection.id,
 //         title: dbSection.title || "",
 //         heading: dbSection.heading || "",
-//         para: dbSection.para || "",
-//         imgOne: null,
-//         imgTwo: null,
+//         paragraph: dbSection.paragraph || "",
+//         img_one: null,
+//         img_two: null,
      
-//         coliconOne: dbSection.coliconOne || "",
-//         coliconTwo: dbSection.coliconTwo || "",
-//         colHeadOne: dbSection.colHeadOne || "",
-//         colHeadTwo: dbSection.colHeadTwo || "",
-//         colparaOne: dbSection.colparaOne || "",
-//         colparaTwo: dbSection.colparaTwo || "",
+//         col_icon_one: dbSection.col_icon_one || "",
+//         col_icon_two: dbSection.col_icon_two || "",
+//         col_head_one: dbSection.col_head_one || "",
+//         col_head_two: dbSection.col_head_two || "",
+//         col_paragraph_one: dbSection.col_paragraph_one || "",
+//         col_paragraph_two: dbSection.col_paragraph_two || "",
        
 //         // badge: dbSection.badge || "ABOUT US",
-//         highlightTitle: dbSection.highlightTitle || "",
-//         highlightDescription: dbSection.highlightDescription || "",
-//         colbtn: dbSection.colbtn || "More Details",
-//         imgOneUrl: dbSection.imgOne,
-//         imgTwoUrl: dbSection.imgTwo
+//         highlight_title: dbSection.highlight_title || "",
+//         highlight_description: dbSection.highlight_description || "",
+//         col_btn: dbSection.col_btn || "More Details",
+//         img_oneUrl: dbSection.img_one,
+//         img_twoUrl: dbSection.img_two
 //       }
 //     } else {
 //       return {
 //         id: dbSection.id,
 //         title: dbSection.title || "",
 //         heading: dbSection.heading || "",
-//         para: dbSection.para || "",
-//         imgOne: dbSection.imgOne,
-//         imgTwo: dbSection.imgTwo,
+//         paragraph: dbSection.paragraph || "",
+//         img_one: dbSection.img_one,
+//         img_two: dbSection.img_two,
         
-//         coliconOne: dbSection.coliconOne || "",
-//         coliconTwo: dbSection.coliconTwo || "",
-//         colHeadOne: dbSection.colHeadOne || "",
-//         colHeadTwo: dbSection.colHeadTwo || "",
-//         colparaOne: dbSection.colparaOne || "",
-//         colparaTwo: dbSection.colparaTwo || "",
+//         col_icon_one: dbSection.col_icon_one || "",
+//         col_icon_two: dbSection.col_icon_two || "",
+//         col_head_one: dbSection.col_head_one || "",
+//         col_head_two: dbSection.col_head_two || "",
+//         col_paragraph_one: dbSection.col_paragraph_one || "",
+//         col_paragraph_two: dbSection.col_paragraph_two || "",
         
 //         // badge: dbSection.badge || "ABOUT US",
-//         highlightTitle: dbSection.highlightTitle || "",
-//         highlightDescription: dbSection.highlightDescription || "",
-//         colbtn: dbSection.colbtn || "More Details"
+//         highlight_title: dbSection.highlight_title || "",
+//         highlight_description: dbSection.highlight_description || "",
+//         col_btn: dbSection.col_btn || "More Details"
 //       }
 //     }
 //   }
@@ -788,31 +788,31 @@
 //     setFormData({
 //       title: section.title,
 //       heading: section.heading,
-//       para: section.para,
+//       paragraph: section.paragraph,
 //       // subHeading: section.subHeading,
-//       // subpara: section.subpara,
-//       coliconOne: section.coliconOne,
-//       coliconTwo: section.coliconTwo,
-//       colHeadOne: section.colHeadOne,
-//       colHeadTwo: section.colHeadTwo,
-//       colparaOne: section.colparaOne,
-//       colparaTwo: section.colparaTwo,
-//       colbtn: section.colbtn,
+//       // subparagraph: section.subparagraph,
+//       col_icon_one: section.col_icon_one,
+//       col_icon_two: section.col_icon_two,
+//       col_head_one: section.col_head_one,
+//       col_head_two: section.col_head_two,
+//       col_paragraph_one: section.col_paragraph_one,
+//       col_paragraph_two: section.col_paragraph_two,
+//       col_btn: section.col_btn,
      
 //       // badge: section.badge,
-//       highlightTitle: section.highlightTitle,
-//       highlightDescription: section.highlightDescription,
-//       imgOne: null,
-//       imgTwo: null
+//       highlight_title: section.highlight_title,
+//       highlight_description: section.highlight_description,
+//       img_one: null,
+//       img_two: null
 //     })
     
 //     // Set preview images
 //     if (STORAGE_TYPE === "bucket") {
-//       setPreviewImgOne(section.imgOneUrl || null)
-//       setPreviewImgTwo(section.imgTwoUrl || null)
+//       setPreviewimg_one(section.img_oneUrl || null)
+//       setPreviewimg_two(section.img_twoUrl || null)
 //     } else {
-//       setPreviewImgOne(section.imgOne)
-//       setPreviewImgTwo(section.imgTwo)
+//       setPreviewimg_one(section.img_one)
+//       setPreviewimg_two(section.img_two)
 //     }
     
 //     setOpen(true)
@@ -892,13 +892,13 @@
 //       }
 
 //       if (imageNumber === 1) {
-//         setFormData(prev => ({ ...prev, imgOne: file }))
+//         setFormData(prev => ({ ...prev, img_one: file }))
 //         const previewUrl = URL.createObjectURL(file)
-//         setPreviewImgOne(previewUrl)
+//         setPreviewimg_one(previewUrl)
 //       } else {
-//         setFormData(prev => ({ ...prev, imgTwo: file }))
+//         setFormData(prev => ({ ...prev, img_two: file }))
 //         const previewUrl = URL.createObjectURL(file)
-//         setPreviewImgTwo(previewUrl)
+//         setPreviewimg_two(previewUrl)
 //       }
 //     }
 //   }
@@ -906,12 +906,12 @@
 //   // Handle Remove Image
 //   const handleRemoveImage = (imageNumber: 1 | 2) => {
 //     if (imageNumber === 1) {
-//       setFormData(prev => ({ ...prev, imgOne: null }))
-//       setPreviewImgOne(null)
+//       setFormData(prev => ({ ...prev, img_one: null }))
+//       setPreviewimg_one(null)
 //       if (fileInputRefOne.current) fileInputRefOne.current.value = ""
 //     } else {
-//       setFormData(prev => ({ ...prev, imgTwo: null }))
-//       setPreviewImgTwo(null)
+//       setFormData(prev => ({ ...prev, img_two: null }))
+//       setPreviewimg_two(null)
 //       if (fileInputRefTwo.current) fileInputRefTwo.current.value = ""
 //     }
 //   }
@@ -919,10 +919,10 @@
 //   // Cleanup preview URLs
 //   useEffect(() => {
 //     return () => {
-//       if (previewImgOne) URL.revokeObjectURL(previewImgOne)
-//       if (previewImgTwo) URL.revokeObjectURL(previewImgTwo)
+//       if (previewimg_one) URL.revokeObjectURL(previewimg_one)
+//       if (previewimg_two) URL.revokeObjectURL(previewimg_two)
 //     }
-//   }, [previewImgOne, previewImgTwo])
+//   }, [previewimg_one, previewimg_two])
 
 //   // Handle Submit (Create)
 //   const handleSubmit = async (
@@ -943,21 +943,21 @@
 //           {
 //             title: values.title,
 //             heading: values.heading,
-//             para: values.para,
-//             imgOne: null,
-//             imgTwo: null,
+//             paragraph: values.paragraph,
+//             img_one: null,
+//             img_two: null,
             
-//             coliconOne: values.coliconOne,
-//             coliconTwo: values.coliconTwo,
-//             colHeadOne: values.colHeadOne,
-//             colHeadTwo: values.colHeadTwo,
-//             colparaOne: values.colparaOne,
-//             colparaTwo: values.colparaTwo,
-//             colbtn: values.colbtn,
+//             col_icon_one: values.col_icon_one,
+//             col_icon_two: values.col_icon_two,
+//             col_head_one: values.col_head_one,
+//             col_head_two: values.col_head_two,
+//             col_paragraph_one: values.col_paragraph_one,
+//             col_paragraph_two: values.col_paragraph_two,
+//             col_btn: values.col_btn,
          
 //             // badge: values.badge,
-//             highlightTitle: values.highlightTitle,
-//             highlightDescription: values.highlightDescription,
+//             highlight_title: values.highlight_title,
+//             highlight_description: values.highlight_description,
 //           }
 //         ])
 //         .select()
@@ -969,33 +969,33 @@
 //         return
 //       }
 
-//       let imgOneUrl: string | null = null
-//       let imgTwoUrl: string | null = null
+//       let img_oneUrl: string | null = null
+//       let img_twoUrl: string | null = null
 
 //       // Upload images to bucket if selected
-//       if (formData.imgOne) {
+//       if (formData.img_one) {
 //         try {
-//           imgOneUrl = await uploadToBucket(formData.imgOne, sectionData.id, 1)
+//           img_oneUrl = await uploadToBucket(formData.img_one, sectionData.id, 1)
 //         } catch (error) {
 //           console.error("Failed to upload image 1:", error)
 //         }
 //       }
 
-//       if (formData.imgTwo) {
+//       if (formData.img_two) {
 //         try {
-//           imgTwoUrl = await uploadToBucket(formData.imgTwo, sectionData.id, 2)
+//           img_twoUrl = await uploadToBucket(formData.img_two, sectionData.id, 2)
 //         } catch (error) {
 //           console.error("Failed to upload image 2:", error)
 //         }
 //       }
 
 //       // Update section with image URLs
-//       if (imgOneUrl || imgTwoUrl) {
+//       if (img_oneUrl || img_twoUrl) {
 //         const { error: updateError } = await supabase
 //           .from("aboutSection")
 //           .update({ 
-//             imgOne: imgOneUrl,
-//             imgTwo: imgTwoUrl
+//             img_one: img_oneUrl,
+//             img_two: img_twoUrl
 //           })
 //           .eq("id", sectionData.id)
 
@@ -1009,24 +1009,24 @@
 //         id: sectionData.id,
 //         title: sectionData.title || "",
 //         heading: sectionData.heading || "",
-//         para: sectionData.para || "",
-//         imgOne: null,
-//         imgTwo: null,
+//         paragraph: sectionData.paragraph || "",
+//         img_one: null,
+//         img_two: null,
        
-//         coliconOne: sectionData.coliconOne || "",
-//         coliconTwo: sectionData.coliconTwo || "",
-//         colHeadOne: sectionData.colHeadOne || "",
-//         colHeadTwo: sectionData.colHeadTwo || "",
-//         colparaOne: sectionData.colparaOne || "",
-//         colparaTwo: sectionData.colparaTwo || "",
+//         col_icon_one: sectionData.col_icon_one || "",
+//         col_icon_two: sectionData.col_icon_two || "",
+//         col_head_one: sectionData.col_head_one || "",
+//         col_head_two: sectionData.col_head_two || "",
+//         col_paragraph_one: sectionData.col_paragraph_one || "",
+//         col_paragraph_two: sectionData.col_paragraph_two || "",
 //         // btnOne: sectionData.btnOne || "",
 //         // btnTwo: sectionData.btnTwo || "",
 //         // badge: sectionData.badge || "ABOUT US",
-//         highlightTitle: sectionData.highlightTitle || "",
-//         highlightDescription: sectionData.highlightDescription || "",
-//         colbtn: sectionData.colbtn || "More Details",
-//         // imgOneUrl: imgOneUrl,
-//         // imgTwoUrl: imgTwoUrl
+//         highlight_title: sectionData.highlight_title || "",
+//         highlight_description: sectionData.highlight_description || "",
+//         col_btn: sectionData.col_btn || "More Details",
+//         // img_oneUrl: img_oneUrl,
+//         // img_twoUrl: img_twoUrl
 //       }
 
 //       // Update state
@@ -1062,26 +1062,26 @@
 
 //       // Get existing section data
 //       const existingSection = sections.find(s => s.id === editId)
-//       let imgOneUrl: string | null = existingSection?.imgOneUrl || null
-//       let imgTwoUrl: string | null = existingSection?.imgTwoUrl || null
+//       let img_oneUrl: string | null = existingSection?.img_oneUrl || null
+//       let img_twoUrl: string | null = existingSection?.img_twoUrl || null
 
 //       // Handle image updates
-//       if (formData.imgOne) {
+//       if (formData.img_one) {
 //         // Delete old image if exists
-//         if (existingSection?.imgOneUrl) {
-//           await deleteFromBucket(existingSection.imgOneUrl)
+//         if (existingSection?.img_oneUrl) {
+//           await deleteFromBucket(existingSection.img_oneUrl)
 //         }
 //         // Upload new image
-//         imgOneUrl = await uploadToBucket(formData.imgOne, editId, 1)
+//         img_oneUrl = await uploadToBucket(formData.img_one, editId, 1)
 //       }
 
-//       if (formData.imgTwo) {
+//       if (formData.img_two) {
 //         // Delete old image if exists
-//         if (existingSection?.imgTwoUrl) {
-//           await deleteFromBucket(existingSection.imgTwoUrl)
+//         if (existingSection?.img_twoUrl) {
+//           await deleteFromBucket(existingSection.img_twoUrl)
 //         }
 //         // Upload new image
-//         imgTwoUrl = await uploadToBucket(formData.imgTwo, editId, 2)
+//         img_twoUrl = await uploadToBucket(formData.img_two, editId, 2)
 //       }
 
 //       // Update section in database
@@ -1090,23 +1090,23 @@
 //         .update({
 //           title: values.title,
 //           heading: values.heading,
-//           para: values.para,
-//           imgOne: imgOneUrl,
-//           imgTwo: imgTwoUrl,
+//           paragraph: values.paragraph,
+//           img_one: img_oneUrl,
+//           img_two: img_twoUrl,
 //           // subHeading: values.subHeading,
-//           // subpara: values.subpara,
-//           coliconOne: values.coliconOne,
-//           coliconTwo: values.coliconTwo,
-//           colHeadOne: values.colHeadOne,
-//           colHeadTwo: values.colHeadTwo,
-//           colparaOne: values.colparaOne,
-//           colparaTwo: values.colparaTwo,
+//           // subparagraph: values.subparagraph,
+//           col_icon_one: values.col_icon_one,
+//           col_icon_two: values.col_icon_two,
+//           col_head_one: values.col_head_one,
+//           col_head_two: values.col_head_two,
+//           col_paragraph_one: values.col_paragraph_one,
+//           col_paragraph_two: values.col_paragraph_two,
 //           // btnOne: values.btnOne,
 //           // btnTwo: values.btnTwo,
 //           // badge: values.badge,
-//           highlightTitle: values.highlightTitle,
-//           highlightDescription: values.highlightDescription,
-//           colbtn: values.colbtn
+//           highlight_title: values.highlight_title,
+//           highlight_description: values.highlight_description,
+//           col_btn: values.col_btn
 //         })
 //         .eq("id", editId)
 //         .select()
@@ -1141,11 +1141,11 @@
 //     try {
 //       // Delete images from bucket
 //       const sectionToDelete = sections.find(s => s.id === id)
-//       if (sectionToDelete?.imgOneUrl) {
-//         await deleteFromBucket(sectionToDelete.imgOneUrl)
+//       if (sectionToDelete?.img_oneUrl) {
+//         await deleteFromBucket(sectionToDelete.img_oneUrl)
 //       }
-//       if (sectionToDelete?.imgTwoUrl) {
-//         await deleteFromBucket(sectionToDelete.imgTwoUrl)
+//       if (sectionToDelete?.img_twoUrl) {
+//         await deleteFromBucket(sectionToDelete.img_twoUrl)
 //       }
 
 //       // Delete from database
@@ -1168,8 +1168,8 @@
 //   // Get safe image URL
 //   const getSafeImageUrl = (section: AboutSection, imageNumber: 1 | 2): string => {
 //     const url = imageNumber === 1 
-//       ? (STORAGE_TYPE === "bucket" ? section.imgOneUrl : section.imgOne)
-//       : (STORAGE_TYPE === "bucket" ? section.imgTwoUrl : section.imgTwo)
+//       ? (STORAGE_TYPE === "bucket" ? section.img_oneUrl : section.img_one)
+//       : (STORAGE_TYPE === "bucket" ? section.img_twoUrl : section.img_two)
     
 //     return url || "/assets/images/about/about-1-1.png"
 //   }
@@ -1266,10 +1266,10 @@
 //            {/* Highlight Card */}
 //            <div className="bg-neutral-900 dark:bg-slate-900 border border-neutral-800 rounded-xl p-6 mb-8">
 //              <h4 className="font-semibold mb-2">
-//                {aboutSectionData.highlightTitle}
+//                {aboutSectionData.highlight_title}
 //              </h4>
 //              <p className="text-sm text-slate-50">
-//                {aboutSectionData.highlightDescription}
+//                {aboutSectionData.highlight_description}
 //              </p>
 //            </div>
 
@@ -1300,7 +1300,7 @@
 
 
 //            <button className="bg-[var(--color-theme)] hover:bg-[var(--color-theme-hover)] transition px-6 py-3 rounded-lg font-medium">
-//              {aboutSectionData.colbtn}
+//              {aboutSectionData.col_btn}
 //            </button>
 //          </div>
 
@@ -1388,17 +1388,17 @@
 //                       </div>
 
 //                       <div>
-//                         <Label htmlFor="para">Description *</Label>
+//                         <Label htmlFor="paragraph">Description *</Label>
 //                         <Field
 //                           as="textarea"
-//                           id="para"
-//                           name="para"
+//                           id="paragraph"
+//                           name="paragraph"
 //                           rows={4}
-//                           className={`w-full p-3 border rounded-md ${errors.para && touched.para ? 'border-red-500' : ''}`}
+//                           className={`w-full p-3 border rounded-md ${errors.paragraph && touched.paragraph ? 'border-red-500' : ''}`}
 //                           placeholder="Main description here..."
 //                         />
 //                         <ErrorMessage
-//                           name="para"
+//                           name="paragraph"
 //                           component="div"
 //                           className="text-sm text-red-400 mt-1"
 //                         />
@@ -1408,21 +1408,21 @@
 //                     {/* Right Column */}
 //                     <div className="space-y-4">
 //                       <div>
-//                         <Label htmlFor="highlightTitle">Highlight Title</Label>
+//                         <Label htmlFor="highlight_title">Highlight Title</Label>
 //                         <Field
 //                           as={Input}
-//                           id="highlightTitle"
-//                           name="highlightTitle"
+//                           id="highlight_title"
+//                           name="highlight_title"
 //                           placeholder="Deliver Perfect Solution"
 //                         />
 //                       </div>
 
 //                       <div>
-//                         <Label htmlFor="highlightDescription">Highlight Description</Label>
+//                         <Label htmlFor="highlight_description">Highlight Description</Label>
 //                         <Field
 //                           as="textarea"
-//                           id="highlightDescription"
-//                           name="highlightDescription"
+//                           id="highlight_description"
+//                           name="highlight_description"
 //                           rows={4}
 //                           className="w-full p-3 border rounded-md"
 //                           placeholder="Highlight description here..."
@@ -1430,11 +1430,11 @@
 //                       </div>
 
 //                       <div>
-//                         <Label htmlFor="colbtn">Button Text</Label>
+//                         <Label htmlFor="col_btn">Button Text</Label>
 //                         <Field
 //                           as={Input}
-//                           id="colbtn"
-//                           name="colbtn"
+//                           id="col_btn"
+//                           name="col_btn"
 //                           placeholder="More Details"
 //                         />
 //                       </div>
@@ -1448,7 +1448,7 @@
                       
 //                       {/* Image 1 */}
 //                       <div className="space-y-3">
-//                         <Label htmlFor="imgOne">Main Image (Big Image) *</Label>
+//                         <Label htmlFor="img_one">Main Image (Big Image) *</Label>
 //                         <div className="
 //                           border-2 border-dashed 
 //                           rounded-lg p-4 
@@ -1464,10 +1464,10 @@
 //                             disabled={submitting}
 //                           />
                           
-//                           {previewImgOne ? (
+//                           {previewimg_one ? (
 //                             <div className="text-center space-y-3">
 //                               <img
-//                                 src={previewImgOne}
+//                                 src={previewimg_one}
 //                                 alt="Preview 1"
 //                                 className="mx-auto max-h-48 rounded-lg object-contain"
 //                               />
@@ -1529,7 +1529,7 @@
 
 //                       {/* Image 2 */}
 //                       <div className="space-y-3">
-//                         <Label htmlFor="imgTwo">Overlay Image (Small Image) *</Label>
+//                         <Label htmlFor="img_two">Overlay Image (Small Image) *</Label>
 //                         <div className="
 //                           border-2 border-dashed 
 //                           rounded-lg p-4 
@@ -1545,10 +1545,10 @@
 //                             disabled={submitting}
 //                           />
                           
-//                           {previewImgTwo ? (
+//                           {previewimg_two ? (
 //                             <div className="text-center space-y-3">
 //                               <img
-//                                 src={previewImgTwo}
+//                                 src={previewimg_two}
 //                                 alt="Preview 2"
 //                                 className="mx-auto max-h-48 rounded-lg object-contain"
 //                               />
@@ -1618,43 +1618,43 @@
 //                       {/* Feature 1 */}
 //                       <div className="space-y-4 border p-4 rounded-lg bg-gray-50 dark:bg-gray-900">
 //                         <div>
-//                           <Label htmlFor="coliconOne">Icon 1</Label>
+//                           <Label htmlFor="col_icon_one">Icon 1</Label>
 //                           <Field
 //                             as={Input}
-//                             id="coliconOne"
-//                             name="coliconOne"
+//                             id="col_icon_one"
+//                             name="col_icon_one"
 //                             placeholder="Settings"
 //                           />
 //                         </div>
                         
 //                         <div>
-//                           <Label htmlFor="colHeadOne">Feature 1 Title *</Label>
+//                           <Label htmlFor="col_head_one">Feature 1 Title *</Label>
 //                           <Field
 //                             as={Input}
-//                             id="colHeadOne"
-//                             name="colHeadOne"
+//                             id="col_head_one"
+//                             name="col_head_one"
 //                             placeholder="Manage Tech Services"
-//                             className={errors.colHeadOne && touched.colHeadOne ? 'border-red-500' : ''}
+//                             className={errors.col_head_one && touched.col_head_one ? 'border-red-500' : ''}
 //                           />
 //                           <ErrorMessage
-//                             name="colHeadOne"
+//                             name="col_head_one"
 //                             component="div"
 //                             className="text-sm text-red-400 mt-1"
 //                           />
 //                         </div>
                         
 //                         <div>
-//                           <Label htmlFor="colparaOne">Feature 1 Description *</Label>
+//                           <Label htmlFor="col_paragraph_one">Feature 1 Description *</Label>
 //                           <Field
 //                             as="textarea"
-//                             id="colparaOne"
-//                             name="colparaOne"
+//                             id="col_paragraph_one"
+//                             name="col_paragraph_one"
 //                             rows={3}
-//                             className={`w-full p-3 border rounded-md ${errors.colparaOne && touched.colparaOne ? 'border-red-500' : ''}`}
+//                             className={`w-full p-3 border rounded-md ${errors.col_paragraph_one && touched.col_paragraph_one ? 'border-red-500' : ''}`}
 //                             placeholder="Description for feature 1"
 //                           />
 //                           <ErrorMessage
-//                             name="colparaOne"
+//                             name="col_paragraph_one"
 //                             component="div"
 //                             className="text-sm text-red-400 mt-1"
 //                           />
@@ -1664,43 +1664,43 @@
 //                       {/* Feature 2 */}
 //                       <div className="space-y-4 border p-4 rounded-lg bg-gray-50 dark:bg-gray-900">
 //                         <div>
-//                           <Label htmlFor="coliconTwo">Icon 2</Label>
+//                           <Label htmlFor="col_icon_two">Icon 2</Label>
 //                           <Field
 //                             as={Input}
-//                             id="coliconTwo"
-//                             name="coliconTwo"
+//                             id="col_icon_two"
+//                             name="col_icon_two"
 //                             placeholder="ShieldCheck"
 //                           />
 //                         </div>
                         
 //                         <div>
-//                           <Label htmlFor="colHeadTwo">Feature 2 Title *</Label>
+//                           <Label htmlFor="col_head_two">Feature 2 Title *</Label>
 //                           <Field
 //                             as={Input}
-//                             id="colHeadTwo"
-//                             name="colHeadTwo"
+//                             id="col_head_two"
+//                             name="col_head_two"
 //                             placeholder="IT Consulting Solution"
-//                             className={errors.colHeadTwo && touched.colHeadTwo ? 'border-red-500' : ''}
+//                             className={errors.col_head_two && touched.col_head_two ? 'border-red-500' : ''}
 //                           />
 //                           <ErrorMessage
-//                             name="colHeadTwo"
+//                             name="col_head_two"
 //                             component="div"
 //                             className="text-sm text-red-400 mt-1"
 //                           />
 //                         </div>
                         
 //                         <div>
-//                           <Label htmlFor="colparaTwo">Feature 2 Description *</Label>
+//                           <Label htmlFor="col_paragraph_two">Feature 2 Description *</Label>
 //                           <Field
 //                             as="textarea"
-//                             id="colparaTwo"
-//                             name="colparaTwo"
+//                             id="col_paragraph_two"
+//                             name="col_paragraph_two"
 //                             rows={3}
-//                             className={`w-full p-3 border rounded-md ${errors.colparaTwo && touched.colparaTwo ? 'border-red-500' : ''}`}
+//                             className={`w-full p-3 border rounded-md ${errors.col_paragraph_two && touched.col_paragraph_two ? 'border-red-500' : ''}`}
 //                             placeholder="Description for feature 2"
 //                           />
 //                           <ErrorMessage
-//                             name="colparaTwo"
+//                             name="col_paragraph_two"
 //                             component="div"
 //                             className="text-sm text-red-400 mt-1"
 //                           />
@@ -1788,26 +1788,26 @@ const STORAGE_TYPE = "bucket" // "bucket" ya "base64" change kar sakte hain
 const CHUNK_SIZE = 60000
 const DELIMITER = '|||CHUNK|||'
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024
-
+const TableName="about_section"
 // Types
 interface DatabaseAboutSection {
   id: string
   title: string
   heading: string
-  para: string
-  imgOne: string | null
-  imgTwo: string | null
+  paragraph: string
+  img_one: string | null
+  img_two: string | null
   
-  coliconOne: string
-  coliconTwo: string
-  colHeadOne: string
-  colHeadTwo: string
-  colparaOne: string
-  colparaTwo: string
-  colbtn: string
+  col_icon_one: string
+  col_icon_two: string
+  col_head_one: string
+  col_head_two: string
+  col_paragraph_one: string
+  col_paragraph_two: string
+  col_btn: string
   
-  highlightTitle: string
-  highlightDescription: string
+  highlight_title: string
+  highlight_description: string
   created_at?: string
 }
 
@@ -1815,22 +1815,22 @@ interface AboutSection {
   id: string
   title: string
   heading: string
-  para: string
-  imgOne: string | null
-  imgTwo: string | null
+  paragraph: string
+  img_one: string | null
+  img_two: string | null
   
-  coliconOne: string
-  coliconTwo: string
-  colHeadOne: string
-  colHeadTwo: string
-  colparaOne: string
-  colparaTwo: string
+  col_icon_one: string
+  col_icon_two: string
+  col_head_one: string
+  col_head_two: string
+  col_paragraph_one: string
+  col_paragraph_two: string
  
-  highlightTitle: string
-  highlightDescription: string
-  colbtn: string
-  imgOneUrl?: string | null
-  imgTwoUrl?: string | null
+  highlight_title: string
+  highlight_description: string
+  col_btn: string
+  img_oneUrl?: string | null
+  img_twoUrl?: string | null
 }
 
 export const aboutSectionData: AboutSectionData = {
@@ -1839,10 +1839,10 @@ export const aboutSectionData: AboutSectionData = {
   heading: "Provide the Best Easy Solution for Your IT Problem",
   description:
     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.",
-  highlightTitle: "Deliver Perfect Solution",
-  highlightDescription:
+  highlight_title: "Deliver Perfect Solution",
+  highlight_description:
     "There are many variations passages of Lorem Ipsum available, but the majority.",
-  colbtn: "More Details",
+  col_btn: "More Details",
   features: [
     {
       id: 1,
@@ -1862,17 +1862,17 @@ export const aboutSectionData: AboutSectionData = {
 interface AboutSectionFormValues {
   title: string
   heading: string
-  para: string
+  paragraph: string
   
-  coliconOne: string
-  coliconTwo: string
-  colHeadOne: string
-  colHeadTwo: string
-  colparaOne: string
-  colparaTwo: string
-  colbtn: string
-  highlightTitle: string
-  highlightDescription: string
+  col_icon_one: string
+  col_icon_two: string
+  col_head_one: string
+  col_head_two: string
+  col_paragraph_one: string
+  col_paragraph_two: string
+  col_btn: string
+  highlight_title: string
+  highlight_description: string
 }
 
 
@@ -1880,36 +1880,36 @@ interface AboutSectionFormValues {
 interface UpdateAboutSectionData {
   title: string;
   heading: string;
-  para: string;
-  coliconOne: string;
-  coliconTwo: string;
-  colHeadOne: string;
-  colHeadTwo: string;
-  colparaOne: string;
-  colparaTwo: string;
-  highlightTitle: string;
-  highlightDescription: string;
-  colbtn: string;
-  imgOne?: string | null;
-  imgTwo?: string | null;
+  paragraph: string;
+  col_icon_one: string;
+  col_icon_two: string;
+  col_head_one: string;
+  col_head_two: string;
+  col_paragraph_one: string;
+  col_paragraph_two: string;
+  highlight_title: string;
+  highlight_description: string;
+  col_btn: string;
+  img_one?: string | null;
+  img_two?: string | null;
 }
 
 
 interface AboutSectionFormData {
   title: string
   heading: string
-  para: string
-  coliconOne: string
-  coliconTwo: string
-  colHeadOne: string
-  colHeadTwo: string
-  colparaOne: string
-  colparaTwo: string
-  colbtn: string
-  highlightTitle: string
-  highlightDescription: string
-  imgOne: File | null
-  imgTwo: File | null
+  paragraph: string
+  col_icon_one: string
+  col_icon_two: string
+  col_head_one: string
+  col_head_two: string
+  col_paragraph_one: string
+  col_paragraph_two: string
+  col_btn: string
+  highlight_title: string
+  highlight_description: string
+  img_one: File | null
+  img_two: File | null
 }
 
 interface AboutSectionCardProps {
@@ -1925,8 +1925,8 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
   const [editId, setEditId] = useState<string | null>(null)
   const [open, setOpen] = useState(false)
   const [submitting, setSubmitting] = useState(false)
-  const [previewImgOne, setPreviewImgOne] = useState<string | null>(null)
-  const [previewImgTwo, setPreviewImgTwo] = useState<string | null>(null)
+  const [previewimg_one, setPreviewimg_one] = useState<string | null>(null)
+  const [previewimg_two, setPreviewimg_two] = useState<string | null>(null)
   
   const fileInputRefOne = useRef<HTMLInputElement>(null)
   const fileInputRefTwo = useRef<HTMLInputElement>(null)
@@ -1934,18 +1934,18 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
   const [formData, setFormData] = useState<AboutSectionFormData>({
     title: "",
     heading: "",
-    para: "",
-    coliconOne: "",
-    coliconTwo: "",
-    colHeadOne: "",
-    colHeadTwo: "",
-    colparaOne: "",
-    colparaTwo: "",
-    highlightTitle: "",
-    highlightDescription: "",
-    colbtn: "More Details",
-    imgOne: null,
-    imgTwo: null
+    paragraph: "",
+    col_icon_one: "",
+    col_icon_two: "",
+    col_head_one: "",
+    col_head_two: "",
+    col_paragraph_one: "",
+    col_paragraph_two: "",
+    highlight_title: "",
+    highlight_description: "",
+    col_btn: "More Details",
+    img_one: null,
+    img_two: null
   })
 
   // Validation Schema
@@ -1956,17 +1956,17 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
     heading: Yup.string()
       .min(2, 'Heading must be at least 2 characters')
       .required('Heading is required'),
-    para: Yup.string()
+    paragraph: Yup.string()
       .min(10, 'Description must be at least 10 characters')
       .required('Description is required'),
     
-    colHeadOne: Yup.string()
+    col_head_one: Yup.string()
       .min(2, 'Column 1 heading is required'),
-    colparaOne: Yup.string()
+    col_paragraph_one: Yup.string()
       .min(10, 'Column 1 description is required'),
-    colHeadTwo: Yup.string()
+    col_head_two: Yup.string()
       .min(2, 'Column 2 heading is required'),
-    colparaTwo: Yup.string()
+    col_paragraph_two: Yup.string()
       .min(10, 'Column 2 description is required'),
   })
 
@@ -1974,16 +1974,16 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
   const initialValues: AboutSectionFormValues = {
     title: formData.title || '',
     heading: formData.heading || '',
-    para: formData.para || '',
-    coliconOne: formData.coliconOne || '',
-    coliconTwo: formData.coliconTwo || '',
-    colHeadOne: formData.colHeadOne || '',
-    colHeadTwo: formData.colHeadTwo || '',
-    colparaOne: formData.colparaOne || '',
-    colparaTwo: formData.colparaTwo || '',
-    highlightTitle: formData.highlightTitle || '',
-    highlightDescription: formData.highlightDescription || '',
-    colbtn: formData.colbtn || 'More Details'
+    paragraph: formData.paragraph || '',
+    col_icon_one: formData.col_icon_one || '',
+    col_icon_two: formData.col_icon_two || '',
+    col_head_one: formData.col_head_one || '',
+    col_head_two: formData.col_head_two || '',
+    col_paragraph_one: formData.col_paragraph_one || '',
+    col_paragraph_two: formData.col_paragraph_two || '',
+    highlight_title: formData.highlight_title || '',
+    highlight_description: formData.highlight_description || '',
+    col_btn: formData.col_btn || 'More Details'
   }
 
   // Reset Form
@@ -1991,22 +1991,22 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
     setFormData({
       title: "",
       heading: "",
-      para: "",
-      coliconOne: "",
-      coliconTwo: "",
-      colHeadOne: "",
-      colHeadTwo: "",
-      colparaOne: "",
-      colparaTwo: "",
-      highlightTitle: "",
-      highlightDescription: "",
-      colbtn: "More Details",
-      imgOne: null,
-      imgTwo: null
+      paragraph: "",
+      col_icon_one: "",
+      col_icon_two: "",
+      col_head_one: "",
+      col_head_two: "",
+      col_paragraph_one: "",
+      col_paragraph_two: "",
+      highlight_title: "",
+      highlight_description: "",
+      col_btn: "More Details",
+      img_one: null,
+      img_two: null
     })
     setEditId(null)
-    setPreviewImgOne(null)
-    setPreviewImgTwo(null)
+    setPreviewimg_one(null)
+    setPreviewimg_two(null)
     setIsEdit(false)
     setSubmitting(false)
     
@@ -2019,12 +2019,12 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
     try {
       setLoading(true)
       const { data, error } = await supabase
-        .from("aboutSection")
+        .from(`${TableName}`)
         .select("*")
         .order("created_at", { ascending: true })
 
       if (error) {
-        console.error("Error fetching sections:", error)
+        console.error("Error fetching secticonvertToUserons:", error)
         return
       }
 
@@ -2158,20 +2158,20 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
         id: dbSection.id,
         title: dbSection.title || "",
         heading: dbSection.heading || "",
-        para: dbSection.para || "",
-        imgOne: null,
-        imgTwo: null,
-        coliconOne: dbSection.coliconOne || "",
-        coliconTwo: dbSection.coliconTwo || "",
-        colHeadOne: dbSection.colHeadOne || "",
-        colHeadTwo: dbSection.colHeadTwo || "",
-        colparaOne: dbSection.colparaOne || "",
-        colparaTwo: dbSection.colparaTwo || "",
-        highlightTitle: dbSection.highlightTitle || "",
-        highlightDescription: dbSection.highlightDescription || "",
-        colbtn: dbSection.colbtn || "More Details",
-        imgOneUrl: dbSection.imgOne,
-        imgTwoUrl: dbSection.imgTwo
+        paragraph: dbSection.paragraph || "",
+        img_one: null,
+        img_two: null,
+        col_icon_one: dbSection.col_icon_one || "",
+        col_icon_two: dbSection.col_icon_two || "",
+        col_head_one: dbSection.col_head_one || "",
+        col_head_two: dbSection.col_head_two || "",
+        col_paragraph_one: dbSection.col_paragraph_one || "",
+        col_paragraph_two: dbSection.col_paragraph_two || "",
+        highlight_title: dbSection.highlight_title || "",
+        highlight_description: dbSection.highlight_description || "",
+        col_btn: dbSection.col_btn || "More Details",
+        img_oneUrl: dbSection.img_one,
+        img_twoUrl: dbSection.img_two
       }
     } else {
       // For Base64 storage
@@ -2179,18 +2179,18 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
         id: dbSection.id,
         title: dbSection.title || "",
         heading: dbSection.heading || "",
-        para: dbSection.para || "",
-        imgOne: reconstructFromChunks(dbSection.imgOne),
-        imgTwo: reconstructFromChunks(dbSection.imgTwo),
-        coliconOne: dbSection.coliconOne || "",
-        coliconTwo: dbSection.coliconTwo || "",
-        colHeadOne: dbSection.colHeadOne || "",
-        colHeadTwo: dbSection.colHeadTwo || "",
-        colparaOne: dbSection.colparaOne || "",
-        colparaTwo: dbSection.colparaTwo || "",
-        highlightTitle: dbSection.highlightTitle || "",
-        highlightDescription: dbSection.highlightDescription || "",
-        colbtn: dbSection.colbtn || "More Details"
+        paragraph: dbSection.paragraph || "",
+        img_one: reconstructFromChunks(dbSection.img_one),
+        img_two: reconstructFromChunks(dbSection.img_two),
+        col_icon_one: dbSection.col_icon_one || "",
+        col_icon_two: dbSection.col_icon_two || "",
+        col_head_one: dbSection.col_head_one || "",
+        col_head_two: dbSection.col_head_two || "",
+        col_paragraph_one: dbSection.col_paragraph_one || "",
+        col_paragraph_two: dbSection.col_paragraph_two || "",
+        highlight_title: dbSection.highlight_title || "",
+        highlight_description: dbSection.highlight_description || "",
+        col_btn: dbSection.col_btn || "More Details"
       }
     }
   }
@@ -2202,27 +2202,27 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
     setFormData({
       title: section.title,
       heading: section.heading,
-      para: section.para,
-      coliconOne: section.coliconOne,
-      coliconTwo: section.coliconTwo,
-      colHeadOne: section.colHeadOne,
-      colHeadTwo: section.colHeadTwo,
-      colparaOne: section.colparaOne,
-      colparaTwo: section.colparaTwo,
-      colbtn: section.colbtn,
-      highlightTitle: section.highlightTitle,
-      highlightDescription: section.highlightDescription,
-      imgOne: null,
-      imgTwo: null
+      paragraph: section.paragraph,
+      col_icon_one: section.col_icon_one,
+      col_icon_two: section.col_icon_two,
+      col_head_one: section.col_head_one,
+      col_head_two: section.col_head_two,
+      col_paragraph_one: section.col_paragraph_one,
+      col_paragraph_two: section.col_paragraph_two,
+      col_btn: section.col_btn,
+      highlight_title: section.highlight_title,
+      highlight_description: section.highlight_description,
+      img_one: null,
+      img_two: null
     })
     
     // Set preview images based on storage type
     if (STORAGE_TYPE === "bucket") {
-      setPreviewImgOne(section.imgOneUrl || null)
-      setPreviewImgTwo(section.imgTwoUrl || null)
+      setPreviewimg_one(section.img_oneUrl || null)
+      setPreviewimg_two(section.img_twoUrl || null)
     } else {
-      setPreviewImgOne(section.imgOne)
-      setPreviewImgTwo(section.imgTwo)
+      setPreviewimg_one(section.img_one)
+      setPreviewimg_two(section.img_two)
     }
     
     setOpen(true)
@@ -2302,13 +2302,13 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
       }
 
       if (imageNumber === 1) {
-        setFormData(prev => ({ ...prev, imgOne: file }))
+        setFormData(prev => ({ ...prev, img_one: file }))
         const previewUrl = URL.createObjectURL(file)
-        setPreviewImgOne(previewUrl)
+        setPreviewimg_one(previewUrl)
       } else {
-        setFormData(prev => ({ ...prev, imgTwo: file }))
+        setFormData(prev => ({ ...prev, img_two: file }))
         const previewUrl = URL.createObjectURL(file)
-        setPreviewImgTwo(previewUrl)
+        setPreviewimg_two(previewUrl)
       }
     }
   }
@@ -2316,12 +2316,12 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
   // Handle Remove Image
   const handleRemoveImage = (imageNumber: 1 | 2) => {
     if (imageNumber === 1) {
-      setFormData(prev => ({ ...prev, imgOne: null }))
-      setPreviewImgOne(null)
+      setFormData(prev => ({ ...prev, img_one: null }))
+      setPreviewimg_one(null)
       if (fileInputRefOne.current) fileInputRefOne.current.value = ""
     } else {
-      setFormData(prev => ({ ...prev, imgTwo: null }))
-      setPreviewImgTwo(null)
+      setFormData(prev => ({ ...prev, img_two: null }))
+      setPreviewimg_two(null)
       if (fileInputRefTwo.current) fileInputRefTwo.current.value = ""
     }
   }
@@ -2329,10 +2329,10 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
   // Cleanup preview URLs
   useEffect(() => {
     return () => {
-      if (previewImgOne) URL.revokeObjectURL(previewImgOne)
-      if (previewImgTwo) URL.revokeObjectURL(previewImgTwo)
+      if (previewimg_one) URL.revokeObjectURL(previewimg_one)
+      if (previewimg_two) URL.revokeObjectURL(previewimg_two)
     }
-  }, [previewImgOne, previewImgTwo])
+  }, [previewimg_one, previewimg_two])
 
   // Handle Submit (Create) - Updated for both storage types
   const handleSubmit = async (
@@ -2345,57 +2345,57 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
       console.log("Submitting form with values:", values);
       setSubmitting(true)
 
-      let imgOneData: string | null = null
-      let imgTwoData: string | null = null
+      let img_oneData: string | null = null
+      let img_twoData: string | null = null
 
       // Process images based on storage type
-      if (formData.imgOne) {
+      if (formData.img_one) {
         if (STORAGE_TYPE === "bucket") {
           // Will upload after section creation to get ID
         } else {
           // Convert to Base64 and chunk
           try {
-            const base64Image = await convertImageToBase64(formData.imgOne)
-            imgOneData = splitIntoChunks(base64Image)
+            const base64Image = await convertImageToBase64(formData.img_one)
+            img_oneData = splitIntoChunks(base64Image)
           } catch (convertError) {
-            console.error("Base64 conversion failed for imgOne:", convertError)
+            console.error("Base64 conversion failed for img_one:", convertError)
           }
         }
       }
 
-      if (formData.imgTwo) {
+      if (formData.img_two) {
         if (STORAGE_TYPE === "bucket") {
           // Will upload after section creation to get ID
         } else {
           // Convert to Base64 and chunk
           try {
-            const base64Image = await convertImageToBase64(formData.imgTwo)
-            imgTwoData = splitIntoChunks(base64Image)
+            const base64Image = await convertImageToBase64(formData.img_two)
+            img_twoData = splitIntoChunks(base64Image)
           } catch (convertError) {
-            console.error("Base64 conversion failed for imgTwo:", convertError)
+            console.error("Base64 conversion failed for img_two:", convertError)
           }
         }
       }
 
       // First create section
       const { data: sectionData, error: sectionError } = await supabase
-        .from("aboutSection")
+        .from(`${TableName}`)
         .insert([
           {
             title: values.title,
             heading: values.heading,
-            para: values.para,
-            imgOne: STORAGE_TYPE === "bucket" ? null : imgOneData,
-            imgTwo: STORAGE_TYPE === "bucket" ? null : imgTwoData,
-            coliconOne: values.coliconOne,
-            coliconTwo: values.coliconTwo,
-            colHeadOne: values.colHeadOne,
-            colHeadTwo: values.colHeadTwo,
-            colparaOne: values.colparaOne,
-            colparaTwo: values.colparaTwo,
-            colbtn: values.colbtn,
-            highlightTitle: values.highlightTitle,
-            highlightDescription: values.highlightDescription,
+            paragraph: values.paragraph,
+            img_one: STORAGE_TYPE === "bucket" ? null : img_oneData,
+            img_two: STORAGE_TYPE === "bucket" ? null : img_twoData,
+            col_icon_one: values.col_icon_one,
+            col_icon_two: values.col_icon_two,
+            col_head_one: values.col_head_one,
+            col_head_two: values.col_head_two,
+            col_paragraph_one: values.col_paragraph_one,
+            col_paragraph_two: values.col_paragraph_two,
+            col_btn: values.col_btn,
+            highlight_title: values.highlight_title,
+            highlight_description: values.highlight_description,
           }
         ])
         .select()
@@ -2409,32 +2409,32 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
 
       // For bucket storage, upload images after getting section ID
       if (STORAGE_TYPE === "bucket") {
-        let imgOneUrl: string | null = null
-        let imgTwoUrl: string | null = null
+        let img_oneUrl: string | null = null
+        let img_twoUrl: string | null = null
 
-        if (formData.imgOne) {
+        if (formData.img_one) {
           try {
-            imgOneUrl = await uploadToBucket(formData.imgOne, sectionData.id, 1)
+            img_oneUrl = await uploadToBucket(formData.img_one, sectionData.id, 1)
           } catch (error) {
             console.error("Failed to upload image 1:", error)
           }
         }
 
-        if (formData.imgTwo) {
+        if (formData.img_two) {
           try {
-            imgTwoUrl = await uploadToBucket(formData.imgTwo, sectionData.id, 2)
+            img_twoUrl = await uploadToBucket(formData.img_two, sectionData.id, 2)
           } catch (error) {
             console.error("Failed to upload image 2:", error)
           }
         }
 
         // Update section with image URLs
-        if (imgOneUrl || imgTwoUrl) {
+        if (img_oneUrl || img_twoUrl) {
           const { error: updateError } = await supabase
-            .from("aboutSection")
+            .from(`${TableName}`)
             .update({ 
-              imgOne: imgOneUrl,
-              imgTwo: imgTwoUrl
+              img_one: img_oneUrl,
+              img_two: img_twoUrl
             })
             .eq("id", sectionData.id)
 
@@ -2444,8 +2444,8 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
         }
 
         // Update image data for response
-        imgOneData = imgOneUrl
-        imgTwoData = imgTwoUrl
+        img_oneData = img_oneUrl
+        img_twoData = img_twoUrl
       }
 
       // Create new section object
@@ -2453,20 +2453,20 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
         id: sectionData.id,
         title: sectionData.title || "",
         heading: sectionData.heading || "",
-        para: sectionData.para || "",
-        imgOne: STORAGE_TYPE === "bucket" ? null : reconstructFromChunks(imgOneData),
-        imgTwo: STORAGE_TYPE === "bucket" ? null : reconstructFromChunks(imgTwoData),
-        coliconOne: sectionData.coliconOne || "",
-        coliconTwo: sectionData.coliconTwo || "",
-        colHeadOne: sectionData.colHeadOne || "",
-        colHeadTwo: sectionData.colHeadTwo || "",
-        colparaOne: sectionData.colparaOne || "",
-        colparaTwo: sectionData.colparaTwo || "",
-        highlightTitle: sectionData.highlightTitle || "",
-        highlightDescription: sectionData.highlightDescription || "",
-        colbtn: sectionData.colbtn || "More Details",
-        imgOneUrl: STORAGE_TYPE === "bucket" ? imgOneData : null,
-        imgTwoUrl: STORAGE_TYPE === "bucket" ? imgTwoData : null
+        paragraph: sectionData.paragraph || "",
+        img_one: STORAGE_TYPE === "bucket" ? null : reconstructFromChunks(img_oneData),
+        img_two: STORAGE_TYPE === "bucket" ? null : reconstructFromChunks(img_twoData),
+        col_icon_one: sectionData.col_icon_one || "",
+        col_icon_two: sectionData.col_icon_two || "",
+        col_head_one: sectionData.col_head_one || "",
+        col_head_two: sectionData.col_head_two || "",
+        col_paragraph_one: sectionData.col_paragraph_one || "",
+        col_paragraph_two: sectionData.col_paragraph_two || "",
+        highlight_title: sectionData.highlight_title || "",
+        highlight_description: sectionData.highlight_description || "",
+        col_btn: sectionData.col_btn || "More Details",
+        img_oneUrl: STORAGE_TYPE === "bucket" ? img_oneData : null,
+        img_twoUrl: STORAGE_TYPE === "bucket" ? img_twoData : null
       }
 
       // Update state
@@ -2502,94 +2502,94 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
 
       // Get existing section data
       const existingSection = sections.find(s => s.id === editId)
-      let imgOneData: string | null = null
-      let imgTwoData: string | null = null
+      let img_oneData: string | null = null
+      let img_twoData: string | null = null
       
       if (existingSection) {
-        imgOneData = STORAGE_TYPE === "bucket" 
-          ? existingSection.imgOneUrl 
-          : existingSection.imgOne
-        imgTwoData = STORAGE_TYPE === "bucket" 
-          ? existingSection.imgTwoUrl 
-          : existingSection.imgTwo
+        img_oneData = STORAGE_TYPE === "bucket" 
+          ? existingSection.img_oneUrl 
+          : existingSection.img_one
+        img_twoData = STORAGE_TYPE === "bucket" 
+          ? existingSection.img_twoUrl 
+          : existingSection.img_two
       }
 
       // Handle image updates
-      if (formData.imgOne) {
+      if (formData.img_one) {
         if (STORAGE_TYPE === "bucket") {
           // Delete old image if exists
-          if (existingSection?.imgOneUrl) {
-            await deleteFromBucket(existingSection.imgOneUrl)
+          if (existingSection?.img_oneUrl) {
+            await deleteFromBucket(existingSection.img_oneUrl)
           }
           // Upload new image
-          imgOneData = await uploadToBucket(formData.imgOne, editId, 1)
+          img_oneData = await uploadToBucket(formData.img_one, editId, 1)
         } else {
           // Convert to Base64 and chunk
           try {
-            const base64Image = await convertImageToBase64(formData.imgOne)
-            imgOneData = splitIntoChunks(base64Image)
+            const base64Image = await convertImageToBase64(formData.img_one)
+            img_oneData = splitIntoChunks(base64Image)
           } catch (convertError) {
             console.error("Base64 conversion failed:", convertError)
             // Keep existing image data
-            imgOneData = existingSection?.imgOne || null
+            img_oneData = existingSection?.img_one || null
           }
         }
       } else {
         // Keep existing image data
-        imgOneData = existingSection?.imgOne || existingSection?.imgOneUrl || null
+        img_oneData = existingSection?.img_one || existingSection?.img_oneUrl || null
       }
 
-      if (formData.imgTwo) {
+      if (formData.img_two) {
         if (STORAGE_TYPE === "bucket") {
           // Delete old image if exists
-          if (existingSection?.imgTwoUrl) {
-            await deleteFromBucket(existingSection.imgTwoUrl)
+          if (existingSection?.img_twoUrl) {
+            await deleteFromBucket(existingSection.img_twoUrl)
           }
           // Upload new image
-          imgTwoData = await uploadToBucket(formData.imgTwo, editId, 2)
+          img_twoData = await uploadToBucket(formData.img_two, editId, 2)
         } else {
           // Convert to Base64 and chunk
           try {
-            const base64Image = await convertImageToBase64(formData.imgTwo)
-            imgTwoData = splitIntoChunks(base64Image)
+            const base64Image = await convertImageToBase64(formData.img_two)
+            img_twoData = splitIntoChunks(base64Image)
           } catch (convertError) {
             console.error("Base64 conversion failed:", convertError)
             // Keep existing image data
-            imgTwoData = existingSection?.imgTwo || null
+            img_twoData = existingSection?.img_two || null
           }
         }
       } else {
         // Keep existing image data
-        imgTwoData = existingSection?.imgTwo || existingSection?.imgTwoUrl || null
+        img_twoData = existingSection?.img_two || existingSection?.img_twoUrl || null
       }
 
       // Update section in database
       const updateData: UpdateAboutSectionData = {
         title: values.title,
         heading: values.heading,
-        para: values.para,
-        coliconOne: values.coliconOne,
-        coliconTwo: values.coliconTwo,
-        colHeadOne: values.colHeadOne,
-        colHeadTwo: values.colHeadTwo,
-        colparaOne: values.colparaOne,
-        colparaTwo: values.colparaTwo,
-        highlightTitle: values.highlightTitle,
-        highlightDescription: values.highlightDescription,
-        colbtn: values.colbtn
+        paragraph: values.paragraph,
+        col_icon_one: values.col_icon_one,
+        col_icon_two: values.col_icon_two,
+        col_head_one: values.col_head_one,
+        col_head_two: values.col_head_two,
+        col_paragraph_one: values.col_paragraph_one,
+        col_paragraph_two: values.col_paragraph_two,
+        highlight_title: values.highlight_title,
+        highlight_description: values.highlight_description,
+        col_btn: values.col_btn
       }
 
       // Add image data based on storage type
       if (STORAGE_TYPE === "bucket") {
-        updateData.imgOne = imgOneData
-        updateData.imgTwo = imgTwoData
+        updateData.img_one = img_oneData
+        updateData.img_two = img_twoData
       } else {
-        updateData.imgOne = imgOneData
-        updateData.imgTwo = imgTwoData
+        updateData.img_one = img_oneData
+        updateData.img_two = img_twoData
       }
 
       const { data, error } = await supabase
-        .from("aboutSection")
+        .from(`${TableName}`)
         .update(updateData)
         .eq("id", editId)
         .select()
@@ -2627,17 +2627,17 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
       
       if (STORAGE_TYPE === "bucket") {
         // Delete images from bucket
-        if (sectionToDelete?.imgOneUrl) {
-          await deleteFromBucket(sectionToDelete.imgOneUrl)
+        if (sectionToDelete?.img_oneUrl) {
+          await deleteFromBucket(sectionToDelete.img_oneUrl)
         }
-        if (sectionToDelete?.imgTwoUrl) {
-          await deleteFromBucket(sectionToDelete.imgTwoUrl)
+        if (sectionToDelete?.img_twoUrl) {
+          await deleteFromBucket(sectionToDelete.img_twoUrl)
         }
       }
       // For Base64 storage, no need to delete from bucket
 
       // Delete from database
-      const { error } = await supabase.from("aboutSection").delete().eq("id", id)
+      const { error } = await supabase.from(`${TableName}`).delete().eq("id", id)
 
       if (error) {
         console.error("Error deleting section:", error)
@@ -2671,9 +2671,9 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
   // Get image URL helper
   const getImageUrl = (section: AboutSection, imageNumber: 1 | 2): string | null => {
   if (imageNumber === 1) {
-    return STORAGE_TYPE === "bucket" ? section.imgOneUrl : section.imgOne;
+    return STORAGE_TYPE === "bucket" ? section.img_oneUrl : section.img_one;
   } else {
-    return STORAGE_TYPE === "bucket" ? section.imgTwoUrl : section.imgTwo;
+    return STORAGE_TYPE === "bucket" ? section.img_twoUrl : section.img_two;
   }
 };
 
@@ -2768,19 +2768,19 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
 
               <p className="text-black dark:text-slate-50 mb-8">
                     
-                     {e.para ? e.para:aboutSectionData.description}
+                     {e.paragraph ? e.paragraph:aboutSectionData.description}
               </p>
 
               {/* Highlight Card */}
               <div className="bg-neutral-900 dark:bg-slate-900 border border-neutral-800 rounded-xl p-6 mb-8">
                 <h4 className="font-semibold mb-2">
-                      {/* {aboutSectionData.highlightTitle} */}
-                     {e.highlightTitle ? e.highlightTitle:aboutSectionData.highlightTitle}
+                      {/* {aboutSectionData.highlight_title} */}
+                     {e.highlight_title ? e.highlight_title:aboutSectionData.highlight_title}
                       
                 </h4>
                 <p className="text-sm text-slate-50">
-                  {/* {aboutSectionData.highlightDescription} */}
-                     {e.highlightDescription ? e.highlightDescription:aboutSectionData.highlightDescription}
+                  {/* {aboutSectionData.highlight_description} */}
+                     {e.highlight_description ? e.highlight_description:aboutSectionData.highlight_description}
 
                 </p>
               </div>
@@ -2793,10 +2793,10 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
                     {/* Icon */}
                     <div className="mt-4 flex h-10 w-10 p-3 rounded-full items-center justify-center items-center justify-center rounded-lg bg-green-100 text-[var(--color-theme)]">
                       {/* {item.icon} */}
-                   {/* <i className={`${e.coliconOne ? e.coliconOne:''} text-lg` } />   */}
+                   {/* <i className={`${e.col_icon_one ? e.col_icon_one:''} text-lg` } />   */}
                          <div 
         dangerouslySetInnerHTML={{
-          __html: `<i class="fa-regular ${e.coliconOne || ''}"></i>`
+          __html: `<i class="fa-regular ${e.col_icon_one || ''}"></i>`
         }}
         className="flex items-center justify-center w-full h-full"
       />
@@ -2810,12 +2810,12 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
                     <div>
                       <h5 className="font-medium leading-tight text-black dark:text-slate-50">
                         {/* {item.title} */}
-                     {e.colHeadOne ? e.colHeadOne:''}
+                     {e.col_head_one ? e.col_head_one:''}
 
                       </h5>
                       <p className="text-sm  mt-1 text-black dark:text-slate-50">
                         {/* {item.description} */}
-                     {e.colparaOne ? e.colparaOne:''}
+                     {e.col_paragraph_one ? e.col_paragraph_one:''}
 
                       </p>
                     </div>
@@ -2826,10 +2826,10 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
                     {/* Icon */}
                     <div className="mt-4 flex h-10 w-10 p-3 rounded-full items-center justify-center items-center justify-center rounded-lg bg-green-100 text-[var(--color-theme)]">
                       {/* {item.icon} */}
-                     {/* {e.coliconTwo ? e.coliconTwo:''} */}
+                     {/* {e.col_icon_two ? e.col_icon_two:''} */}
                                       <div 
         dangerouslySetInnerHTML={{
-          __html: `<i class="${e.coliconTwo || 'fas fa-globe'}"></i>`
+          __html: `<i class="${e.col_icon_two || 'fas fa-globe'}"></i>`
         }}
         className="flex items-center justify-center w-full h-full"
       />
@@ -2840,12 +2840,12 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
                     <div>
                       <h5 className="font-medium leading-tight text-black dark:text-slate-50">
                         {/* {item.title} */}
-                     {e.colHeadTwo ? e.colHeadTwo:''}
+                     {e.col_head_two ? e.col_head_two:''}
 
                       </h5>
                       <p className="text-sm  mt-1 text-black dark:text-slate-50">
                         {/* {item.description} */}
-                     {e.colparaTwo ? e.colparaTwo:''}
+                     {e.col_paragraph_two ? e.col_paragraph_two:''}
 
                       </p>
                     </div>
@@ -2853,7 +2853,7 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
               </div>
 
               <button className="bg-[var(--color-theme)] hover:bg-[var(--color-theme-hover)] transition px-6 py-3 rounded-lg font-medium">
-                {e.colbtn}
+                {e.col_btn}
               </button>
             </div>
           </div>
@@ -2933,17 +2933,17 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
                         </div>
 
                         <div>
-                          <Label htmlFor="para">Description *</Label>
+                          <Label htmlFor="paragraph">Description *</Label>
                           <Field
                             as="textarea"
-                            id="para"
-                            name="para"
+                            id="paragraph"
+                            name="paragraph"
                             rows={4}
-                            className={`w-full p-3 border rounded-md ${errors.para && touched.para ? 'border-red-500' : ''}`}
+                            className={`w-full p-3 border rounded-md ${errors.paragraph && touched.paragraph ? 'border-red-500' : ''}`}
                             placeholder="Main description here..."
                           />
                           <ErrorMessage
-                            name="para"
+                            name="paragraph"
                             component="div"
                             className="text-sm text-red-400 mt-1"
                           />
@@ -2953,21 +2953,21 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
                       {/* Right Column */}
                       <div className="space-y-4">
                         <div>
-                          <Label htmlFor="highlightTitle">Highlight Title</Label>
+                          <Label htmlFor="highlight_title">Highlight Title</Label>
                           <Field
                             as={Input}
-                            id="highlightTitle"
-                            name="highlightTitle"
+                            id="highlight_title"
+                            name="highlight_title"
                             placeholder="Deliver Perfect Solution"
                           />
                         </div>
 
                         <div>
-                          <Label htmlFor="highlightDescription">Highlight Description</Label>
+                          <Label htmlFor="highlight_description">Highlight Description</Label>
                           <Field
                             as="textarea"
-                            id="highlightDescription"
-                            name="highlightDescription"
+                            id="highlight_description"
+                            name="highlight_description"
                             rows={4}
                             className="w-full p-3 border rounded-md"
                             placeholder="Highlight description here..."
@@ -2975,11 +2975,11 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
                         </div>
 
                         <div>
-                          <Label htmlFor="colbtn">Button Text</Label>
+                          <Label htmlFor="col_btn">Button Text</Label>
                           <Field
                             as={Input}
-                            id="colbtn"
-                            name="colbtn"
+                            id="col_btn"
+                            name="col_btn"
                             placeholder="More Details"
                           />
                         </div>
@@ -2993,7 +2993,7 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
                         
                         {/* Image 1 */}
                         <div className="space-y-3">
-                          <Label htmlFor="imgOne">Main Image (Big Image)</Label>
+                          <Label htmlFor="img_one">Main Image (Big Image)</Label>
                           <div className="
                             border-2 border-dashed 
                             rounded-lg p-4 
@@ -3009,11 +3009,11 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
                               disabled={submitting}
                             />
                             
-                            {previewImgOne ? (
+                            {previewimg_one ? (
                               <div className="text-center space-y-3">
                                  {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
-                                  src={previewImgOne}
+                                  src={previewimg_one}
                                   alt="Preview 1"
                                   className="mx-auto max-h-48 rounded-lg object-contain"
                                 />
@@ -3071,7 +3071,7 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
                               </div>
                             )}
                             
-                            {isEdit && !previewImgOne && (
+                            {isEdit && !previewimg_one && (
                               <div className="mt-2 text-center text-xs text-gray-500">
                                 Leave empty to keep existing image
                               </div>
@@ -3087,7 +3087,7 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
 
                         {/* Image 2 */}
                         <div className="space-y-3">
-                          <Label htmlFor="imgTwo">Overlay Image (Small Image)</Label>
+                          <Label htmlFor="img_two">Overlay Image (Small Image)</Label>
                           <div className="
                             border-2 border-dashed 
                             rounded-lg p-4 
@@ -3103,11 +3103,11 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
                               disabled={submitting}
                             />
                             
-                            {previewImgTwo ? (
+                            {previewimg_two ? (
                               <div className="text-center space-y-3">
                                  {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
-                                  src={previewImgTwo}
+                                  src={previewimg_two}
                                   alt="Preview 2"
                                   className="mx-auto max-h-48 rounded-lg object-contain"
                                 />
@@ -3165,7 +3165,7 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
                               </div>
                             )}
                             
-                            {isEdit && !previewImgTwo && (
+                            {isEdit && !previewimg_two && (
                               <div className="mt-2 text-center text-xs text-gray-500">
                                 Leave empty to keep existing image
                               </div>
@@ -3189,43 +3189,43 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
                         {/* Feature 1 */}
                         <div className="space-y-4 border p-4 rounded-lg bg-gray-50 dark:bg-gray-900">
                           <div>
-                            <Label htmlFor="coliconOne">Icon 1</Label>
+                            <Label htmlFor="col_icon_one">Icon 1</Label>
                             <Field
                               as={Input}
-                              id="coliconOne"
-                              name="coliconOne"
+                              id="col_icon_one"
+                              name="col_icon_one"
                               placeholder="Settings"
                             />
                           </div>
                           
                           <div>
-                            <Label htmlFor="colHeadOne">Feature 1 Title *</Label>
+                            <Label htmlFor="col_head_one">Feature 1 Title *</Label>
                             <Field
                               as={Input}
-                              id="colHeadOne"
-                              name="colHeadOne"
+                              id="col_head_one"
+                              name="col_head_one"
                               placeholder="Manage Tech Services"
-                              className={errors.colHeadOne && touched.colHeadOne ? 'border-red-500' : ''}
+                              className={errors.col_head_one && touched.col_head_one ? 'border-red-500' : ''}
                             />
                             <ErrorMessage
-                              name="colHeadOne"
+                              name="col_head_one"
                               component="div"
                               className="text-sm text-red-400 mt-1"
                             />
                           </div>
                           
                           <div>
-                            <Label htmlFor="colparaOne">Feature 1 Description *</Label>
+                            <Label htmlFor="col_paragraph_one">Feature 1 Description *</Label>
                             <Field
                               as="textarea"
-                              id="colparaOne"
-                              name="colparaOne"
+                              id="col_paragraph_one"
+                              name="col_paragraph_one"
                               rows={3}
-                              className={`w-full p-3 border rounded-md ${errors.colparaOne && touched.colparaOne ? 'border-red-500' : ''}`}
+                              className={`w-full p-3 border rounded-md ${errors.col_paragraph_one && touched.col_paragraph_one ? 'border-red-500' : ''}`}
                               placeholder="Description for feature 1"
                             />
                             <ErrorMessage
-                              name="colparaOne"
+                              name="col_paragraph_one"
                               component="div"
                               className="text-sm text-red-400 mt-1"
                             />
@@ -3235,43 +3235,43 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
                         {/* Feature 2 */}
                         <div className="space-y-4 border p-4 rounded-lg bg-gray-50 dark:bg-gray-900">
                           <div>
-                            <Label htmlFor="coliconTwo">Icon 2</Label>
+                            <Label htmlFor="col_icon_two">Icon 2</Label>
                             <Field
                               as={Input}
-                              id="coliconTwo"
-                              name="coliconTwo"
+                              id="col_icon_two"
+                              name="col_icon_two"
                               placeholder="ShieldCheck"
                             />
                           </div>
                           
                           <div>
-                            <Label htmlFor="colHeadTwo">Feature 2 Title *</Label>
+                            <Label htmlFor="col_head_two">Feature 2 Title *</Label>
                             <Field
                               as={Input}
-                              id="colHeadTwo"
-                              name="colHeadTwo"
+                              id="col_head_two"
+                              name="col_head_two"
                               placeholder="IT Consulting Solution"
-                              className={errors.colHeadTwo && touched.colHeadTwo ? 'border-red-500' : ''}
+                              className={errors.col_head_two && touched.col_head_two ? 'border-red-500' : ''}
                             />
                             <ErrorMessage
-                              name="colHeadTwo"
+                              name="col_head_two"
                               component="div"
                               className="text-sm text-red-400 mt-1"
                             />
                           </div>
                           
                           <div>
-                            <Label htmlFor="colparaTwo">Feature 2 Description *</Label>
+                            <Label htmlFor="col_paragraph_two">Feature 2 Description *</Label>
                             <Field
                               as="textarea"
-                              id="colparaTwo"
-                              name="colparaTwo"
+                              id="col_paragraph_two"
+                              name="col_paragraph_two"
                               rows={3}
-                              className={`w-full p-3 border rounded-md ${errors.colparaTwo && touched.colparaTwo ? 'border-red-500' : ''}`}
+                              className={`w-full p-3 border rounded-md ${errors.col_paragraph_two && touched.col_paragraph_two ? 'border-red-500' : ''}`}
                               placeholder="Description for feature 2"
                             />
                             <ErrorMessage
-                              name="colparaTwo"
+                              name="col_paragraph_two"
                               component="div"
                               className="text-sm text-red-400 mt-1"
                             />

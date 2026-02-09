@@ -33,7 +33,7 @@ interface Feature {
   icon: string
 }
 
-interface FeatureList {
+interface feature_list {
   title: string
   icon: string
 }
@@ -45,37 +45,37 @@ interface DatabaseFeature {
   icon: string
 }
 
-interface DatabaseOurBenefits {
+interface Databaseour_benefits {
   id: string
   title: string
   heading: string
-  subHeading: string  // New field
-  btnText: string     // New field
+  sub_heading: string  // New field
+  btn_text: string     // New field
   image: string | null
   features: DatabaseFeature[] | null
-  featurelist: FeatureList[] | null
+  feature_list: feature_list[] | null
   created_at?: string
 }
 
-interface OurBenefits {
+interface our_benefits {
   id: string
   title: string
   heading: string
-  subHeading: string  // New field
-  btnText: string     // New field
+  sub_heading: string  // New field
+  btn_text: string     // New field
   image: string | null 
   features: Feature[]
-  featurelist: FeatureList[]
+  feature_list: feature_list[]
   mainImageUrl: string | null
 }
 
-interface OurBenefitsFormValues {
+interface our_benefitsFormValues {
   title: string
   heading: string
-  subHeading: string  // New field
-  btnText: string     // New field
+  sub_heading: string  // New field
+  btn_text: string     // New field
   features: Feature[]
-  featurelist: FeatureList[]
+  feature_list: feature_list[]
 }
 
 interface ImagePreview {
@@ -98,7 +98,7 @@ interface FeatureError {
   icon?: string
 }
 
-interface FeatureListError {
+interface feature_listError {
   title?: string
   icon?: string
 }
@@ -106,15 +106,15 @@ interface FeatureListError {
 interface FormikErrorType {
   title?: string
   heading?: string
-  subHeading?: string  // New field
-  btnText?: string     // New field
+  sub_heading?: string  // New field
+  btn_text?: string     // New field
   features?: string | FeatureError[]
-  featurelist?: string | FeatureListError[]
+  feature_list?: string | feature_listError[]
 }
 
-const OurBenefitsSection: FC = () => {
+const OurbenefitsSection: FC = () => {
   // State
-  const [benefits, setBenefits] = useState<OurBenefits[]>([])
+  const [benefits, setBenefits] = useState<our_benefits[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [editId, setEditId] = useState<string | null>(null)
@@ -123,22 +123,22 @@ const OurBenefitsSection: FC = () => {
   const [mainImagePreview, setMainImagePreview] = useState<ImagePreview | null>(null)
   const [featureImagePreviews, setFeatureImagePreviews] = useState<FeatureImagePreview[]>([])
   const [fetchError, setFetchError] = useState<string | null>(null)
-  const [editInitialValues, setEditInitialValues] = useState<OurBenefitsFormValues | null>(null)
+  const [editInitialValues, setEditInitialValues] = useState<our_benefitsFormValues | null>(null)
 
   const mainFileInputRef = useRef<HTMLInputElement>(null)
   const featureFileInputRefs = useRef<(HTMLInputElement | null)[]>([])
 
   // Initial Form Values for Create
-  const initialValues: OurBenefitsFormValues = {
+  const initialValues: our_benefitsFormValues = {
     title: "",
     heading: "",
-    subHeading: "",  // New field
-    btnText: "",     // New field
+    sub_heading: "",  // New field
+    btn_text: "",     // New field
     features: [
       { title: "", para: "", image: null, icon: "" },
       { title: "", para: "", image: null, icon: "" }
     ],
-    featurelist: [
+    feature_list: [
       { title: "", icon: "" },
       { title: "", icon: "" }
     ]
@@ -152,10 +152,10 @@ const OurBenefitsSection: FC = () => {
     heading: Yup.string()
       .min(2, 'Heading must be at least 2 characters')
       .required('Heading is required'),
-    subHeading: Yup.string()  // New field validation
+    sub_heading: Yup.string()  // New field validation
       .min(2, 'Sub-heading must be at least 2 characters')
       .required('Sub-heading is required'),
-    btnText: Yup.string()     // New field validation
+    btn_text: Yup.string()     // New field validation
       .min(2, 'Button text must be at least 2 characters')
       .required('Button text is required'),
     features: Yup.array().of(
@@ -180,7 +180,7 @@ const OurBenefitsSection: FC = () => {
           .required('Icon is required')
       })
     ).min(1, 'At least one feature is required').required('Features are required'),
-    featurelist: Yup.array().of(
+    feature_list: Yup.array().of(
       Yup.object().shape({
         title: Yup.string()
           .min(2, 'List item title is required')
@@ -220,7 +220,7 @@ const OurBenefitsSection: FC = () => {
       }
 
       const { data, error } = await supabase
-        .from("ourBenefits")
+        .from("our_benefits")
         .select("*")
         .order("created_at", { ascending: true })
 
@@ -230,7 +230,7 @@ const OurBenefitsSection: FC = () => {
         return
       }
 
-      const processedBenefits: OurBenefits[] = (data || []).map(convertToOurBenefits)
+      const processedBenefits: our_benefits[] = (data || []).map(convertToour_benefits)
       setBenefits(processedBenefits)
     } catch (error) {
       console.error("Unexpected error:", error)
@@ -371,7 +371,7 @@ const OurBenefitsSection: FC = () => {
   }
 
   // Convert Database to Component Type
-  const convertToOurBenefits = (dbSection: DatabaseOurBenefits): OurBenefits => {
+  const convertToour_benefits = (dbSection: Databaseour_benefits): our_benefits => {
     const processedFeatures: Feature[] = (dbSection.features || []).map((feature: DatabaseFeature): Feature => {
       let imageValue: File | null | string = null;
       
@@ -393,11 +393,11 @@ const OurBenefitsSection: FC = () => {
       id: dbSection.id,
       title: dbSection.title || "",
       heading: dbSection.heading || "",
-      subHeading: dbSection.subHeading || "",  // New field
-      btnText: dbSection.btnText || "",       // New field
+      sub_heading: dbSection.sub_heading || "",  // New field
+      btn_text: dbSection.btn_text || "",       // New field
       image: null,
       features: processedFeatures,
-      featurelist: dbSection.featurelist || [],
+      feature_list: dbSection.feature_list || [],
       mainImageUrl: STORAGE_TYPE === "bucket" ? dbSection.image : null
     };
   }
@@ -548,23 +548,23 @@ const OurBenefitsSection: FC = () => {
   }, [mainImagePreview, featureImagePreviews])
 
   // Handle Edit
-  const handleEdit = (benefit: OurBenefits): void => {
+  const handleEdit = (benefit: our_benefits): void => {
     setIsEdit(true)
     setEditId(benefit.id)
     
     // Prepare edit initial values
-    const editValues: OurBenefitsFormValues = {
+    const editValues: our_benefitsFormValues = {
       title: benefit.title,
       heading: benefit.heading,
-      subHeading: benefit.subHeading,  // New field
-      btnText: benefit.btnText,        // New field
+      sub_heading: benefit.sub_heading,  // New field
+      btn_text: benefit.btn_text,        // New field
       features: benefit.features.map(feature => ({
         title: feature.title,
         para: feature.para,
         icon: feature.icon,
         image: feature.image || null
       })),
-      featurelist: benefit.featurelist
+      feature_list: benefit.feature_list
     }
     
     // Store edit values for Formik
@@ -598,7 +598,7 @@ const OurBenefitsSection: FC = () => {
   }
 
   // Get current form values based on edit mode
-  const getCurrentInitialValues = (): OurBenefitsFormValues => {
+  const getCurrentInitialValues = (): our_benefitsFormValues => {
     if (isEdit && editInitialValues) {
       return editInitialValues
     }
@@ -607,8 +607,8 @@ const OurBenefitsSection: FC = () => {
 
   // Handle Submit (Create)
   const handleSubmit = async (
-    values: OurBenefitsFormValues,
-    formikHelpers: FormikHelpers<OurBenefitsFormValues>
+    values: our_benefitsFormValues,
+    formikHelpers: FormikHelpers<our_benefitsFormValues>
   ): Promise<void> => {
     if (submitting) return
 
@@ -668,13 +668,13 @@ const OurBenefitsSection: FC = () => {
 
       // Create section first
       const { data: sectionData, error: sectionError } = await supabase
-        .from("ourBenefits")
+        .from("our_benefits")
         .insert([
           {
             title: values.title,
             heading: values.heading,
-            subHeading: values.subHeading,  // New field
-            btnText: values.btnText,        // New field
+            sub_heading: values.sub_heading,  // New field
+            btn_text: values.btn_text,        // New field
             image: STORAGE_TYPE === "bucket" ? null : mainImageData,
             features: values.features.map((feature: Feature, index: number): DatabaseFeature => ({
               title: feature.title,
@@ -682,7 +682,7 @@ const OurBenefitsSection: FC = () => {
               icon: feature.icon,
               image: featureImagesData[index]
             })),
-            featurelist: values.featurelist
+            feature_list: values.feature_list
           }
         ])
         .select()
@@ -706,7 +706,7 @@ const OurBenefitsSection: FC = () => {
 
               // Update section with main image URL
               const { error: updateError } = await supabase
-                .from("ourBenefits")
+                .from("our_benefits")
                 .update({ 
                   image: mainImageUrl
                 })
@@ -745,7 +745,7 @@ const OurBenefitsSection: FC = () => {
         // Update section with feature image URLs
         if (updatedFeatures.some((f, i) => f.image !== values.features[i].image)) {
           const { error: updateError } = await supabase
-            .from("ourBenefits")
+            .from("our_benefits")
             .update({ 
               features: updatedFeatures.map((feature: Feature, index: number): DatabaseFeature => ({
                 title: feature.title,
@@ -763,12 +763,12 @@ const OurBenefitsSection: FC = () => {
       }
 
       // Create new benefit object
-      const newBenefit: OurBenefits = {
+      const newBenefit: our_benefits = {
         id: sectionData.id,
         title: sectionData.title || "",
         heading: sectionData.heading || "",
-        subHeading: sectionData.subHeading || "",  // New field
-        btnText: sectionData.btnText || "",       // New field
+        sub_heading: sectionData.sub_heading || "",  // New field
+        btn_text: sectionData.btn_text || "",       // New field
         image: STORAGE_TYPE === "bucket" ? null : reconstructFromChunks(mainImageData),
         features: ((sectionData.features as DatabaseFeature[]) || []).map((feature: DatabaseFeature, index: number): Feature => ({
           title: feature.title,
@@ -778,7 +778,7 @@ const OurBenefitsSection: FC = () => {
             ? feature.image 
             : reconstructFromChunks(feature.image)
         })),
-        featurelist: sectionData.featurelist || [],
+        feature_list: sectionData.feature_list || [],
         mainImageUrl: STORAGE_TYPE === "bucket" ? mainImageData : null
       }
 
@@ -809,8 +809,8 @@ const OurBenefitsSection: FC = () => {
 
   // Handle Update
   const handleUpdate = async (
-    values: OurBenefitsFormValues,
-    formikHelpers: FormikHelpers<OurBenefitsFormValues>
+    values: our_benefitsFormValues,
+    formikHelpers: FormikHelpers<our_benefitsFormValues>
   ): Promise<void> => {
     if (!editId || submitting) return
 
@@ -916,8 +916,8 @@ const OurBenefitsSection: FC = () => {
       const updateData = {
         title: values.title,
         heading: values.heading,
-        subHeading: values.subHeading,  // New field
-        btnText: values.btnText,        // New field
+        sub_heading: values.sub_heading,  // New field
+        btn_text: values.btn_text,        // New field
         image: mainImageData,
         features: updatedFeatures.map((feature: Feature, index: number): DatabaseFeature => ({
           title: feature.title,
@@ -925,11 +925,11 @@ const OurBenefitsSection: FC = () => {
           icon: feature.icon,
           image: typeof feature.image === 'string' ? feature.image : null
         })),
-        featurelist: values.featurelist
+        feature_list: values.feature_list
       }
 
       const { data, error } = await supabase
-        .from("ourBenefits")
+        .from("our_benefits")
         .update(updateData)
         .eq("id", editId)
         .select()
@@ -942,7 +942,7 @@ const OurBenefitsSection: FC = () => {
       }
 
       // Convert to component type and update state
-      const updatedBenefit: OurBenefits = convertToOurBenefits(data)
+      const updatedBenefit: our_benefits = convertToour_benefits(data)
       setBenefits(prev => prev.map(b => b.id === editId ? updatedBenefit : b))
 
       resetForm()
@@ -986,7 +986,7 @@ const OurBenefitsSection: FC = () => {
       }
 
       // Delete from database
-      const { error } = await supabase.from("ourBenefits").delete().eq("id", id)
+      const { error } = await supabase.from("our_benefits").delete().eq("id", id)
 
       if (error) {
         console.error("Error deleting benefit section:", error)
@@ -1003,7 +1003,7 @@ const OurBenefitsSection: FC = () => {
   }
 
   // Helper functions
-  const getMainImageUrl = (benefit: OurBenefits): string | null => {
+  const getMainImageUrl = (benefit: our_benefits): string | null => {
     return STORAGE_TYPE === "bucket" ? benefit.mainImageUrl : benefit.image
   }
 
@@ -1020,34 +1020,34 @@ const OurBenefitsSection: FC = () => {
 
   const hasError = (
     errors: FormikErrorType,
-    fieldName: keyof OurBenefitsFormValues | keyof Feature | keyof FeatureList,
+    fieldName: keyof our_benefitsFormValues | keyof Feature | keyof feature_list,
     index?: number,
-    subField?: 'features' | 'featurelist'
+    subField?: 'features' | 'feature_list'
   ): boolean => {
     if (index !== undefined && subField) {
       const fieldErrors = errors[subField]
       if (Array.isArray(fieldErrors) && fieldErrors[index]) {
-        const error = fieldErrors[index] as FeatureError | FeatureListError
-        const fieldNameKey = fieldName as keyof (FeatureError | FeatureListError)
+        const error = fieldErrors[index] as FeatureError | feature_listError
+        const fieldNameKey = fieldName as keyof (FeatureError | feature_listError)
         return !!error[fieldNameKey]
       }
       return false
     }
     
-    const fieldNameKey = fieldName as keyof OurBenefitsFormValues
+    const fieldNameKey = fieldName as keyof our_benefitsFormValues
     return !!errors[fieldNameKey]
   }
 
   const getErrorMessage = (
     errors: FormikErrorType,
     index: number,
-    fieldName: keyof Feature | keyof FeatureList,
-    subField: 'features' | 'featurelist'
+    fieldName: keyof Feature | keyof feature_list,
+    subField: 'features' | 'feature_list'
   ): string | undefined => {
     const fieldErrors = errors[subField]
     if (Array.isArray(fieldErrors) && fieldErrors[index]) {
-      const error = fieldErrors[index] as FeatureError | FeatureListError
-      const fieldNameKey = fieldName as keyof (FeatureError | FeatureListError)
+      const error = fieldErrors[index] as FeatureError | feature_listError
+      const fieldNameKey = fieldName as keyof (FeatureError | feature_listError)
       return error[fieldNameKey]
     }
     return undefined
@@ -1115,10 +1115,10 @@ const OurBenefitsSection: FC = () => {
                       </h2>
                       <p className="text-gray-600 dark:text-gray-300">{benefit.heading}</p>
                       <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
-                        {benefit.subHeading} {/* New field display */}
+                        {benefit.sub_heading} {/* New field display */}
                       </p>
                       <p className="text-blue-600 dark:text-blue-400 text-sm mt-1">
-                        Button Text: {benefit.btnText} {/* New field display */}
+                        Button Text: {benefit.btn_text} {/* New field display */}
                       </p>
                     </div>
                     <div className="flex gap-2">
@@ -1163,7 +1163,7 @@ const OurBenefitsSection: FC = () => {
                         {benefit.heading}
                       </p>
                       <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-4">
-                        {benefit.subHeading} {/* New field display */}
+                        {benefit.sub_heading} {/* New field display */}
                       </p>
                       <div className="h-1 w-24 bg-blue-600 mx-auto rounded-full"></div>
                     </div>
@@ -1171,7 +1171,7 @@ const OurBenefitsSection: FC = () => {
                     {/* Button Display */}
                     <div className="flex justify-center mb-8">
                       <Button className="px-8 py-3 text-lg !text-upparcase text-white">
-                        {benefit.btnText} {/* New field display */}
+                        {benefit.btn_text} {/* New field display */}
                       </Button>
                     </div>
 
@@ -1199,7 +1199,9 @@ const OurBenefitsSection: FC = () => {
                         {benefit.features.map((feature, idx) => (
                           <div 
                             key={idx}
-                            className="p-6 rounded-xl border transition-all duration-300 hover:scale-[1.02] hover:shadow-lg bg-blue-50 dark:bg-blue-900/20"
+                            className="p-6 rounded-xl border transition-all duration-300 hover:scale-[1.02] hover:shadow-lg bg-blue-50 dark:bg-blue-900/20
+                            
+                            "
                           >
                             <div className="flex items-start space-x-4">
                               {feature.image && (
@@ -1235,10 +1237,10 @@ const OurBenefitsSection: FC = () => {
                     <div className="mb-8">
                       <h3 className="text-xl font-bold mb-6 text-center text-gray-900 dark:text-white">Benefits List</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {benefit.featurelist.map((item, idx) => (
+                        {benefit.feature_list.map((item, idx) => (
                           <div 
                             key={idx}
-                            className="flex items-center p-4 rounded-lg border bg-gray-50 dark:bg-gray-900"
+                            className="flex items-center p-4 rounded-lg border bg-gray-50 dark:bg-gray-900 hover:scale-[1.02] hover:shadow-lg transition-all"
                           >
                             <div 
                               dangerouslySetInnerHTML={{
@@ -1283,11 +1285,11 @@ const OurBenefitsSection: FC = () => {
                   isSubmitting, 
                   setFieldValue,
                   isValid 
-                }: FormikProps<OurBenefitsFormValues>) => {
+                }: FormikProps<our_benefitsFormValues>) => {
                   const formikErrors: FormikErrorType = errors as unknown as FormikErrorType
                   
                   return (
-                    <Form id="ourBenefitsForm" className="space-y-6 pb-4">
+                    <Form id="our_benefitsForm" className="space-y-6 pb-4">
                       {/* Basic Info */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
@@ -1326,39 +1328,39 @@ const OurBenefitsSection: FC = () => {
                           />
                         </div>
 
-                        {/* New: SubHeading Field */}
+                        {/* New: sub_heading Field */}
                         <div>
-                          <Label htmlFor="subHeading" className="mb-2 block font-medium">
+                          <Label htmlFor="sub_heading" className="mb-2 block font-medium">
                             Sub-Heading *
                           </Label>
                           <Field
                             as={Input}
-                            id="subHeading"
-                            name="subHeading"
+                            id="sub_heading"
+                            name="sub_heading"
                             placeholder="Discover our amazing benefits"
-                            className={`${hasError(formikErrors, 'subHeading') && touched.subHeading ? 'border-red-500 focus:ring-red-500' : ''}`}
+                            className={`${hasError(formikErrors, 'sub_heading') && touched.sub_heading ? 'border-red-500 focus:ring-red-500' : ''}`}
                           />
                           <ErrorMessage
-                            name="subHeading"
+                            name="sub_heading"
                             component="div"
                             className="text-sm text-red-600 mt-1"
                           />
                         </div>
 
-                        {/* New: BtnText Field */}
+                        {/* New: btn_text Field */}
                         <div>
-                          <Label htmlFor="btnText" className="mb-2 block font-medium">
+                          <Label htmlFor="btn_text" className="mb-2 block font-medium">
                             Button Text *
                           </Label>
                           <Field
                             as={Input}
-                            id="btnText"
-                            name="btnText"
+                            id="btn_text"
+                            name="btn_text"
                             placeholder="Get Started"
-                            className={`${hasError(formikErrors, 'btnText') && touched.btnText ? 'border-red-500 focus:ring-red-500' : ''}`}
+                            className={`${hasError(formikErrors, 'btn_text') && touched.btn_text ? 'border-red-500 focus:ring-red-500' : ''}`}
                           />
                           <ErrorMessage
-                            name="btnText"
+                            name="btn_text"
                             component="div"
                             className="text-sm text-red-600 mt-1"
                           />
@@ -1664,7 +1666,7 @@ const OurBenefitsSection: FC = () => {
                       <div className="border-t pt-6">
                         <div className="flex justify-between items-center mb-4">
                           <h3 className="font-semibold text-lg">Feature List *</h3>
-                          <FieldArray name="featurelist">
+                          <FieldArray name="feature_list">
                             {({ push }: FieldArrayRenderProps) => (
                               <Button
                                 type="button"
@@ -1680,14 +1682,14 @@ const OurBenefitsSection: FC = () => {
                           </FieldArray>
                         </div>
                         
-                        <FieldArray name="featurelist">
+                        <FieldArray name="feature_list">
                           {({ push, remove }: FieldArrayRenderProps) => (
                             <div className="space-y-4">
-                              {values.featurelist.map((item, index) => (
+                              {values.feature_list.map((item, index) => (
                                 <div key={index} className="border p-4 rounded-lg bg-gray-50 dark:bg-gray-900">
                                   <div className="flex justify-between items-center mb-4">
                                     <h4 className="font-medium text-gray-900 dark:text-white">List Item {index + 1}</h4>
-                                    {values.featurelist.length > 1 && (
+                                    {values.feature_list.length > 1 && (
                                       <Button
                                         type="button"
                                         variant="ghost"
@@ -1703,36 +1705,36 @@ const OurBenefitsSection: FC = () => {
                                   
                                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
-                                      <Label htmlFor={`featurelist.${index}.title`} className="mb-2 block font-medium">
+                                      <Label htmlFor={`feature_list.${index}.title`} className="mb-2 block font-medium">
                                         Title *
                                       </Label>
                                       <Field
                                         as={Input}
-                                        id={`featurelist.${index}.title`}
-                                        name={`featurelist.${index}.title`}
+                                        id={`feature_list.${index}.title`}
+                                        name={`feature_list.${index}.title`}
                                         placeholder="List Item Title"
-                                        className={`${getErrorMessage(formikErrors, index, 'title', 'featurelist') ? 'border-red-500 focus:ring-red-500' : ''}`}
+                                        className={`${getErrorMessage(formikErrors, index, 'title', 'feature_list') ? 'border-red-500 focus:ring-red-500' : ''}`}
                                       />
                                       <ErrorMessage
-                                        name={`featurelist.${index}.title`}
+                                        name={`feature_list.${index}.title`}
                                         component="div"
                                         className="text-sm text-red-600 mt-1"
                                       />
                                     </div>
                                     
                                     <div>
-                                      <Label htmlFor={`featurelist.${index}.icon`} className="mb-2 block font-medium">
+                                      <Label htmlFor={`feature_list.${index}.icon`} className="mb-2 block font-medium">
                                         Icon Class (Font Awesome) *
                                       </Label>
                                       <Field
                                         as={Input}
-                                        id={`featurelist.${index}.icon`}
-                                        name={`featurelist.${index}.icon`}
+                                        id={`feature_list.${index}.icon`}
+                                        name={`feature_list.${index}.icon`}
                                         placeholder="fas fa-check"
-                                        className={`${getErrorMessage(formikErrors, index, 'icon', 'featurelist') ? 'border-red-500 focus:ring-red-500' : ''}`}
+                                        className={`${getErrorMessage(formikErrors, index, 'icon', 'feature_list') ? 'border-red-500 focus:ring-red-500' : ''}`}
                                       />
                                       <ErrorMessage
-                                        name={`featurelist.${index}.icon`}
+                                        name={`feature_list.${index}.icon`}
                                         component="div"
                                         className="text-sm text-red-600 mt-1"
                                       />
@@ -1757,9 +1759,9 @@ const OurBenefitsSection: FC = () => {
                                 </div>
                               ))}
                               
-                              {typeof errors.featurelist === 'string' && (
+                              {typeof errors.feature_list === 'string' && (
                                 <div className="text-sm text-red-600 p-3 bg-red-50 dark:bg-red-900/20 rounded-lg">
-                                  {errors.featurelist}
+                                  {errors.feature_list}
                                 </div>
                               )}
                             </div>
@@ -1792,7 +1794,7 @@ const OurBenefitsSection: FC = () => {
                         
                         <Button
                           type="submit"
-                          form="ourBenefitsForm"
+                          form="our_benefitsForm"
                           disabled={submitting || !isValid}
                           className="bg-blue-600 hover:bg-blue-700"
                         >
@@ -1816,4 +1818,4 @@ const OurBenefitsSection: FC = () => {
   )
 }
 
-export default OurBenefitsSection
+export default OurbenefitsSection

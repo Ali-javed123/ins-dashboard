@@ -9,8 +9,8 @@ export interface AboutSectionData {
   badge: string;
   heading: string;
   description: string;
-  highlightTitle: string;
-  highlightDescription: string;
+  highlight_title: string;
+  highlight_description: string;
   features: FeatureItem[];
-  colbtn: string;
+  col_btn: string;
 }

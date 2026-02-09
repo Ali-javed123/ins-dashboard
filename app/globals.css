@@ -177,6 +177,8 @@
     --color-secondary: 217.2 32.6% 20%; /* Increased contrast */
     --color-secondary-foreground: 210 40% 98%;
     --color-muted: 217.2 32.6% 20%;
+        --color-foreground: 210 40% 98%;
+
     --color-muted-foreground: 215 20.2% 75%; /* Brighter for better visibility */
     --color-accent: 217.2 32.6% 20%;
     --color-accent-foreground: 210 40% 98%;
@@ -218,8 +220,7 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-x: hidden !important;
   }
 }
 
@@ -330,4 +331,23 @@
 
 .custom-pagination .swiper-pagination-bullet-active {
   background: #ef4444;
+}
+
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-10px) translateX(5px);
+  }
 }

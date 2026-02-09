@@ -29,10 +29,10 @@
 
 // // ============ INTERFACE DEFINITIONS ============
 // interface ProjectItemFormValues {
-//   para: string;
+//   paragraph: string;
 //   title: string;
 //   heading: string;
-//   btnText: string;
+//   btn_text: string;
 // }
 
 // interface ProjectFormValues {
@@ -44,10 +44,10 @@
 // interface DatabaseProjectItem {
 //   id: string;
 //   created_at: string;
-//   para: string;
+//   paragraph: string;
 //   title: string;
 //   heading: string;
-//   btnText: string;
+//   btn_text: string;
 //   image: string | null;
 //   project_id: string;
 // }
@@ -64,10 +64,10 @@
 // interface ProjectItem {
 //   id: string;
 //   created_at: string;
-//   para: string;
+//   paragraph: string;
 //   title: string;
 //   heading: string;
-//   btnText: string;
+//   btn_text: string;
 //   imageUrl: string | null; // For displaying
 //   project_id: string;
 // }
@@ -89,10 +89,10 @@
 // }
 
 // interface ProjectItemFormData {
-//   para: string;
+//   paragraph: string;
 //   title: string;
 //   heading: string;
-//   btnText: string;
+//   btn_text: string;
 //   itemImage: File | null;
 // }
 
@@ -145,10 +145,10 @@
 //   });
 
 //   const [projectItemFormData, setProjectItemFormData] = useState<ProjectItemFormData>({
-//     para: "",
+//     paragraph: "",
 //     title: "",
 //     heading: "",
-//     btnText: "",
+//     btn_text: "",
 //     itemImage: null,
 //   });
 
@@ -165,7 +165,7 @@
 //   });
 
 //   const projectItemValidationSchema = Yup.object({
-//     para: Yup.string()
+//     paragraph: Yup.string()
 //       .min(10, 'Description must be at least 10 characters')
 //       .max(2000, 'Description must be less than 2000 characters')
 //       .required('Description is required'),
@@ -177,7 +177,7 @@
 //       .min(2, 'Heading must be at least 2 characters')
 //       .max(200, 'Heading must be less than 200 characters')
 //       .required('Heading is required'),
-//     btnText: Yup.string()
+//     btn_text: Yup.string()
 //       .min(2, 'Button text must be at least 2 characters')
 //       .max(50, 'Button text must be less than 50 characters')
 //       .required('Button text is required'),
@@ -201,10 +201,10 @@
 
 //   const resetProjectItemForm = (): void => {
 //     setProjectItemFormData({
-//       para: "",
+//       paragraph: "",
 //       title: "",
 //       heading: "",
-//       btnText: "",
+//       btn_text: "",
 //       itemImage: null,
 //     });
 //     setEditProjectItemId(null);
@@ -396,10 +396,10 @@
 //               return {
 //                 id: item.id,
 //                 created_at: item.created_at,
-//                 para: item.para,
+//                 paragraph: item.paragraph,
 //                 title: item.title,
 //                 heading: item.heading,
-//                 btnText: item.btnText,
+//                 btn_text: item.btn_text,
 //                 imageUrl: imageUrl, // Base64 image
 //                 project_id: item.project_id
 //               };
@@ -706,10 +706,10 @@
 //       const updateData = await supabase
 //         .from("projectItem")
 //         .update({
-//           para: values.para,
+//           paragraph: values.paragraph,
 //           title: values.title,
 //           heading: values.heading,
-//           btnText: values.btnText,
+//           btn_text: values.btn_text,
 //           image: imageData, // Base64 chunks
 //         })
 //         .eq("id", editProjectItemId)
@@ -839,10 +839,10 @@
 //     setIsProjectItemEdit(true);
 //     setEditProjectItemId(item.id);
 //     setProjectItemFormData({
-//       para: item.para,
+//       paragraph: item.paragraph,
 //       title: item.title,
 //       heading: item.heading,
-//       btnText: item.btnText,
+//       btn_text: item.btn_text,
 //       itemImage: null,
 //     });
 //     setProjectItemPreview(item.imageUrl || null);
@@ -1044,7 +1044,7 @@
 //                             </p>
 //                             <div className="flex items-center gap-2 flex-wrap">
 //                               <span className="text-xs bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-700 dark:text-blue-300 px-2.5 py-1 rounded-full font-medium">
-//                                 {item.btnText}
+//                                 {item.btn_text}
 //                               </span>
 //                             </div>
 //                           </div>
@@ -1267,10 +1267,10 @@
           
 //           <Formik
 //             initialValues={{
-//               para: projectItemFormData.para,
+//               paragraph: projectItemFormData.paragraph,
 //               title: projectItemFormData.title,
 //               heading: projectItemFormData.heading,
-//               btnText: projectItemFormData.btnText
+//               btn_text: projectItemFormData.btn_text
 //             }}
 //             validationSchema={projectItemValidationSchema}
 //             onSubmit={isProjectItemEdit ? handleProjectItemUpdate : handleProjectItemSubmit}
@@ -1315,37 +1315,37 @@
 //                 </div>
 
 //                 <div>
-//                   <Label htmlFor="para" className="text-base font-medium">
+//                   <Label htmlFor="paragraph" className="text-base font-medium">
 //                     Description *
 //                   </Label>
 //                   <Field
 //                     as={Textarea}
-//                     id="para"
-//                     name="para"
+//                     id="paragraph"
+//                     name="paragraph"
 //                     placeholder="Detailed description of the item..."
 //                     rows={4}
-//                     className={`mt-2 resize-none ${errors.para && touched.para ? 'border-red-500 ring-red-500' : 'border-gray-300'}`}
+//                     className={`mt-2 resize-none ${errors.paragraph && touched.paragraph ? 'border-red-500 ring-red-500' : 'border-gray-300'}`}
 //                   />
 //                   <ErrorMessage
-//                     name="para"
+//                     name="paragraph"
 //                     component="div"
 //                     className="text-sm text-red-500 mt-1"
 //                   />
 //                 </div>
 
 //                 <div>
-//                   <Label htmlFor="btnText" className="text-base font-medium">
+//                   <Label htmlFor="btn_text" className="text-base font-medium">
 //                     Button Text *
 //                   </Label>
 //                   <Field
 //                     as={Input}
-//                     id="btnText"
-//                     name="btnText"
+//                     id="btn_text"
+//                     name="btn_text"
 //                     placeholder="e.g., View Details, Learn More"
-//                     className={`mt-2 ${errors.btnText && touched.btnText ? 'border-red-500 ring-red-500' : 'border-gray-300'}`}
+//                     className={`mt-2 ${errors.btn_text && touched.btn_text ? 'border-red-500 ring-red-500' : 'border-gray-300'}`}
 //                   />
 //                   <ErrorMessage
-//                     name="btnText"
+//                     name="btn_text"
 //                     component="div"
 //                     className="text-sm text-red-500 mt-1"
 //                   />
@@ -1479,8 +1479,6 @@ import { Pen, Trash, Plus, Image as ImageIcon, X, Upload, Check, Folder, FileTex
 import { Skeleton } from '@/components/ui/skeleton'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
-
 // ============ CONSTANTS ============
 const PROJECT_BUCKET_NAME = "project";
 const PROJECT_STORAGE_TYPE = "bucket";
@@ -1491,10 +1489,10 @@ const DELIMITER = '|||CHUNK|||';
 
 // ============ INTERFACE DEFINITIONS ============
 interface ProjectItemFormValues {
-  para: string;
+  paragraph: string;
   title: string;
   heading: string;
-  btnText: string;
+  btn_text: string;
 }
 
 interface ProjectFormValues {
@@ -1505,10 +1503,10 @@ interface ProjectFormValues {
 interface DatabaseProjectItem {
   id: string;
   created_at: string;
-  para: string;
+  paragraph: string;
   title: string;
   heading: string;
-  btnText: string;
+  btn_text: string;
   image: string | null;
   project_id: string;
 }
@@ -1524,10 +1522,10 @@ interface DatabaseProject {
 interface ProjectItem {
   id: string;
   created_at: string;
-  para: string;
+  paragraph: string;
   title: string;
   heading: string;
-  btnText: string;
+  btn_text: string;
   imageUrl: string | null;
   project_id: string;
 }
@@ -1548,10 +1546,10 @@ interface ProjectFormData {
 }
 
 interface ProjectItemFormData {
-  para: string;
+  paragraph: string;
   title: string;
   heading: string;
-  btnText: string;
+  btn_text: string;
   itemImage: File | null;
 }
 
@@ -1604,10 +1602,10 @@ const ProjectComponent: FC = () => {
   });
 
   const [projectItemFormData, setProjectItemFormData] = useState<ProjectItemFormData>({
-    para: "",
+    paragraph: "",
     title: "",
     heading: "",
-    btnText: "",
+    btn_text: "",
     itemImage: null,
   });
 
@@ -1624,7 +1622,7 @@ const ProjectComponent: FC = () => {
   });
 
   const projectItemValidationSchema = Yup.object({
-    para: Yup.string()
+    paragraph: Yup.string()
       .min(10, 'Description must be at least 10 characters')
       .max(2000, 'Description must be less than 2000 characters')
       .required('Description is required'),
@@ -1636,7 +1634,7 @@ const ProjectComponent: FC = () => {
       .min(2, 'Heading must be at least 2 characters')
       .max(200, 'Heading must be less than 200 characters')
       .required('Heading is required'),
-    btnText: Yup.string()
+    btn_text: Yup.string()
       .min(2, 'Button text must be at least 2 characters')
       .max(50, 'Button text must be less than 50 characters')
       .required('Button text is required'),
@@ -1660,10 +1658,10 @@ const ProjectComponent: FC = () => {
 
   const resetProjectItemForm = (): void => {
     setProjectItemFormData({
-      para: "",
+      paragraph: "",
       title: "",
       heading: "",
-      btnText: "",
+      btn_text: "",
       itemImage: null,
     });
     setEditProjectItemId(null);
@@ -1832,7 +1830,7 @@ const ProjectComponent: FC = () => {
 
       if (projectsData && projectsData.length > 0) {
         const { data: allItemsData, error: itemsError } = await supabase
-          .from("projectItem")
+          .from("project_item")
           .select("*")
           .order("created_at", { ascending: true });
 
@@ -1849,10 +1847,10 @@ const ProjectComponent: FC = () => {
               return {
                 id: item.id,
                 created_at: item.created_at,
-                para: item.para,
+                paragraph: item.paragraph,
                 title: item.title,
                 heading: item.heading,
-                btnText: item.btnText,
+                btn_text: item.btn_text,
                 imageUrl: imageUrl,
                 project_id: item.project_id
               };
@@ -2022,7 +2020,7 @@ const ProjectComponent: FC = () => {
 
       if (projectToDelete?.projectItems && projectToDelete.projectItems.length > 0) {        
         await supabase
-          .from("projectItem")
+          .from("project_item")
           .delete()
           .eq("project_id", id);
       }
@@ -2067,7 +2065,7 @@ const ProjectComponent: FC = () => {
       }
 
       const { data, error } = await supabase
-        .from("projectItem")
+        .from("project_item")
         .insert([
           {
             ...values,
@@ -2133,12 +2131,12 @@ const ProjectComponent: FC = () => {
       }
 
       const updateData = await supabase
-        .from("projectItem")
+        .from("project_item")
         .update({
-          para: values.para,
+          paragraph: values.paragraph,
           title: values.title,
           heading: values.heading,
-          btnText: values.btnText,
+          btn_text: values.btn_text,
           image: imageData,
         })
         .eq("id", editProjectItemId)
@@ -2183,7 +2181,7 @@ const ProjectComponent: FC = () => {
 
     try {
       const { error } = await supabase
-        .from("projectItem")
+        .from("project_item")
         .delete()
         .eq("id", itemId);
 
@@ -2264,10 +2262,10 @@ const ProjectComponent: FC = () => {
     setIsProjectItemEdit(true);
     setEditProjectItemId(item.id);
     setProjectItemFormData({
-      para: item.para,
+      paragraph: item.paragraph,
       title: item.title,
       heading: item.heading,
-      btnText: item.btnText,
+      btn_text: item.btn_text,
       itemImage: null,
     });
     setProjectItemPreview(item.imageUrl || null);
@@ -2373,7 +2371,7 @@ const ProjectComponent: FC = () => {
           {projects.map((project) => (
             <section key={project.id} className="scroll-mt-16">
               {/* Project Section Header */}
-              <div className="mb-8 bg-gradient-to-r from-background via-muted/30 to-background p-6 rounded-2xl border">
+              <div className="mb-8 bg-[hsl(var(--color-background))] p-6 rounded-2xl border">
                 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                   <div className="flex-1">
                     <div className="flex items-center gap-4 mb-4">
@@ -2438,72 +2436,86 @@ const ProjectComponent: FC = () => {
               {project.projectItems.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {project.projectItems.map((item) => (
-                    <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
-                      <CardHeader className="pb-3">
-                        <div className="flex justify-between items-start gap-2">
-                          <div>
-                            <CardTitle className="text-lg line-clamp-1">
-                              {item.title}
-                            </CardTitle>
-                            <CardDescription className="line-clamp-2 mt-1">
-                              {item.heading}
-                            </CardDescription>
-                          </div>
-                          <div className="flex gap-1">
-                            <Button
-                              size="icon"
-                              variant="ghost"
-                              onClick={() => handleEditProjectItem(project.id, item)}
-                              className="h-8 w-8"
-                            >
-                              <Pen className="h-4 w-4" />
-                            </Button>
-                            <Button
-                              size="icon"
-                              variant="ghost"
-                              onClick={() => handleDeleteProjectItem(project.id, item.id)}
-                              className="h-8 w-8 text-destructive"
-                            >
-                              <Trash className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </div>
-                        <Badge className="mt-2 w-fit">
-                          {item.btnText}
-                        </Badge>
-                      </CardHeader>
-                      
-                      <CardContent className="pb-3">
-                        {item.imageUrl ? (
-                          <div className="mb-4 rounded-lg overflow-hidden border">
-                            <img
-                              src={item.imageUrl}
-                              alt={item.title}
-                              className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                          </div>
-                        ) : (
-                          <div className="mb-4 h-48 rounded-lg border border-dashed flex items-center justify-center bg-muted/30">
-                            <ImageIcon className="h-12 w-12 text-muted-foreground" />
-                          </div>
-                        )}
-                        
-                        <p className="text-sm text-muted-foreground line-clamp-3">
-                          {item.para}
-                        </p>
-                      </CardContent>
-                      
-                      <CardFooter className="pt-3 border-t">
-                        <div className="flex justify-between items-center w-full">
-                          <span className="text-xs text-muted-foreground">
-                            {formatDate(item.created_at)}
-                          </span>
-                          <Button size="sm" variant="outline">
-                            View Details
-                          </Button>
-                        </div>
-                      </CardFooter>
-                    </Card>
+                    <div
+  key={item.id}
+  className="group relative rounded-2xl p-[1px] bg-gradient-to-br from-blue-500/40 via-purple-500/40 to-cyan-500/40 hover:from-blue-500 hover:to-cyan-500 transition-all duration-500"
+                    >
+                      <div className="h-full rounded-2xl p-3 bg-white/90 dark:bg-[#0B1220]/90 backdrop-blur-xl shadow-lg dark:shadow-lg hover:shadow-2xl transition-all">
+    <div className=" overflow-hidden rounded-lg relative">
+    {item.imageUrl ? (
+      <img
+        src={item.imageUrl}
+        alt={item.title}
+        className={`
+          w-full h-48 object-cover
+          transform transition-transform duration-700
+          ease-[cubic-bezier(0,0.57,0.55,1)]
+          group-hover:translate-x-0
+          group-hover:clip-path-[inset(0_0_0_0)]
+          clip-path-[inset(0_100%_0_0)]
+          
+        `}
+      />
+    ) : (
+      <div className="w-full h-48 flex items-center justify-center bg-gray-100">
+        <ImageIcon className="h-12 w-12 text-gray-400" />
+      </div>
+    )}
+  </div>
+
+  {/* Card Header */}
+  <div className="p-4 flex justify-between items-start">
+    <div>
+      <h3 className="text-lg font-semibold line-clamp-1">{item.title}</h3>
+      <p className="text-gray-500 mt-1 line-clamp-2">{item.heading}</p>
+    </div>
+
+    <div className="flex gap-2">
+      <button
+        onClick={() => handleEditProjectItem(project.id, item)}
+        className="    p-2 rounded-full
+    hover:bg-gray-100 hover:text-black
+    transition
+    text-gray-700 dark:text-gray-200
+    dark:hover:text-white
+    dark:hover:bg-white
+"
+      >
+        <Pen className="w-4 h-4" />
+      </button>
+
+      <button
+        onClick={() => handleDeleteProjectItem(project.id, item.id)}
+        className="p-2 rounded-full hover:bg-red-100 transition"
+      >
+        <Trash className="w-4 h-4 text-red-500" />
+      </button>
+    </div>
+  </div>
+
+  {/* Badge */}
+  <div className="px-4">
+    <span className="inline-block bg-blue-100 text-blue-700 text-xs font-medium px-2 py-1 rounded">
+      {item.btn_text}
+    </span>
+  </div>
+
+  {/* Card Image */}
+
+  {/* Description */}
+  <div className="p-4 pt-2">
+    <p className="text-gray-900 dark:text-gray-300 text-sm line-clamp-3">{item.paragraph}</p>
+                        <Button className='my-2'>{item.btn_text }</Button>
+  </div>
+
+  {/* Footer */}
+  {/* <div className="flex justify-between  items-center p-4 pt-0 border-t">
+    <span className="text-xs font-lg  text-gray-900 dark:text-gray-300">{formatDate(item.created_at)}</span>
+    <button className="text-sm text-blue-600 hover:underline">View Details</button>
+  </div> */}
+  </div>
+</div>
+
                   ))}
                 </div>
               ) : (
@@ -2534,13 +2546,39 @@ const ProjectComponent: FC = () => {
 
       {/* ============ PROJECT MODAL ============ */}
       <Dialog open={projectModalOpen} onOpenChange={setProjectModalOpen}>
-        <DialogContent className="sm:max-w-lg">
+        <DialogContent className="
+  flex flex-col
+      sm:max-w-lg 
+      w-full 
+      max-screen
+      h-screen
+      p-0           /* Remove padding from DialogContent */
+      overflow-hidden
+      rounded-xl 
+      bg-white 
+      dark:bg-gray-800
+">
+      <div className="flex-shrink-0 p-6 pb-4 border-b dark:border-gray-700">
+
+          
           <DialogHeader>
             <DialogTitle className="text-2xl">
               {isProjectEdit ? 'Edit Project' : 'Create New Project'}
             </DialogTitle>
-          </DialogHeader>
-          
+            </DialogHeader>
+            </div>
+          <div className="flex-1 overflow-y-auto px-6 py-2">
+      <div className="
+        h-full
+        scrollbar-thin 
+        scrollbar-thumb-gray-300 
+        scrollbar-track-gray-100
+        dark:scrollbar-thumb-gray-600 
+        dark:scrollbar-track-gray-700
+        scrollbar-thumb-rounded-full 
+        scrollbar-track-rounded-full
+        pr-2 /* Scrollbar के लिए space */
+      ">
           <Formik
             initialValues={{ 
               title: projectFormData.title, 
@@ -2685,25 +2723,53 @@ const ProjectComponent: FC = () => {
                 </DialogFooter>
               </Form>
             )}
-          </Formik>
+              </Formik>
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
 
       {/* ============ PROJECT ITEM MODAL ============ */}
       <Dialog open={projectItemModalOpen} onOpenChange={setProjectItemModalOpen}>
-        <DialogContent className="sm:max-w-lg">
+        <DialogContent className="
+  flex flex-col
+      sm:max-w-lg 
+      w-full 
+      max-screen
+      h-screen
+      p-0           /* Remove padding from DialogContent */
+      overflow-hidden
+      rounded-xl 
+      bg-white 
+      dark:bg-gray-800
+">
+      <div className="flex-shrink-0 p-6 pb-4 border-b dark:border-gray-700">
+
           <DialogHeader>
             <DialogTitle className="text-2xl">
               {isProjectItemEdit ? 'Edit Project Item' : 'Add Project Item'}
             </DialogTitle>
-          </DialogHeader>
-          
+            </DialogHeader>
+                </div>
+
+              <div className="flex-1 overflow-y-auto px-6 py-2">
+      <div className="
+        h-full
+        scrollbar-thin 
+        scrollbar-thumb-gray-300 
+        scrollbar-track-gray-100
+        dark:scrollbar-thumb-gray-600 
+        dark:scrollbar-track-gray-700
+        scrollbar-thumb-rounded-full 
+        scrollbar-track-rounded-full
+        pr-2 /* Scrollbar के लिए space */
+      ">
           <Formik
             initialValues={{
-              para: projectItemFormData.para,
+              paragraph: projectItemFormData.paragraph,
               title: projectItemFormData.title,
               heading: projectItemFormData.heading,
-              btnText: projectItemFormData.btnText
+              btn_text: projectItemFormData.btn_text
             }}
             validationSchema={projectItemValidationSchema}
             onSubmit={isProjectItemEdit ? handleProjectItemUpdate : handleProjectItemSubmit}
@@ -2748,37 +2814,37 @@ const ProjectComponent: FC = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="para" className="text-base font-medium">
+                  <Label htmlFor="paragraph" className="text-base font-medium">
                     Description *
                   </Label>
                   <Field
                     as={Textarea}
-                    id="para"
-                    name="para"
+                    id="paragraph"
+                    name="paragraph"
                     placeholder="Detailed description of the item..."
                     rows={4}
-                    className={`mt-2 resize-none ${errors.para && touched.para ? 'border-red-500 ring-red-500' : ''}`}
+                    className={`mt-2 resize-none ${errors.paragraph && touched.paragraph ? 'border-red-500 ring-red-500' : ''}`}
                   />
                   <ErrorMessage
-                    name="para"
+                    name="paragraph"
                     component="div"
                     className="text-sm text-red-500 mt-1"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="btnText" className="text-base font-medium">
+                  <Label htmlFor="btn_text" className="text-base font-medium">
                     Button Text *
                   </Label>
                   <Field
                     as={Input}
-                    id="btnText"
-                    name="btnText"
+                    id="btn_text"
+                    name="btn_text"
                     placeholder="e.g., View Details, Learn More"
-                    className={`mt-2 ${errors.btnText && touched.btnText ? 'border-red-500 ring-red-500' : ''}`}
+                    className={`mt-2 ${errors.btn_text && touched.btn_text ? 'border-red-500 ring-red-500' : ''}`}
                   />
                   <ErrorMessage
-                    name="btnText"
+                    name="btn_text"
                     component="div"
                     className="text-sm text-red500 mt-1"
                   />
@@ -2880,7 +2946,9 @@ const ProjectComponent: FC = () => {
                 </DialogFooter>
               </Form>
             )}
-          </Formik>
+            </Formik>
+            </div>
+            </div>
         </DialogContent>
       </Dialog>
     </div>

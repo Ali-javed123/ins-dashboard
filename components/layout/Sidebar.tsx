@@ -593,6 +593,30 @@ const navItems: NavItem[] = [
     href: '/ourbanefit',
     badge: '29'
   },
+   {
+    id: 'Projects',
+    label: 'Projects',
+    icon: Users,
+    type: 'single',
+    href: '/projects',
+    badge: '30'
+  },
+  {
+    id: 'Testimonial',
+    label: 'Testimonial',
+    icon: Users,
+    type: 'single',
+    href: '/testimonials',
+    badge: '31'
+  },
+  {
+    id: 'Faqs',
+    label: 'Faqs',
+    icon: Users,
+    type: 'single',
+    href: '/faqs',
+    badge: '32'
+  },
   {
     id: 'Service',
     label: 'services',
@@ -600,29 +624,26 @@ const navItems: NavItem[] = [
     type: 'dropdown',
     items: [
       {
-        id: 'home-banner',
-        label: 'Home Banner',
-        icon: Image,
+        id: 'Service-Detail-One',
+        label: 'Service Detail One',
+        icon: LayoutDashboard,
         type: 'single',
-        href: '/home/banner',
-        badge: '3'
+        href: '/services/serviceone',
+        badge: '1'
       },
       {
-        id: 'hero-section',
-        label: 'Hero Section',
-        icon: Layers,
+        id: 'Service-Detail-Two',
+        label: 'Service Detail Two',
+        icon: LayoutDashboard,
         type: 'single',
-        href: '/home/hero'
+        href: '/services/servicetwo',
+        badge: '2'
       },
-      {
-        id: 'features',
-        label: 'Features',
-        icon: Briefcase,
-        type: 'single',
-        href: '/home/features'
-      }
+      
+     
     ]
   },
+  
 ]
 
 export default function Sidebar() {

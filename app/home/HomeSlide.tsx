@@ -22,8 +22,8 @@
 // interface UserFormValues {
 //   title: string
 //   heading: string
-//   btnOne:string
-//   btnTwo:string
+//   btn_one:string
+//   btn_two:string
 // }
 
 
@@ -31,9 +31,9 @@
 //   id: string;
 //   title: string;
 //   heading: number;
-//   btnOne: string;
-//   btnTwo: string;
-//   profileImage: string | null;
+//   btn_one: string;
+//   btn_two: string;
+//   profile_image: string | null;
 //   created_at?: string;
 // }
 
@@ -66,22 +66,22 @@
 //   id: string;
 //   title: string;
 //   heading: number;
-//   btnOne: string;
-//   btnTwo: string;
+//   btn_one: string;
+//   btn_two: string;
 //   image: string;
-//   profileImage:string | null;
+//   profile_image:string | null;
   
   
 
-//   profileImageUrl?: string | null | undefined; // undefined भी allow करें
+//   profile_imageUrl?: string | null | undefined; // undefined भी allow करें
 // }
 
 // interface FormData {
 //   title: string;
 //   heading: string;
-//   btnOne: string;
-//   btnTwo: string;
-//   profileImage: File | null;
+//   btn_one: string;
+//   btn_two: string;
+//   profile_image: File | null;
 // }
 // const HomeSliderCard: FC<HomeSliderCardProps> = ({
 //   imageSrc,
@@ -105,9 +105,9 @@
 //     const [formData, setFormData] = useState<FormData>({
 //       title: "",
 //       heading: "",
-//       btnOne: "",
-//       btnTwo: "",
-//       profileImage: null,
+//       btn_one: "",
+//       btn_two: "",
+//       profile_image: null,
 //     });
   
 //   // ---Formik---
@@ -120,10 +120,10 @@
 //     heading: Yup.string()
 //       .min(2, 'Heading must be at least 2 characters')
 //       .required('Heading is required'),
-//    btnOne: Yup.string()
+//    btn_one: Yup.string()
 //       .min(2, 'btn one must be at least 2 characters')
 //       .required('btn one is required'),
-//       btnTwo: Yup.string()
+//       btn_two: Yup.string()
 //       .min(2, 'btn two must be at least 2 characters')
 //       .required('btn two is required'),
 //   })
@@ -131,8 +131,8 @@
 // const initialValues: UserFormValues = {
 //     title: '',
 //     heading: '',
-//     btnOne: '',
-//     btnTwo: '',
+//     btn_one: '',
+//     btn_two: '',
     
 //   }
 
@@ -140,9 +140,9 @@
 //     setFormData({ 
 //       title: "", 
 //       heading: "", 
-//       btnOne: "", 
-//       btnTwo: "",
-//       profileImage: null 
+//       btn_one: "", 
+//       btn_two: "",
+//       profile_image: null 
 //     });
 //     setEditId(null);
 //     setPreviewImage(null);
@@ -170,8 +170,8 @@
 //           {
 //             title: formData.title,
 //             heading: Number(formData.heading),
-//             btnOne: formData.btnOne,
-//             profileImage: null, // Will update after processing
+//             btn_one: formData.btn_one,
+//             profile_image: null, // Will update after processing
 //           },
 //         ])
 //         .select()
@@ -183,15 +183,15 @@
 //         return;
 //       }
 
-//       let profileImageData: string | null = null;
+//       let profile_imageData: string | null = null;
       
 //       // Process image based on storage type
-//       if (formData.profileImage) {
+//       if (formData.profile_image) {
 //         if (STORAGE_TYPE === "bucket") {
 //           // Upload to bucket
 //           try {
-//             const bucketUrl = await uploadToBucket(formData.profileImage, userData.id);
-//             profileImageData = bucketUrl;
+//             const bucketUrl = await uploadToBucket(formData.profile_image, userData.id);
+//             profile_imageData = bucketUrl;
 //           } catch (uploadError) {
 //             console.error("Bucket upload failed:", uploadError);
 //             // Continue without image
@@ -199,18 +199,18 @@
 //         } else {
 //           // Convert to Base64 and chunk
 //           try {
-//             const base64Image = await convertImageToBase64(formData.profileImage);
-//             profileImageData = splitIntoChunks(base64Image);
+//             const base64Image = await convertImageToBase64(formData.profile_image);
+//             profile_imageData = splitIntoChunks(base64Image);
 //           } catch (convertError) {
 //             console.error("Base64 conversion failed:", convertError);
 //           }
 //         }
         
 //         // Update user with image data
-//         if (profileImageData) {
+//         if (profile_imageData) {
 //           const { error: updateError } = await supabase
 //             .from("home-banner")
-//             .update({ profileImage: profileImageData })
+//             .update({ profile_image: profile_imageData })
 //             .eq("id", userData.id);
 
 //           if (updateError) {
@@ -222,8 +222,8 @@
 //       // Create new user object
 //       const newUser: User = {
 //         ...userData,
-//         profileImage: STORAGE_TYPE === "bucket" ? null : reconstructFromChunks(profileImageData),
-//         profileImageUrl: STORAGE_TYPE === "bucket" ? profileImageData : null
+//         profile_image: STORAGE_TYPE === "bucket" ? null : reconstructFromChunks(profile_imageData),
+//         profile_imageUrl: STORAGE_TYPE === "bucket" ? profile_imageData : null
 //       };
       
 //       // Add user to state with duplicate check
@@ -371,7 +371,7 @@
 //         return;
 //       }
 
-//       setFormData((prev) => ({ ...prev, profileImage: file }));
+//       setFormData((prev) => ({ ...prev, profile_image: file }));
       
 //       const previewUrl = URL.createObjectURL(file);
 //       setPreviewImage(previewUrl);
@@ -399,10 +399,10 @@
 //         id: dbUser.id,
 //         title: dbUser.title,
 //         heading: dbUser.heading,
-//         btnOne: dbUser.btnOne,
-//         btnTwo: dbUser.btnTwo,
-//         profileImage: null,
-//         profileImageUrl: dbUser.profileImage || null
+//         btn_one: dbUser.btn_one,
+//         btn_two: dbUser.btn_two,
+//         profile_image: null,
+//         profile_imageUrl: dbUser.profile_image || null
 //       };
 //     } else {
 //       // For Base64 storage
@@ -410,10 +410,10 @@
 //         id: dbUser.id,
 //         title: dbUser.title,
 //         heading: dbUser.heading,
-//         btnOne: dbUser.btnOne,
-//         btnTwo: dbUser.btnTwo,
-//         profileImage: reconstructFromChunks(dbUser.profileImage),
-//         profileImageUrl: null
+//         btn_one: dbUser.btn_one,
+//         btn_two: dbUser.btn_two,
+//         profile_image: reconstructFromChunks(dbUser.profile_image),
+//         profile_imageUrl: null
 //       };
 //     }
 //   };
@@ -508,7 +508,7 @@
 //   };
 
 // const handleRemoveImage = () => {
-//     setFormData(prev => ({ ...prev, profileImage: null }));
+//     setFormData(prev => ({ ...prev, profile_image: null }));
 //     setPreviewImage(null);
     
 //     if (fileInputRef.current) {
@@ -597,31 +597,31 @@
 //                     </div>
 //                     <div className='flex  w-full  my-2  gap-2'>
 //                       <div>
-//                           <Label htmlFor="btnOne">Button 1</Label>
+//                           <Label htmlFor="btn_one">Button 1</Label>
 //                 <Field
 //                   as={Input}
-//                   id="btnOne"
-//                   name="btnOne"
+//                   id="btn_one"
+//                   name="btn_one"
 //                   placeholder="John Doe"
-//                   className={errors.btnOne && touched.btnOne ? 'border-destructive' : ''}
+//                   className={errors.btn_one && touched.btn_one ? 'border-destructive' : ''}
 //                 />
 //                 <ErrorMessage
-//                   name="btnOne"
+//                   name="btn_one"
 //                   component="div"
 //                   className="text-sm text-red-400"
 //                 />
 //                         </div>
 //                       <div>
-//                                   <Label htmlFor="btnTwo">Button 2</Label>
+//                                   <Label htmlFor="btn_two">Button 2</Label>
 //                 <Field
 //                   as={Input}
-//                   id="btnTwo"
-//                   name="btnTwo"
+//                   id="btn_two"
+//                   name="btn_two"
 //                   placeholder="John Doe"
-//                   className={errors["btnTwo"] && touched["btnTwo"] ? 'border-destructive' : ''}
+//                   className={errors["btn_two"] && touched["btn_two"] ? 'border-destructive' : ''}
 //                 />
 //                 <ErrorMessage
-//                   name="btnTwo"
+//                   name="btn_two"
 //                   component="div"
 //                   className="text-sm text-red-400"
 //                 />
@@ -749,17 +749,17 @@ import img1 from './img1.jpg'
 interface UserFormValues {
   title: string
   heading: string
-  btnOne: string
-  btnTwo: string
+  btn_one: string
+  btn_two: string
 }
 
 interface DatabaseUser {
   id: string;
   title: string;
   heading: number;
-  btnOne: string;
-  btnTwo: string;
-  profileImage: string | null;
+  btn_one: string;
+  btn_two: string;
+  profile_image: string | null;
   created_at?: string;
 }
 
@@ -784,18 +784,18 @@ interface User {
   id: string;
   title: string;
   heading: number;
-  btnOne: string;
-  btnTwo: string;
-  profileImage: string | null; // Changed from 'image' to 'profileImage'
-  profileImageUrl?: string | null; // undefined भी allow करें
+  btn_one: string;
+  btn_two: string;
+  profile_image: string | null; // Changed from 'image' to 'profile_image'
+  profile_imageUrl?: string | null; // undefined भी allow करें
 }
 
 interface FormData {
   title: string;
   heading: string;
-  btnOne: string;
-  btnTwo: string;
-  profileImage: File | null;
+  btn_one: string;
+  btn_two: string;
+  profile_image: File | null;
 }
 
 const HomeSliderCard: FC<HomeSliderCardProps> = ({
@@ -826,9 +826,9 @@ const HomeSliderCard: FC<HomeSliderCardProps> = ({
   const [formData, setFormData] = useState<FormData>({
     title: "",
     heading: "",
-    btnOne: "",
-    btnTwo: "",
-    profileImage: null,
+    btn_one: "",
+    btn_two: "",
+    profile_image: null,
   });
 
   // ---Formik---
@@ -839,10 +839,10 @@ const HomeSliderCard: FC<HomeSliderCardProps> = ({
     heading: Yup.string()
       .min(2, 'Heading must be at least 2 characters')
       .required('Heading is required'),
-    btnOne: Yup.string()
+    btn_one: Yup.string()
       .min(2, 'btn one must be at least 2 characters')
       .required('btn one is required'),
-    btnTwo: Yup.string()
+    btn_two: Yup.string()
       .min(2, 'btn two must be at least 2 characters')
       .required('btn two is required'),
   })
@@ -850,17 +850,17 @@ const HomeSliderCard: FC<HomeSliderCardProps> = ({
   const initialValues: UserFormValues = {
     title: formData.title? formData.title : '',
     heading: formData.heading? formData.heading : '',
-    btnOne: formData.btnOne? formData.btnOne : '',
-    btnTwo: formData.btnTwo? formData.btnTwo : '',
+    btn_one: formData.btn_one? formData.btn_one : '',
+    btn_two: formData.btn_two? formData.btn_two : '',
   }
 
   const resetForm = () => {
     setFormData({
       title: "",
       heading: "",
-      btnOne: "",
-      btnTwo: "",
-      profileImage: null
+      btn_one: "",
+      btn_two: "",
+      profile_image: null
     });
     setEditId(null);
     setPreviewImage(null);
@@ -881,16 +881,16 @@ const HomeSliderCard: FC<HomeSliderCardProps> = ({
     setFormData({
       title: user.title,
       heading: String(user.heading),
-      btnOne: user.btnOne,
-      btnTwo: user.btnTwo,
-      profileImage: null,
+      btn_one: user.btn_one,
+      btn_two: user.btn_two,
+      profile_image: null,
     });
     
     // Set preview based on storage type
     if (STORAGE_TYPE === "bucket") {
-      setPreviewImage(user.profileImageUrl || null);
+      setPreviewImage(user.profile_imageUrl || null);
     } else {
-      setPreviewImage(user.profileImage);
+      setPreviewImage(user.profile_image);
     }
     setOpen(true);
   };
@@ -900,13 +900,13 @@ const HomeSliderCard: FC<HomeSliderCardProps> = ({
   const fetchUsers = useCallback(async () => {
     try {
       const { data, error } = await supabase
-        .from("home-banner")
+        .from("home_banner")
         .select("*")
         .order("created_at", { ascending: true });
-      console.log("Fetched users:", data);
+      console.log("Fetched user:", data);
 
       if (error) {
-        console.error("Error fetching users:", error);
+        console.error("Error fetching home:", error);
         return;
       }
 
@@ -944,14 +944,14 @@ const HomeSliderCard: FC<HomeSliderCardProps> = ({
 
       // First, create user without image to get ID
       const { data: userData, error: userError } = await supabase
-        .from("home-banner")
+        .from("home_banner")
         .insert([
           {
             title: values.title, // Use values from Formik
             heading: values.heading, // Convert heading to number
-            btnOne: values.btnOne,
-            btnTwo: values.btnTwo, // Add btnTwo which was missing
-            profileImage: null, // Will update after processing
+            btn_one: values.btn_one,
+            btn_two: values.btn_two, // Add btn_two which was missing
+            profile_image: null, // Will update after processing
           }
         ])
         .select()
@@ -964,15 +964,15 @@ const HomeSliderCard: FC<HomeSliderCardProps> = ({
         return;
       }
 
-      let profileImageData: string | null = null;
+      let profile_imageData: string | null = null;
 
       // Process image based on storage type
-      if (formData.profileImage) {
+      if (formData.profile_image) {
         if (STORAGE_TYPE === "bucket") {
           // Upload to bucket
           try {
-            const bucketUrl = await uploadToBucket(formData.profileImage, userData.id);
-            profileImageData = bucketUrl;
+            const bucketUrl = await uploadToBucket(formData.profile_image, userData.id);
+            profile_imageData = bucketUrl;
           } catch (uploadError) {
             console.error("Bucket upload failed:", uploadError);
             // Continue without image
@@ -980,18 +980,18 @@ const HomeSliderCard: FC<HomeSliderCardProps> = ({
         } else {
           // Convert to Base64 and chunk
           try {
-            const base64Image = await convertImageToBase64(formData.profileImage);
-            profileImageData = splitIntoChunks(base64Image);
+            const base64Image = await convertImageToBase64(formData.profile_image);
+            profile_imageData = splitIntoChunks(base64Image);
           } catch (convertError) {
             console.error("Base64 conversion failed:", convertError);
           }
         }
 
         // Update user with image data
-        if (profileImageData) {
+        if (profile_imageData) {
           const { error: updateError } = await supabase
-            .from("home-banner")
-            .update({ profileImage: profileImageData })
+            .from("home_banner")
+            .update({ profile_image: profile_imageData })
             .eq("id", userData.id);
 
           if (updateError) {
@@ -1010,10 +1010,10 @@ const HomeSliderCard: FC<HomeSliderCardProps> = ({
         id: userData.id,
         title: userData.title || "",
         heading: Number(userData.heading) || 0,
-        btnOne: userData.btnOne || "",
-        btnTwo: userData.btnTwo || "",
-        profileImage: STORAGE_TYPE === "bucket" ? null : reconstructFromChunks(profileImageData),
-        profileImageUrl: STORAGE_TYPE === "bucket" ? profileImageData : null
+        btn_one: userData.btn_one || "",
+        btn_two: userData.btn_two || "",
+        profile_image: STORAGE_TYPE === "bucket" ? null : reconstructFromChunks(profile_imageData),
+        profile_imageUrl: STORAGE_TYPE === "bucket" ? profile_imageData : null
       };
 
       // Add user to state with duplicate check
@@ -1171,7 +1171,7 @@ setOpen(false);
         return;
       }
 
-      setFormData((prev) => ({ ...prev, profileImage: file }));
+      setFormData((prev) => ({ ...prev, profile_image: file }));
 
       const previewUrl = URL.createObjectURL(file);
       setPreviewImage(previewUrl);
@@ -1199,10 +1199,10 @@ setOpen(false);
         id: dbUser.id,
         title: dbUser.title,
         heading: dbUser.heading,
-        btnOne: dbUser.btnOne,
-        btnTwo: dbUser.btnTwo,
-        profileImage: null,
-        profileImageUrl: dbUser.profileImage || null
+        btn_one: dbUser.btn_one,
+        btn_two: dbUser.btn_two,
+        profile_image: null,
+        profile_imageUrl: dbUser.profile_image || null
       };
     } else {
       // For Base64 storage
@@ -1210,10 +1210,10 @@ setOpen(false);
         id: dbUser.id,
         title: dbUser.title,
         heading: dbUser.heading,
-        btnOne: dbUser.btnOne,
-        btnTwo: dbUser.btnTwo,
-        profileImage: reconstructFromChunks(dbUser.profileImage),
-        profileImageUrl: null
+        btn_one: dbUser.btn_one,
+        btn_two: dbUser.btn_two,
+        profile_image: reconstructFromChunks(dbUser.profile_image),
+        profile_imageUrl: null
       };
     }
   };
@@ -1299,7 +1299,7 @@ setOpen(false);
   };
 
   const handleRemoveImage = () => {
-    setFormData(prev => ({ ...prev, profileImage: null }));
+    setFormData(prev => ({ ...prev, profile_image: null }));
     setPreviewImage(null);
 
     if (fileInputRef.current) {
@@ -1311,7 +1311,7 @@ setOpen(false);
 
 
   const getImageUrl = (user: User): string | null => {
-    const url = STORAGE_TYPE === "bucket" ? user.profileImageUrl : user.profileImage;
+    const url = STORAGE_TYPE === "bucket" ? user.profile_imageUrl : user.profile_image;
     return url || null;
   };
 
@@ -1347,14 +1347,14 @@ const getSafeImageSrc = (
       // Handle image deletion based on storage type
       if (STORAGE_TYPE === "bucket") {
         const userToDelete = users.find(u => u.id === id);
-        if (userToDelete?.profileImageUrl) {
-          await deleteFromBucket(userToDelete.profileImageUrl);
+        if (userToDelete?.profile_imageUrl) {
+          await deleteFromBucket(userToDelete.profile_imageUrl);
         }
       }
       // For Base64 storage, no need to delete from bucket
 
       // Delete user from database
-      const { error } = await supabase.from("home-banner").delete().eq("id", id);
+      const { error } = await supabase.from("home_banner").delete().eq("id", id);
 
       if (error) {
         console.error("Error deleting user:", error);
@@ -1379,19 +1379,19 @@ const getSafeImageSrc = (
 
     try {
       setSubmitting(true);
-      let profileImageData: string | null = null;
+      let profile_imageData: string | null = null;
       let oldImageData: string | null | undefined = null;
       
       // Get existing user data
       const existingUser = users.find(u => u.id === editId);
       if (existingUser) {
         oldImageData = STORAGE_TYPE === "bucket" 
-          ? existingUser.profileImageUrl 
-          : existingUser.profileImage;
+          ? existingUser.profile_imageUrl 
+          : existingUser.profile_image;
       }
       
       // Process new image if selected
-      if (formData.profileImage) {
+      if (formData.profile_image) {
         if (STORAGE_TYPE === "bucket") {
           // Delete old image from bucket if exists
           if (oldImageData) {
@@ -1400,35 +1400,35 @@ const getSafeImageSrc = (
           
           // Upload new image to bucket
           try {
-            profileImageData = await uploadToBucket(formData.profileImage, editId);
+            profile_imageData = await uploadToBucket(formData.profile_image, editId);
           } catch (uploadError) {
             console.error("Bucket upload failed:", uploadError);
-            profileImageData = oldImageData || null;
+            profile_imageData = oldImageData || null;
           }
         } else {
           // Convert to Base64 and chunk
           try {
-            const base64Image = await convertImageToBase64(formData.profileImage);
-            profileImageData = splitIntoChunks(base64Image);
+            const base64Image = await convertImageToBase64(formData.profile_image);
+            profile_imageData = splitIntoChunks(base64Image);
           } catch (convertError) {
             console.error("Base64 conversion failed:", convertError);
-            profileImageData = oldImageData ? splitIntoChunks(oldImageData) : null;
+            profile_imageData = oldImageData ? splitIntoChunks(oldImageData) : null;
           }
         }
       } else {
         // Keep existing image
-        profileImageData = oldImageData || null;
+        profile_imageData = oldImageData || null;
       }
 
       // Update user in database
       const { data, error } = await supabase
-        .from("home-banner")
+        .from("home_banner")
         .update({
           title: values.title,
           heading: values.heading,
-          btnOne: values.btnOne,
-          btnTwo: values.btnTwo,
-          profileImage: profileImageData,
+          btn_one: values.btn_one,
+          btn_two: values.btn_two,
+          profile_image: profile_imageData,
         })
         .eq("id", editId)
         .select()
@@ -1563,13 +1563,13 @@ const getSafeImageSrc = (
                         <div>
 
                         <Button >
-                          {u.btnOne}
+                          {u.btn_one}
                         </Button>
                         </div>
                         <div>
 
                         <Button >
-                          {u.btnTwo}
+                          {u.btn_two}
                         </Button>
                         </div>
                         <div>
@@ -1805,7 +1805,7 @@ const getSafeImageSrc = (
             transform-gpu
           "
         >
-          {u.btnOne}
+          {u.btn_one}
         </Button>
         
         {/* Button Two - Always Visible */}
@@ -1830,7 +1830,7 @@ const getSafeImageSrc = (
             transform-gpu
           "
         >
-          {u.btnTwo}
+          {u.btn_two}
         </Button>
 
         {/* Edit and Delete buttons - ALWAYS VISIBLE with enhanced styling */}
@@ -2112,31 +2112,31 @@ const getSafeImageSrc = (
                     </div>
                     <div className='flex w-full my-2 gap-2'>
                       <div>
-                        <Label htmlFor="btnOne">Button 1</Label>
+                        <Label htmlFor="btn_one">Button 1</Label>
                         <Field
                           as={Input}
-                          id="btnOne"
-                          name="btnOne"
+                          id="btn_one"
+                          name="btn_one"
                           placeholder="John Doe"
-                          className={errors.btnOne && touched.btnOne ? 'border-destructive' : ''}
+                          className={errors.btn_one && touched.btn_one ? 'border-destructive' : ''}
                         />
                         <ErrorMessage
-                          name="btnOne"
+                          name="btn_one"
                           component="div"
                           className="text-sm text-red-400"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="btnTwo">Button 2</Label>
+                        <Label htmlFor="btn_two">Button 2</Label>
                         <Field
                           as={Input}
-                          id="btnTwo"
-                          name="btnTwo"
+                          id="btn_two"
+                          name="btn_two"
                           placeholder="John Doe"
-                          className={errors["btnTwo"] && touched["btnTwo"] ? 'border-destructive' : ''}
+                          className={errors["btn_two"] && touched["btn_two"] ? 'border-destructive' : ''}
                         />
                         <ErrorMessage
-                          name="btnTwo"
+                          name="btn_two"
                           component="div"
                           className="text-sm text-red-400"
                         />
