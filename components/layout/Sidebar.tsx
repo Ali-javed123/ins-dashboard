@@ -639,6 +639,38 @@ const navItems: NavItem[] = [
         href: '/services/servicetwo',
         badge: '2'
       },
+          {
+        id: 'Service-Detail-Three',
+        label: 'Service Detail Three',
+        icon: LayoutDashboard,
+        type: 'single',
+        href: '/services/service_detail_three',
+        badge: '3'
+      },
+      {
+        id: 'Service-Detail-Four',
+        label: 'Service Detail Four',
+        icon: LayoutDashboard,
+        type: 'single',
+        href: '/services/service_detail_four',
+        badge: '4'
+      },
+      {
+        id: 'service_five',
+        label: 'Service Detail Five',
+        icon: LayoutDashboard,
+        type: 'single',
+        href: '/services/service_five',
+        badge: '5'
+      },
+       {
+        id: 'Sevice-faqs',
+        label: 'Service Detail Faqs',
+        icon: LayoutDashboard,
+        type: 'single',
+        href: '/services/faqs',
+        badge: '5'
+      },
       
      
     ]

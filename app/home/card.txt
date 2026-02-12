@@ -66,3 +66,11 @@
     </div>
 
 </div>
+
+
+
+
+
+table name
+service_detail_one_group
+id created_at heading des service_group_id service_id

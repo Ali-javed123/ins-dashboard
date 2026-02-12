@@ -1181,7 +1181,7 @@ const FAQs: FC = () => {
       setSubmitting(true)
 
       const { data: faqGroupData, error: faqGroupError } = await supabase
-        .from("faqGroup")
+        .from("faq_group")
         .insert([{ main_heading: values.main_heading }])
         .select()
         .single()
