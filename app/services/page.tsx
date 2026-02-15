@@ -9,6 +9,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik'
 import * as Yup from 'yup'
 import { supabase } from "@/lib/supabase-client"
+import { toast } from "sonner";
+import { CheckCircle, XCircle, AlertTriangle } from "lucide-react";
 
 // Constants
 const BUCKET_NAME = "services-images";
@@ -139,6 +141,10 @@ const reconstructFromChunks = (chunkedString: string | null | undefined): string
 const convertImageToBase64 = (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
     if (file.size > MAX_IMAGE_SIZE) {
+    toast.error(`Image size should be less than ${MAX_IMAGE_SIZE / 1024 / 1024}MB`, {
+        icon: <XCircle className="text-red-500" />,
+      });
+
       reject(new Error(`Image size should be less than ${MAX_IMAGE_SIZE / 1024 / 1024}MB`))
       return
     }
@@ -258,7 +264,11 @@ const uploadToBucket = async (
     const fileName = `service_${serviceId}_${Date.now()}.${extension}`;
 
     if (file.size > 5 * 1024 * 1024) {
-      alert('Image must be less than 5MB');
+      // alert('Image must be less than 5MB');
+            toast.error("Image must be less than 5MB", {
+        icon: <XCircle className="text-red-500" />,
+      });
+
       return null;
     }
 
@@ -271,6 +281,10 @@ const uploadToBucket = async (
 
     if (error) {
       console.error('Upload error:', error);
+            toast.error("Failed to upload image", {
+        icon: <XCircle className="text-red-500" />,
+      });
+
       throw error;
     }
 
@@ -281,6 +295,10 @@ const uploadToBucket = async (
     return data.publicUrl;
   } catch (err) {
     console.error('Bucket upload failed:', err);
+        toast.error("Image upload failed", {
+      icon: <XCircle className="text-red-500" />,
+    });
+
     return null;
   }
 };
@@ -378,7 +396,8 @@ const ServicesPage: FC = () => {
       setServiceGroups(processedGroups)
     } catch (error) {
       console.error('Unexpected error:', error)
-    } finally {
+    }
+    finally {
       setLoading(false)
     }
   }, [])
@@ -461,6 +480,10 @@ const convertToService = (dbService: ServiceDatabase): Service => {
           .eq('id', editServiceGroupId)
 
         if (error) throw new Error(`Failed to update: ${error.message}`)
+              toast.success("Service group updated successfully!", {
+        icon: <CheckCircle className="text-green-500" />,
+      });
+
       } else {
         const { error } = await supabase
           .from('service_groups')
@@ -472,16 +495,46 @@ const convertToService = (dbService: ServiceDatabase): Service => {
           .single()
 
         if (error) throw new Error(`Failed to create: ${error.message}`)
+              toast.success("Service group created successfully!", {
+        icon: <CheckCircle className="text-green-500" />,
+      });
+
       }
 
       await fetchServiceGroups()
       resetServiceGroupForm()
       setServiceGroupOpen(false)
       formikHelpers.resetForm()
-    } catch (error) {
-      console.error('Error saving service group:', error)
-      alert(error instanceof Error ? `Error: ${error.message}` : 'Error saving service group')
-    } finally {
+    }
+    // catch (error) {
+    //   console.error('Error saving service group:', error)
+    //   // alert(error instanceof Error ? `Error: ${error.message}` : 'Error saving service group')
+    //       toast.error(error instanceof Error ? error.message : 'Error saving service group', {
+    //   icon: <XCircle className="text-red-500" />,
+    // });
+
+    // }
+    catch (error: unknown) {
+  console.error("Service save failed:", error);
+
+  let errorMessage = "Service save failed";
+
+  if (error instanceof Error) {
+    errorMessage = error.message;
+  } else if (
+    typeof error === "object" &&
+    error !== null &&
+    "message" in error &&
+    typeof (error as { message?: unknown }).message === "string"
+  ) {
+    errorMessage = (error as { message: string }).message;
+  }
+
+  toast.error(errorMessage, {
+    icon: <XCircle className="text-red-500" />,
+  });
+}
+    finally {
       setSubmitting(false)
     }
   }
@@ -505,10 +558,18 @@ const convertToService = (dbService: ServiceDatabase): Service => {
       if (groupError) throw groupError
 
       await fetchServiceGroups()
-      alert('Service group deleted successfully!')
+      // alert('Service group deleted successfully!')
+          toast.success("Service group deleted successfully!", {
+      icon: <CheckCircle className="text-green-500" />,
+    });
+
     } catch (error) {
       console.error('Error deleting service group:', error)
-      alert(`Error: ${error instanceof Error ? error.message : 'Please try again.'}`)
+      // alert(`Error: ${error instanceof Error ? error.message : 'Please try again.'}`)
+          toast.error(error instanceof Error ? error.message : 'Error deleting service group', {
+      icon: <XCircle className="text-red-500" />,
+    });
+
     }
   }
 
@@ -549,18 +610,30 @@ const handleEditService = (service: Service, groupId: string): void => {
     
     if (file) {
       if (!file.type.startsWith('image/')) {
-        alert('Please select an image file')
+        // alert('Please select an image file')
+              toast.error("Please select an image file", {
+        icon: <XCircle className="text-red-500" />,
+      });
+
         return
       }
 
       if (file.size > MAX_IMAGE_SIZE) {
-        alert(`Image size should be less than ${MAX_IMAGE_SIZE / 1024 / 1024}MB`)
+        // alert(`Image size should be less than ${MAX_IMAGE_SIZE / 1024 / 1024}MB`)
+              toast.error(`Image size should be less than ${MAX_IMAGE_SIZE / 1024 / 1024}MB`, {
+        icon: <XCircle className="text-red-500" />,
+      });
+
         return
       }
 
       setServiceFormData(prev => ({ ...prev, image: file }))
       const previewUrl = URL.createObjectURL(file)
       setPreviewImage(previewUrl)
+          toast.info("Image selected successfully", {
+      icon: <CheckCircle className="text-green-500" />,
+    });
+
     }
   }
 
@@ -618,7 +691,11 @@ const handleSubmitService = async (
       resetServiceForm();
       setServiceOpen(false);
       formikHelpers.resetForm();
-      alert('Service created successfully!');
+      // alert('Service created successfully!');
+            toast.success("Service created successfully!", {
+        icon: <CheckCircle className="text-green-500" />,
+      });
+
       return;
     }
 
@@ -647,21 +724,40 @@ const handleSubmitService = async (
         .eq('id', editServiceId);
 
       if (error) throw error;
+            toast.success("Service updated successfully!", {
+        icon: <CheckCircle className="text-green-500" />,
+      });
+
     }
 
     await fetchServiceGroups();
     resetServiceForm();
     setServiceOpen(false);
     formikHelpers.resetForm();
-    alert('Service updated successfully!');
-  } catch (error) {
-    console.error('Service save failed:', error);
-    alert(
-      error instanceof Error
-        ? error.message
-        : 'Service save failed'
-    );
-  } finally {
+    // alert('Service updated successfully!');
+   
+  }
+  catch (error: unknown) {
+  console.error("Service save failed:", error);
+
+  let errorMessage = "Service save failed";
+
+  if (error instanceof Error) {
+    errorMessage = error.message;
+  } else if (
+    typeof error === "object" &&
+    error !== null &&
+    "message" in error &&
+    typeof (error as { message?: unknown }).message === "string"
+  ) {
+    errorMessage = (error as { message: string }).message;
+  }
+
+  toast.error(errorMessage, {
+    icon: <XCircle className="text-red-500" />,
+  });
+}
+ finally {
     setSubmitting(false);
   }
 };
@@ -690,11 +786,43 @@ const handleDeleteService = async (id: string): Promise<void> => {
     if (error) throw error;
 
     await fetchServiceGroups();
-    alert('Service deleted successfully!');
-  } catch (error) {
-    console.error('Error deleting service:', error);
-    alert(`Error: ${error instanceof Error ? error.message : 'Please try again.'}`);
+    // alert('Service deleted successfully!');
+        toast.success("Service deleted successfully!", {
+      icon: <CheckCircle className="text-green-500" />,
+    });
+
   }
+  // catch (error) {
+  //   console.error('Error deleting service:', error);
+  //   // alert(`Error: ${error instanceof Error ? error.message : 'Please try again.'}`);
+  //       toast.error(
+  //     error instanceof Error ? error.message : 'Error deleting service',
+  //     {
+  //       icon: <XCircle className="text-red-500" />,
+  //     }
+  //   );
+  // }
+
+  catch (error: unknown) {
+  console.error("Service save failed:", error);
+
+  let errorMessage = "Service save failed";
+
+  if (error instanceof Error) {
+    errorMessage = error.message;
+  } else if (
+    typeof error === "object" &&
+    error !== null &&
+    "message" in error &&
+    typeof (error as { message?: unknown }).message === "string"
+  ) {
+    errorMessage = (error as { message: string }).message;
+  }
+
+  toast.error(errorMessage, {
+    icon: <XCircle className="text-red-500" />,
+  });
+}
 };
 
 
@@ -728,7 +856,7 @@ const handleDeleteService = async (id: string): Promise<void> => {
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <div className="h-32 w-32 animate-spin rounded-full border-b-2 border-blue-600"></div>
+        <div className="h-32 w-32 animate-spin rounded-full  "></div>
       </div>
     )
   }

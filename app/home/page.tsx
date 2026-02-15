@@ -71,11 +71,7 @@ export default function HomeSlider() {
     dark:bg-[hsl(var(--color-background))] ">
       <div className='px-3'>
 
-      <div className="flex justify-end my-7">
-        <Button onClick={() => setOpen(true)}>
-          Open Modal
-        </Button>
-      </div>
+   
 
       {/* Slider Section */}
       <HomeSliderCard

@@ -71,7 +71,7 @@ import { Eye, EyeOff } from 'lucide-react'
 import { navigate } from 'next/dist/client/components/segment-cache/navigation';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks'
 
-
+import Link from 'next/link';
 import { toast } from "sonner";
 import { CheckCircle, XCircle, AlertTriangle } from "lucide-react";
 
@@ -442,7 +442,7 @@ console.log("userSession",userSession)
               className="py-2 px-5  border rounded-xl hover:scale-110 duration-300"
               onClick={() => setLogin(login === "login" ? "signUp" : "login")}
             >
-              {login === "login" ? "Register" : "Login"}
+             <Link href="/register">{login === "login" ? "Register" : "Login"}</Link> 
             </Button>
               </div>
 

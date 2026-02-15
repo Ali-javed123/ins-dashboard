@@ -1781,6 +1781,8 @@ import { Label } from '@/components/ui/label'
 import { Pen, Trash } from "lucide-react"
 import type { AboutSectionData } from "@/types/aboutSection";
 import img from '@/public/assets/images/about/about-1-1.png'
+import { toast } from "sonner";
+import { CheckCircle, XCircle, AlertTriangle } from "lucide-react";
 
 // Constants - HomeSlide jaisa structure
 const BUCKET_NAME = "aboutSection"
@@ -1921,7 +1923,7 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
   // State
   const [sections, setSections] = useState<AboutSection[]>([])
   const [loading, setLoading] = useState(true)
-  const [isEdit, setIsEdit] = useState(false)
+  const  [isEdit, setIsEdit] = useState(false)
   const [editId, setEditId] = useState<string | null>(null)
   const [open, setOpen] = useState(false)
   const [submitting, setSubmitting] = useState(false)
@@ -2025,14 +2027,40 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
 
       if (error) {
         console.error("Error fetching secticonvertToUserons:", error)
+                toast.error("Failed to fetch about section data", {
+          icon: <XCircle className="text-red-500" />,
+        });
         return
       }
 
       const processedSections = (data || []).map(convertToAboutSection)
       setSections(processedSections)
-    } catch (error) {
-      console.error("Unexpected error:", error)
-    } finally {
+            toast.success("About section data loaded successfully", {
+        icon: <CheckCircle className="text-green-500" />,
+      });
+
+    }
+     catch (error: unknown) {
+        console.error("Error updating slide:", error);
+        
+        let errorMessage = "Failed to update slide";
+        
+        if (error instanceof Error) {
+          errorMessage = error.message;
+        } else if (
+          typeof error === "object" &&
+          error !== null &&
+          "message" in error &&
+          typeof (error as { message?: unknown }).message === "string"
+        ) {
+          errorMessage = (error as { message: string }).message;
+        }
+        
+        toast.error(errorMessage, {
+          icon: <XCircle className="text-red-500" />,
+        });
+      } 
+    finally {
       setLoading(false)
     }
   }, [])
@@ -2359,6 +2387,9 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
             img_oneData = splitIntoChunks(base64Image)
           } catch (convertError) {
             console.error("Base64 conversion failed for img_one:", convertError)
+                      toast.error("Image 1 processing failed, but section will be created", {
+            icon: <AlertTriangle className="text-yellow-500" />,
+          });
           }
         }
       }
@@ -2373,6 +2404,9 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
             img_twoData = splitIntoChunks(base64Image)
           } catch (convertError) {
             console.error("Base64 conversion failed for img_two:", convertError)
+                      toast.error("Image 2 processing failed, but section will be created", {
+            icon: <AlertTriangle className="text-yellow-500" />,
+          });
           }
         }
       }
@@ -2403,7 +2437,10 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
 
       if (sectionError) {
         console.error("Error adding section:", sectionError)
-        alert(`Error: ${sectionError.message}`)
+        // alert(`Error: ${sectionError.message}`)
+              toast.error(`Failed to create: ${sectionError.message}`, {
+        icon: <XCircle className="text-red-500" />,
+      });
         return
       }
 
@@ -2417,6 +2454,9 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
             img_oneUrl = await uploadToBucket(formData.img_one, sectionData.id, 1)
           } catch (error) {
             console.error("Failed to upload image 1:", error)
+                      toast.error("Image 1 upload failed, but section was created", {
+            icon: <AlertTriangle className="text-yellow-500" />,
+          });
           }
         }
 
@@ -2425,6 +2465,9 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
             img_twoUrl = await uploadToBucket(formData.img_two, sectionData.id, 2)
           } catch (error) {
             console.error("Failed to upload image 2:", error)
+                      toast.error("Image 2 upload failed, but section was created", {
+            icon: <AlertTriangle className="text-yellow-500" />,
+          });
           }
         }
 
@@ -2440,6 +2483,9 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
 
           if (updateError) {
             console.error("Error updating section with images:", updateError)
+                      toast.error("Section created but images couldn't be saved", {
+            icon: <AlertTriangle className="text-yellow-500" />,
+          });
           }
         }
 
@@ -2477,15 +2523,34 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
         }
         return [...prev, newSection]
       })
+          toast.success("About section created successfully!", {
+      icon: <CheckCircle className="text-green-500" />,
+    });
 
       resetForm()
       formikHelpers.resetForm()
       setOpen(false)
       fetchSections()
-    } catch (error) {
-      console.error("Error saving section:", error)
-      alert(error instanceof Error ? `Error: ${error.message}` : "Error saving section")
-    } finally {
+    }  catch (error: unknown) {
+  console.error("Service save failed:", error);
+
+  let errorMessage = "Service save failed";
+
+  if (error instanceof Error) {
+    errorMessage = error.message;
+  } else if (
+    typeof error === "object" &&
+    error !== null &&
+    "message" in error &&
+    typeof (error as { message?: unknown }).message === "string"
+  ) {
+    errorMessage = (error as { message: string }).message;
+  }
+
+  toast.error(errorMessage, {
+    icon: <XCircle className="text-red-500" />,
+  });
+} finally {
       setSubmitting(false)
     }
   }
@@ -2530,6 +2595,9 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
             img_oneData = splitIntoChunks(base64Image)
           } catch (convertError) {
             console.error("Base64 conversion failed:", convertError)
+                      toast.error("Image 1 processing failed, keeping existing image", {
+            icon: <AlertTriangle className="text-yellow-500" />,
+          });
             // Keep existing image data
             img_oneData = existingSection?.img_one || null
           }
@@ -2554,6 +2622,9 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
             img_twoData = splitIntoChunks(base64Image)
           } catch (convertError) {
             console.error("Base64 conversion failed:", convertError)
+                      toast.error("Image 2 processing failed, keeping existing image", {
+            icon: <AlertTriangle className="text-yellow-500" />,
+          });
             // Keep existing image data
             img_twoData = existingSection?.img_two || null
           }
@@ -2597,22 +2668,50 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
 
       if (error) {
         console.error("Error updating section:", error)
-        alert(`Error: ${error.message}`)
+        // alert(`Error: ${error.message}`)
+              toast.error(`Failed to update: ${error.message}`, {
+        icon: <XCircle className="text-red-500" />,
+      });
         return
       }
 
       // Convert to component type and update state
       const updatedSection = convertToAboutSection(data)
       setSections(prev => prev.map(s => s.id === editId ? updatedSection : s))
+          toast.success("About section updated successfully!", {
+      icon: <CheckCircle className="text-green-500" />,
+    });
 
       resetForm()
       formikHelpers.resetForm()
       setOpen(false)
       fetchSections()
-    } catch (error) {
-      console.error("Error updating section:", error)
-      alert(error instanceof Error ? `Error: ${error.message}` : "Error updating section")
-    } finally {
+    }
+    // catch (error) {
+    //   console.error("Error updating section:", error)
+    //   alert(error instanceof Error ? `Error: ${error.message}` : "Error updating section")
+    // }
+    catch (error: unknown) {
+        console.error("Error updating slide:", error);
+        
+        let errorMessage = "Failed to update slide";
+        
+        if (error instanceof Error) {
+          errorMessage = error.message;
+        } else if (
+          typeof error === "object" &&
+          error !== null &&
+          "message" in error &&
+          typeof (error as { message?: unknown }).message === "string"
+        ) {
+          errorMessage = (error as { message: string }).message;
+        }
+        
+        toast.error(errorMessage, {
+          icon: <XCircle className="text-red-500" />,
+        });
+      } 
+    finally {
       setSubmitting(false)
     }
   }
@@ -2641,16 +2740,40 @@ const AboutSectionCard: FC<AboutSectionCardProps> = () => {
 
       if (error) {
         console.error("Error deleting section:", error)
-        alert(`Error: ${error.message}`)
+        // alert(`Error: ${error.message}`)
+              toast.error(`Failed to delete: ${error.message}`, {
+        icon: <XCircle className="text-red-500" />,
+      });
+
         return
       }
 
       // Update state
       setSections(prev => prev.filter(s => s.id !== id))
-    } catch (error) {
-      console.error("Error deleting section:", error)
-      alert("Error deleting section. Please try again.")
+          toast.success("About section deleted successfully!", {
+      icon: <CheckCircle className="text-green-500" />,
+    });
     }
+    catch (error: unknown) {
+        console.error("Error updating slide:", error);
+        
+        let errorMessage = "Failed to update slide";
+        
+        if (error instanceof Error) {
+          errorMessage = error.message;
+        } else if (
+          typeof error === "object" &&
+          error !== null &&
+          "message" in error &&
+          typeof (error as { message?: unknown }).message === "string"
+        ) {
+          errorMessage = (error as { message: string }).message;
+        }
+        
+        toast.error(errorMessage, {
+          icon: <XCircle className="text-red-500" />,
+        });
+      } 
   }
 
   // Get safe image URL for both storage types

@@ -734,6 +734,8 @@ import { Pen, Trash,UserRound } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation, Pagination, Autoplay} from "swiper/modules"
 import type { Swiper as SwiperType } from "swiper"
+import { toast } from "sonner";
+import { CheckCircle, XCircle, AlertTriangle } from "lucide-react";
 
 import "swiper/css"
 import "swiper/css/navigation"
@@ -905,15 +907,23 @@ const HomeSliderCard: FC<HomeSliderCardProps> = ({
         .order("created_at", { ascending: true });
       console.log("Fetched user:", data);
 
-      if (error) {
-        console.error("Error fetching home:", error);
-        return;
+        if (error) {
+        console.error('Error fetching slider data:', error)
+        toast.error("Failed to fetch slider data", {
+          icon: <XCircle className="text-red-500" />,
+        });
+        return
       }
+
 
       // Safely convert database users to component users
       const processedUsers = (data || []).map((dbUser) => convertToUser(dbUser as DatabaseUser));
 
       setUsers(processedUsers);
+            toast.success("Slider data loaded successfully", {
+        icon: <CheckCircle className="text-green-500" />,
+      });
+
     } catch (error) {
       console.error("Unexpected error:", error);
     } finally {
@@ -960,7 +970,11 @@ const HomeSliderCard: FC<HomeSliderCardProps> = ({
       setOpen(false);
       if (userError) {
         console.error("Error adding user:", userError);
-        alert(`Error: ${userError.message}`);
+        // alert(`Error: ${userError.message}`);
+                 toast.error(`Failed to create: ${userError.message}`, {
+          icon: <XCircle className="text-red-500" />,
+        });
+
         return;
       }
 
@@ -975,6 +989,9 @@ const HomeSliderCard: FC<HomeSliderCardProps> = ({
             profile_imageData = bucketUrl;
           } catch (uploadError) {
             console.error("Bucket upload failed:", uploadError);
+                        toast.error("Image upload failed, but slide was created", {
+              icon: <AlertTriangle className="text-yellow-500" />,
+            });
             // Continue without image
           }
         } else {
@@ -984,6 +1001,9 @@ const HomeSliderCard: FC<HomeSliderCardProps> = ({
             profile_imageData = splitIntoChunks(base64Image);
           } catch (convertError) {
             console.error("Base64 conversion failed:", convertError);
+                        toast.error("Image processing failed, but slide was created", {
+              icon: <AlertTriangle className="text-yellow-500" />,
+            });
           }
         }
 
@@ -996,13 +1016,22 @@ const HomeSliderCard: FC<HomeSliderCardProps> = ({
 
           if (updateError) {
             console.error("Error updating user with image:", updateError);
+                        toast.error("Slide created but image couldn't be saved", {
+              icon: <AlertTriangle className="text-yellow-500" />,
+            });
           }
         }
+        toast.success("Slide created successfully!", {
+        icon: <CheckCircle className="text-green-500" />,
+      });
       }
 
       // Type-safe user data handling
       if (!userData) {
         throw new Error("No user data returned from insert");
+                                toast.error("No user data returned from insert", {
+              icon: <AlertTriangle className="text-yellow-500" />,
+            });
       }
 
       // Create new user object with proper typing
@@ -1028,16 +1057,40 @@ const HomeSliderCard: FC<HomeSliderCardProps> = ({
 fetchUsers();
       resetForm();
       formikHelpers.resetForm();
-    } catch (error) {
-setOpen(false);
+    }
+//     catch (error) {
+// setOpen(false);
 
-      console.error("Error saving user:", error);
+//       console.error("Error saving user:", error);
+//       if (error instanceof Error) {
+//         alert(`Error: ${error.message}`);
+//       } else {
+//         alert("Error saving user. Please try again.");
+//       }
+//     } 
+       catch (error: unknown) {
+setOpen(false);
+         
+      console.error("Service save failed:", error);
+    
+      let errorMessage = "Service save failed";
+    
       if (error instanceof Error) {
-        alert(`Error: ${error.message}`);
-      } else {
-        alert("Error saving user. Please try again.");
+        errorMessage = error.message;
+      } else if (
+        typeof error === "object" &&
+        error !== null &&
+        "message" in error &&
+        typeof (error as { message?: unknown }).message === "string"
+      ) {
+        errorMessage = (error as { message: string }).message;
       }
-    } finally {
+    
+      toast.error(errorMessage, {
+        icon: <XCircle className="text-red-500" />,
+      });
+    }
+    finally {
 setOpen(false);
 
       setSubmitting(false);
@@ -1358,15 +1411,33 @@ const getSafeImageSrc = (
 
       if (error) {
         console.error("Error deleting user:", error);
-        alert(`Error: ${error.message}`);
+        // alert(`Error: ${error.message}`);
+        
         return;
       }
 
       // Remove user from state
       setUsers((prev) => prev.filter((u) => u.id !== id));
-    } catch (error) {
-      console.error("Error deleting user:", error);
-      alert("Error deleting user. Please try again.");
+    }
+       catch (error: unknown) {
+      console.error("Service save failed:", error);
+    
+      let errorMessage = "Service save failed";
+    
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (
+        typeof error === "object" &&
+        error !== null &&
+        "message" in error &&
+        typeof (error as { message?: unknown }).message === "string"
+      ) {
+        errorMessage = (error as { message: string }).message;
+      }
+    
+      toast.error(errorMessage, {
+        icon: <XCircle className="text-red-500" />,
+      });
     }
   };
 
@@ -1403,6 +1474,9 @@ const getSafeImageSrc = (
             profile_imageData = await uploadToBucket(formData.profile_image, editId);
           } catch (uploadError) {
             console.error("Bucket upload failed:", uploadError);
+                      toast.error("Image upload failed, keeping existing image", {
+            icon: <AlertTriangle className="text-yellow-500" />,
+          });
             profile_imageData = oldImageData || null;
           }
         } else {
@@ -1412,6 +1486,9 @@ const getSafeImageSrc = (
             profile_imageData = splitIntoChunks(base64Image);
           } catch (convertError) {
             console.error("Base64 conversion failed:", convertError);
+                      toast.error("Image processing failed, keeping existing image", {
+            icon: <AlertTriangle className="text-yellow-500" />,
+          });
             profile_imageData = oldImageData ? splitIntoChunks(oldImageData) : null;
           }
         }
@@ -1437,7 +1514,10 @@ const getSafeImageSrc = (
 
       if (error) {
         console.error("Error updating user:", error);
-        alert(`Error: ${error.message}`);
+        // alert(`Error: ${error.message}`);
+              toast.error(`Failed to update: ${error.message}`, {
+        icon: <XCircle className="text-red-500" />,
+      });
         return;
       }
 
@@ -1445,16 +1525,41 @@ const getSafeImageSrc = (
       const updatedUser = convertToUser(data);
       
       setUsers((prev) => prev.map((u) => (u.id === editId ? updatedUser : u)));
+          toast.success("Slide updated successfully!", {
+      icon: <CheckCircle className="text-green-500" />,
+    });
       resetForm();
       formikHelpers.resetForm();
-    } catch (error) {
-      console.error("Error updating user:", error);
-      if (error instanceof Error) {
-        alert(`Error: ${error.message}`);
-      } else {
-        alert("Error updating user. Please try again.");
-      }
-    } finally {
+    }
+    // catch (error) {
+    //   console.error("Error updating user:", error);
+    //   if (error instanceof Error) {
+    //     alert(`Error: ${error.message}`);
+    //   } else {
+    //     alert("Error updating user. Please try again.");
+    //   }
+    // } 
+    catch (error: unknown) {
+    console.error("Error updating slide:", error);
+    
+    let errorMessage = "Failed to update slide";
+    
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    } else if (
+      typeof error === "object" &&
+      error !== null &&
+      "message" in error &&
+      typeof (error as { message?: unknown }).message === "string"
+    ) {
+      errorMessage = (error as { message: string }).message;
+    }
+    
+    toast.error(errorMessage, {
+      icon: <XCircle className="text-red-500" />,
+    });
+  } 
+    finally {
       setSubmitting(false);
     }
   };
@@ -1465,7 +1570,11 @@ const getSafeImageSrc = (
     
 <div className="w-full   overflow-hidden">
 
-      
+         <div className="flex justify-end my-7">
+              <Button onClick={() =>{ setOpen(true); resetForm()}}>
+                Open Slide
+              </Button>
+            </div>
       <div className="w-full relative">
               <button
         ref={prevRef}
@@ -2069,6 +2178,7 @@ const getSafeImageSrc = (
       {open && (
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogContent className="sm:max-w-md">
+            
             <DialogHeader>
               <DialogTitle>{isEdit ? "Edit Slide" : "Create Slide"}</DialogTitle>
             </DialogHeader>
@@ -2372,7 +2482,7 @@ const getSafeImageSrc = (
                       <Button
                         type="button"
                         variant="secondary"
-                        onClick={() => setOpen(false)}
+                        onClick={() => { setOpen(false); resetForm()}}
                         disabled={isSubmitting}
                       >
                         Cancel
