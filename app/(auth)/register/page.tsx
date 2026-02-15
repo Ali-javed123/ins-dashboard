@@ -420,7 +420,7 @@ console.log("userSession",userSession)
                   className="py-2 px-5  border rounded-xl hover:scale-110 duration-300"
                   onClick={() => setLogin(login === "signUp" ? "signUp" : "login")}
                 >
-                 <Link href="/register">{login === "signUp" ? "login" : "Login"}</Link> 
+                 <Link href="/">{login === "signUp" ? "login" : "Login"}</Link> 
                 </Button>
                   </div>
     
