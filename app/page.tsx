@@ -340,12 +340,12 @@ console.log("userSession",userSession)
                   Password
                 </Label>
                 {login === "login" && (
-                  <a 
+                  <Link 
                     href="#" 
                     className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
                   >
                     Forgot password?
-                  </a>
+                  </Link>
                 )}
               </div>
               <div className="relative">
