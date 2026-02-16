@@ -245,6 +245,7 @@ const handleAuth = async (values: UserFormValues, formikHelpers: FormikHelpers<U
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUserSession(session);
+      localStorage.setItem("supabaseSession", JSON.stringify(session));
     });
 
     return () => { subscription.unsubscribe(); };

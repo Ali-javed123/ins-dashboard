@@ -520,6 +520,7 @@ import { useAppSelector, useAppDispatch } from '@/lib/hooks'
 import { setSidebarOpen, toggleSidebar } from '@/lib/features/sidebar/sidebarSlice'
 import { useState, useEffect, useRef } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
+import { supabase } from "@/lib/supabase-client"
 
 // Define types for navigation items
 type NavItemType = 'single' | 'dropdown';
@@ -679,12 +680,31 @@ const navItems: NavItem[] = [
 ]
 
 export default function Sidebar() {
+  
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
+  const router = useRouter()
+
+    
+const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+
+      // setUserSession(null);
+      router.push('/login')
+      localStorage.removeItem("supabaseSession");
+
+    } catch (error) {
+      console.error("Error signing out:", error);
+      alert("Failed to sign out. Please try again.");
+    }
+  };
   const dispatch = useAppDispatch()
   const isOpen = useAppSelector((state) => state.sidebar.isOpen)
   const [activeItem, setActiveItem] = useState('')
   const [expandedItems, setExpandedItems] = useState<string[]>([])
   const [isMobile, setIsMobile] = useState(false)
-  const router = useRouter()
   const pathname = usePathname()
   const pathnameRef = useRef(pathname)
   const isInitialMount = useRef(true)
@@ -1054,7 +1074,7 @@ export default function Sidebar() {
               <Button
                 variant="ghost"
                 className="w-full justify-start text-destructive"
-                onClick={() => {/* Handle logout */}}
+                onClick={() => handleLogout()}
               >
                 <LogOut className="mr-3 h-4 w-4" />
                 Logout
