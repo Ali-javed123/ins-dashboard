@@ -521,6 +521,8 @@ import { setSidebarOpen, toggleSidebar } from '@/lib/features/sidebar/sidebarSli
 import { useState, useEffect, useRef } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { supabase } from "@/lib/supabase-client"
+import { toast } from "sonner";
+import { CheckCircle, XCircle, AlertTriangle } from "lucide-react";
 
 // Define types for navigation items
 type NavItemType = 'single' | 'dropdown';
@@ -692,13 +694,32 @@ const handleLogout = async () => {
       if (error) throw error;
 
       // setUserSession(null);
-      router.push('/login')
+      router.push('/')
       localStorage.removeItem("supabaseSession");
-
-    } catch (error) {
-      console.error("Error signing out:", error);
-      alert("Failed to sign out. Please try again.");
+                toast.success("Logged out successfully!", {
+              icon: <CheckCircle className="text-green-500" />,
+            });
     }
+    catch (error: unknown) {
+  console.error("Logout failed:", error);
+
+  let errorMessage = "Logout failed";
+
+  if (error instanceof Error) {
+    errorMessage = error.message;
+  } else if (
+    typeof error === "object" &&
+    error !== null &&
+    "message" in error &&
+    typeof (error as { message?: unknown }).message === "string"
+  ) {
+    errorMessage = (error as { message: string }).message;
+  }
+
+  toast.error(errorMessage, {
+    icon: <XCircle className="text-red-500" />,
+  });
+}
   };
   const dispatch = useAppDispatch()
   const isOpen = useAppSelector((state) => state.sidebar.isOpen)
