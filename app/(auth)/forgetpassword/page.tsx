@@ -1,185 +1,233 @@
+// 'use client'
+// import { useState } from 'react'
+// import { supabase } from "@/lib/supabase-client"
+
+// export default function ForgetPassword() {
+//   const [email, setEmail] = useState('')
+//   const [message, setMessage] = useState('')
+//   const [loading, setLoading] = useState(false)
+
+//   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+//     e.preventDefault()
+//     setLoading(true)
+//     setMessage('')
+
+//     const { error } = await supabase.auth.resetPasswordForEmail(email, {
+//       redirectTo: `${window.location.origin}/resetpassword`,
+//     })
+
+//     if (error) {
+//       setMessage(error.message)
+//     } else {
+//       setMessage('Reset link sent to your email')
+//     }
+
+//     setLoading(false)
+//   }
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <input
+//         type="email"
+//         placeholder="Enter your email"
+//         required
+//         onChange={(e) => setEmail(e.target.value)}
+//       />
+//       <button disabled={loading}>
+//         {loading ? 'Sending...' : 'Send Reset Link'}
+//       </button>
+//       <p>{message}</p>
+//     </form>
+//   )
+// }
 'use client'
 
-import { FC, useState } from 'react'
-import { createClient, User } from '@supabase/supabase-js'
-import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik'
-import * as Yup from 'yup'
-import { useRouter } from 'next/navigation'
-
-/* =============================
-   Supabase Client
-============================= */
-
-const supabaseUrl: string = process.env.NEXT_PUBLIC_SUPABASE_URL as string
-const supabaseAnonKey: string = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
-
-const supabase = createClient(supabaseUrl, supabaseAnonKey)
-
-/* =============================
-   Types
-============================= */
-
-interface ChangePasswordFormValues {
-  password: string
-  confirmPassword: string
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { supabase } from "@/lib/supabase-client";
+import { useState } from 'react';
+import { Mail, Loader2, CheckCircle2, XCircle, ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
+// Define interface for form values
+interface ForgetPasswordFormValues {
+  email: string;
 }
 
-interface SupabaseError {
-  message: string
-}
+// Validation schema with Yup
+const validationSchema = Yup.object({
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Email is required')
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      'Please enter a valid email address'
+    ),
+});
 
-/* =============================
-   Validation Schema
-============================= */
+export default function ForgetPassword() {
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
 
-const validationSchema: Yup.ObjectSchema<ChangePasswordFormValues> = Yup.object({
-  password: Yup.string()
-    .min(6, 'Minimum 6 characters required')
-    .required('Password is required'),
+  const formik = useFormik<ForgetPasswordFormValues>({
+    initialValues: {
+      email: '',
+    },
+    validationSchema,
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
+      setSubmitStatus({ type: null, message: '' });
 
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password')], 'Passwords must match')
-    .required('Confirm password is required'),
-})
+      try {
+        const { error } = await supabase.auth.resetPasswordForEmail(values.email, {
+          redirectTo: `${window.location.origin}/resetpassword`,
+        });
 
-/* =============================
-   Component
-============================= */
-
-const ChangePasswordPage: FC = () => {
-    const router = useRouter()
-  const [successMessage, setSuccessMessage] = useState<string>('')
-  const [errorMessage, setErrorMessage] = useState<string>('')
-
-  const initialValues: ChangePasswordFormValues = {
-    password: '',
-    confirmPassword: '',
-  }
-
-  const handleSubmit = async (
-    values: ChangePasswordFormValues,
-    { setSubmitting, resetForm }: FormikHelpers<ChangePasswordFormValues>
-  ): Promise<void> => {
-    setSuccessMessage('')
-    setErrorMessage('')
-
-    /* Check Logged In User */
-    const {
-      data: { user },
-      error: userError,
-    }: {
-      data: { user: User | null }
-      error: Error | null
-    } = await supabase.auth.getUser()
-
-    if (userError || !user) {
-      setErrorMessage('User not authenticated.')
-      setSubmitting(false)
-      return
-    }
-
-    /* Update Password Without Email Verification */
-    const { error } = await supabase.auth.updateUser({
-      password: values.password,
-    })
-
-    if (error) {
-      const typedError: SupabaseError = {
-        message: error.message,
+        if (error) {
+          setSubmitStatus({
+            type: 'error',
+            message: error.message,
+          });
+        } else {
+          setSubmitStatus({
+            type: 'success',
+            message: 'Reset link sent to your email! Please check your inbox.',
+          });
+          resetForm();
+        }
+      } catch {
+        setSubmitStatus({
+          type: 'error',
+          message: 'An unexpected error occurred. Please try again.',
+        });
+      } finally {
+        setSubmitting(false);
       }
-      setErrorMessage(typedError.message)
-    } else {
-      setSuccessMessage('Password changed successfully.')
-        resetForm()
-        router.push('/') // Redirect to login page after successful password change
-    }
-
-    setSubmitting(false)
-  }
+    },
+  });
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-gray-900 px-4">
-      <div className="w-full max-w-md rounded-2xl bg-white dark:bg-gray-800 p-8 shadow-xl">
-        <h1 className="text-2xl font-bold text-center mb-6 text-gray-800 dark:text-white">
-          Change Password
-        </h1>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md space-y-8">
+        {/* Header */}
+        <div className="text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900">
+            Forgot your password?
+          </h2>
+          <p className="mt-2 text-sm text-gray-600">
+            Enter your email address and we&apos;ll send you a link to reset your password.
+          </p>
+        </div>
 
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          {({ isSubmitting }) => (
-            <Form className="space-y-4">
-
-              {/* Password */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                  New Password
-                </label>
-
-                <Field
-                  type="password"
-                  name="password"
-                  className="mt-1 w-full rounded-xl border border-gray-300 dark:border-gray-600 
-                             bg-white dark:bg-gray-700 px-3 py-2 text-gray-900 dark:text-white 
-                             focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className="mt-1 text-sm text-red-500"
-                />
-              </div>
-
-              {/* Confirm Password */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Confirm Password
-                </label>
-
-                <Field
-                  type="password"
-                  name="confirmPassword"
-                  className="mt-1 w-full rounded-xl border border-gray-300 dark:border-gray-600 
-                             bg-white dark:bg-gray-700 px-3 py-2 text-gray-900 dark:text-white 
-                             focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-
-                <ErrorMessage
-                  name="confirmPassword"
-                  component="div"
-                  className="mt-1 text-sm text-red-500"
+        {/* Form */}
+        <div className="bg-white py-8 px-6 shadow-xl rounded-2xl sm:px-10 border border-gray-100">
+          <form onSubmit={formik.handleSubmit} className="space-y-6">
+            {/* Email Field */}
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                Email address
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Mail className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                </div>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  className={`
+                    block w-full pl-10 pr-3 py-2.5 border rounded-lg shadow-sm 
+                    placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-0
+                    transition duration-150 ease-in-out
+                    ${formik.touched.email && formik.errors.email
+                      ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
+                      : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'
+                    }
+                  `}
+                  placeholder="you@example.com"
+                  disabled={formik.isSubmitting}
                 />
               </div>
+              {/* Error Message */}
+              {formik.touched.email && formik.errors.email && (
+                <p className="mt-2 text-sm text-red-600">
+                  {formik.errors.email}
+                </p>
+              )}
+            </div>
 
+            {/* Submit Button */}
+            <div>
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="w-full rounded-xl bg-blue-600 hover:bg-blue-700 
-                           text-white py-2 font-semibold transition disabled:opacity-50"
+                disabled={formik.isSubmitting || !formik.isValid}
+                className={`
+                  w-full flex justify-center items-center py-2.5 px-4 
+                  border border-transparent rounded-lg shadow-sm text-sm font-medium 
+                  text-white bg-blue-600 hover:bg-blue-700 
+                  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+                  transition duration-150 ease-in-out
+                  disabled:opacity-50 disabled:cursor-not-allowed
+                  ${formik.isSubmitting ? 'cursor-wait' : ''}
+                `}
               >
-                {isSubmitting ? 'Updating...' : 'Update Password'}
+                {formik.isSubmitting ? (
+                  <>
+                    <Loader2 className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
+                    Sending...
+                  </>
+                ) : (
+                  'Send Reset Link'
+                )}
               </button>
+            </div>
 
-              {successMessage && (
-                <div className="text-green-600 text-sm text-center">
-                  {successMessage}
+            {/* Status Messages */}
+            {submitStatus.type && (
+              <div
+                className={`
+                  p-4 rounded-lg text-sm border
+                  ${submitStatus.type === 'success' 
+                    ? 'bg-green-50 text-green-800 border-green-200' 
+                    : 'bg-red-50 text-red-800 border-red-200'
+                  }
+                `}
+                role="alert"
+              >
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    {submitStatus.type === 'success' ? (
+                      <CheckCircle2 className="h-5 w-5 text-green-400" />
+                    ) : (
+                      <XCircle className="h-5 w-5 text-red-400" />
+                    )}
+                  </div>
+                  <div className="ml-3">
+                    <p className="font-medium">
+                      {submitStatus.message}
+                    </p>
+                  </div>
                 </div>
-              )}
+              </div>
+            )}
 
-              {errorMessage && (
-                <div className="text-red-600 text-sm text-center">
-                  {errorMessage}
-                </div>
-              )}
-            </Form>
-          )}
-        </Formik>
+            {/* Back to Login Link */}
+            <div className="text-center">
+              <Link
+                href="/"
+                className="inline-flex items-center text-sm text-blue-600 hover:text-blue-500 font-medium group"
+              >
+                <ArrowLeft className="h-4 w-4 mr-1 transition-transform group-hover:-translate-x-1" />
+                Back to login
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  )
+  );
 }
-
-export default ChangePasswordPage

@@ -342,7 +342,7 @@ console.log("userSession",userSession)
                 </Label>
                 {login === "login" && (
                   <Link 
-                    href="#" 
+                    href="/forgetpassword" 
                     className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
                   >
                     Forgot password?
